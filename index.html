@@ -205,103 +205,76 @@ header p { font-size: 0.78rem; color: var(--text-soft); margin-top: 3px; }
 }
 .answer-hint.hidden { display: none; }
 
-/* ── HISTÓRIA MALUCA ── */
-.mode-badge.historia { background: var(--rose); }
-.cat-btn.hall { background: var(--rose); color: #fff; }
-.cat-btn.h-aventura   { background: var(--green-light); color: var(--green); }
-.cat-btn.h-escola     { background: var(--teal-light); color: var(--teal); }
-.cat-btn.h-herois     { background: var(--blue-light); color: var(--blue); }
-.cat-btn.h-familia    { background: var(--rose-light); color: var(--rose); }
-.cat-btn.h-espaco     { background: var(--purple-light); color: var(--purple); }
-.cat-btn.h-festa      { background: var(--orange-light); color: var(--orange); }
-.cat-btn.h-animais    { background: var(--amber-pale); color: var(--amber); }
-.cat-btn.h-comida     { background: var(--rose-light); color: var(--rose); }
-.cat-label.historia   { background: var(--rose-light); color: var(--rose); }
-.cat-label.h-aventura { background: var(--green-light); color: var(--green); }
-.cat-label.h-escola   { background: var(--teal-light); color: var(--teal); }
-.cat-label.h-herois   { background: var(--blue-light); color: var(--blue); }
-.cat-label.h-familia  { background: var(--rose-light); color: var(--rose); }
-.cat-label.h-espaco   { background: var(--purple-light); color: var(--purple); }
-.cat-label.h-festa    { background: var(--orange-light); color: var(--orange); }
-.cat-label.h-animais  { background: var(--amber-pale); color: var(--amber); }
-.cat-label.h-comida   { background: var(--rose-light); color: var(--rose); }
+/* ── IA ── */
+.ai-gear {
+  position: fixed; top: 14px; right: 14px; width: 38px; height: 38px;
+  border-radius: 50%; background: var(--card); border: 1.5px solid var(--border);
+  box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; cursor: pointer; z-index: 50; transition: transform 0.2s;
+}
+.ai-gear:hover { transform: rotate(25deg); }
 
-.submode-toggle {
-  display: flex; gap: 6px; background: var(--rose-light); border-radius: 999px;
-  padding: 4px; margin-bottom: 18px; width: 100%; max-width: 320px;
+.ai-panel {
+  width: 100%; max-width: 480px; margin-top: 14px;
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 18px;
+  padding: 14px 16px; box-shadow: var(--shadow);
 }
-.submode-btn {
-  flex: 1; border: none; border-radius: 999px; padding: 8px 6px;
-  font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 700;
-  color: var(--rose); background: transparent; cursor: pointer; transition: all 0.2s;
+.ai-panel-title {
+  font-size: 0.72rem; font-weight: 700; color: var(--teal); letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
 }
-.submode-btn.active { background: var(--rose); color: #fff; }
+.ai-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+.ai-btn {
+  flex: 1; min-width: 140px; border: none; border-radius: 999px; padding: 10px 14px;
+  font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; background: var(--teal); color: #fff;
+}
+.ai-btn:hover:not(:disabled) { background: #256363; transform: translateY(-1px); }
+.ai-btn:disabled { opacity: 0.5; cursor: default; }
+.ai-btn.secondary { background: var(--purple); }
+.ai-btn.secondary:hover:not(:disabled) { background: #59407e; }
+.ai-answer-input {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 12px; padding: 8px 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.82rem; color: var(--text);
+  resize: vertical; min-height: 44px; margin-bottom: 8px; background: #fff;
+}
+.ai-answer-input:focus { outline: none; border-color: var(--teal); }
+.ai-status { font-size: 0.72rem; color: var(--text-soft); min-height: 16px; }
+.ai-status.error { color: #b03030; }
+.ai-question-box {
+  font-family: 'Lora', serif; font-style: italic; font-size: 1rem; line-height: 1.55;
+  background: var(--teal-light); color: var(--text); border-radius: 12px;
+  padding: 12px 14px; margin-top: 8px;
+}
+.ai-spinner {
+  display: inline-block; width: 14px; height: 14px; border: 2px solid var(--teal-light);
+  border-top-color: var(--teal); border-radius: 50%; animation: ai-spin 0.7s linear infinite;
+  vertical-align: middle; margin-right: 6px;
+}
+@keyframes ai-spin { to { transform: rotate(360deg); } }
 
-.historia-intro { text-align: center; }
-.historia-intro .emoji { font-size: 2.4rem; display: block; margin-bottom: 6px; }
-.historia-intro h2 { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--rose); margin-bottom: 8px; }
-.historia-intro p { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 6px; line-height: 1.5; }
-.roll-btn {
-  background: var(--rose); color: #fff; border: none; border-radius: 999px;
-  padding: 13px 30px; font-family: 'Nunito', sans-serif; font-size: 0.92rem;
-  font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 14px;
+.ai-modal-overlay {
+  position: fixed; inset: 0; background: rgba(58,46,34,0.45); z-index: 100;
+  display: flex; align-items: center; justify-content: center; padding: 20px;
 }
-.roll-btn:hover { background: #b4577a; transform: translateY(-1px); }
-
-.blank-progress {
-  font-size: 0.72rem; color: var(--rose); font-weight: 700; letter-spacing: 0.06em;
-  text-transform: uppercase; margin-bottom: 10px;
+.ai-modal {
+  background: var(--card); border-radius: 20px; padding: 24px 22px; max-width: 380px; width: 100%;
+  box-shadow: var(--shadow);
 }
-.blank-label { font-family: 'Lora', serif; font-size: 1.05rem; color: var(--text); font-style: italic; margin-bottom: 4px; }
-.blank-hint { font-size: 0.72rem; color: var(--text-soft); margin-bottom: 18px; }
-
-.mic-btn {
-  width: 76px; height: 76px; border-radius: 50%; border: none;
-  background: var(--rose); color: #fff; font-size: 1.8rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  transition: all 0.2s; box-shadow: 0 4px 14px rgba(158,69,96,0.28);
+.ai-modal h3 { font-family: 'Lora', serif; color: var(--amber); font-size: 1.05rem; margin-bottom: 8px; }
+.ai-modal p { font-size: 0.78rem; color: var(--text-soft); line-height: 1.5; margin-bottom: 12px; }
+.ai-modal a { color: var(--teal); }
+.ai-modal input {
+  width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 9px 12px;
+  font-family: 'Nunito', sans-serif; font-size: 0.85rem; margin-bottom: 12px;
 }
-.mic-btn:hover { background: #b4577a; transform: scale(1.04); }
-.mic-btn.listening { animation: pulse 1.1s infinite; background: #d0455f; }
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(208,69,95,0.5); }
-  70% { box-shadow: 0 0 0 16px rgba(208,69,95,0); }
-  100% { box-shadow: 0 0 0 0 rgba(208,69,95,0); }
+.ai-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.ai-modal-actions button {
+  border: none; border-radius: 999px; padding: 9px 18px; font-family: 'Nunito', sans-serif;
+  font-size: 0.8rem; font-weight: 700; cursor: pointer;
 }
-.mic-status { font-size: 0.75rem; color: var(--text-soft); margin-top: 10px; min-height: 18px; }
-
-.blank-answer {
-  font-family: 'Lora', serif; font-size: 1.1rem; color: var(--rose); font-weight: 600;
-  margin-top: 14px; min-height: 28px;
-}
-.text-fallback {
-  margin-top: 12px; width: 100%; max-width: 260px;
-  border: 1.5px solid var(--border); border-radius: 999px;
-  padding: 8px 16px; font-family: 'Nunito', sans-serif; font-size: 0.85rem;
-  text-align: center; background: #fff; color: var(--text);
-}
-.blank-actions { display: flex; gap: 10px; margin-top: 18px; }
-
-.form-list { width: 100%; text-align: left; }
-.form-item {
-  display: flex; align-items: center; justify-content: space-between; gap: 10px;
-  padding: 10px 0; border-bottom: 1px solid var(--border);
-}
-.form-item:last-child { border-bottom: none; }
-.form-item-label { font-size: 0.86rem; color: var(--text); font-weight: 600; }
-.form-item-hint { font-size: 0.68rem; color: var(--text-soft); }
-.form-item-answer { font-size: 0.82rem; color: var(--rose); font-weight: 700; margin-top: 2px; }
-.mic-btn-small {
-  width: 42px; height: 42px; border-radius: 50%; border: none; flex-shrink: 0;
-  background: var(--rose); color: #fff; font-size: 1.1rem; cursor: pointer;
-  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
-}
-.mic-btn-small.listening { animation: pulse 1.1s infinite; background: #d0455f; }
-.mic-btn-small:hover { background: #b4577a; }
-
-.story-title { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--rose); font-weight: 600; margin-bottom: 14px; }
-.story-text { font-family: 'Lora', serif; font-size: 1.02rem; line-height: 1.75; color: var(--text); text-align: left; }
-.story-text .filled { color: var(--rose); font-weight: 700; font-style: normal; }
+.ai-modal-actions .cancel { background: transparent; color: var(--text-soft); }
+.ai-modal-actions .save { background: var(--teal); color: #fff; }
 </style>
 </head>
 <body>
@@ -317,7 +290,6 @@ header p { font-size: 0.78rem; color: var(--text-soft); margin-top: 3px; }
   <button class="mode-tab" data-mode="quem" onclick="setMode('quem')">🤣 Quem é mais?</button>
   <button class="mode-tab" data-mode="prefere" onclick="setMode('prefere')">🤔 O que prefere?</button>
   <button class="mode-tab" data-mode="adivinha" onclick="setMode('adivinha')">🔍 Adivinhas</button>
-  <button class="mode-tab" data-mode="historia" onclick="setMode('historia')">📖 História Maluca</button>
 </div>
 
 <div class="categories" id="categories"></div>
@@ -332,6 +304,19 @@ header p { font-size: 0.78rem; color: var(--text-soft); margin-top: 3px; }
   <button class="nav-btn prev" id="btnPrev" onclick="go(-1)">← Anterior</button>
   <button class="nav-btn next" id="btnNext" onclick="go(1)">Próxima →</button>
 </div>
+
+<div class="ai-panel">
+  <div class="ai-panel-title">🤖 Perguntas com IA</div>
+  <div class="ai-row">
+    <button class="ai-btn" id="btnAiNew" onclick="generateAIQuestion()">✨ Gerar pergunta nova</button>
+    <button class="ai-btn secondary" id="btnAiFollow" onclick="generateFollowUp()">💬 Pergunta de acompanhamento</button>
+  </div>
+  <textarea class="ai-answer-input" id="aiAnswerInput" placeholder="O que a criança respondeu? (opcional, usado na 'pergunta de acompanhamento')"></textarea>
+  <div class="ai-status" id="aiStatus"></div>
+  <div id="aiResultBox"></div>
+</div>
+
+<button class="ai-gear" id="aiGear" onclick="openKeyModal()" title="Configurar chave da IA">⚙️</button>
 
 <script>
 const DATA = {
@@ -978,11 +963,6 @@ function render() {
   const nav     = document.getElementById("nav");
   const btnPrev = document.getElementById("btnPrev");
 
-  if (currentMode === "historia") {
-    renderHistoria();
-    return;
-  }
-
   if (finished) {
     const emojis = { perguntas:"🎉", quem:"😄", prefere:"🤔", adivinha:"🔍" };
     card.innerHTML = `<div class="finished">
@@ -1032,7 +1012,17 @@ function render() {
 // ─────────────────────────────────────────
 // ACTIONS
 // ─────────────────────────────────────────
+function clearAiPanel() {
+  const box = document.getElementById("aiResultBox");
+  const input = document.getElementById("aiAnswerInput");
+  const status = document.getElementById("aiStatus");
+  if (box) box.innerHTML = "";
+  if (input) input.value = "";
+  if (status) { status.textContent = ""; status.classList.remove("error"); }
+}
+
 function go(dir) {
+  clearAiPanel();
   const card = document.getElementById("card");
   card.classList.add("fade-out");
   setTimeout(() => {
@@ -1049,38 +1039,25 @@ function go(dir) {
 }
 
 function selectCat(cat) {
+  clearAiPanel();
   currentCat = cat;
+  deck = buildDeck(currentMode, cat);
+  idx = 0; finished = false;
   document.querySelectorAll(".cat-btn").forEach(btn => {
     btn.classList.toggle("active", btn.dataset.cat === cat);
   });
-  if (currentMode === "historia") {
-    historiaCat = cat;
-    historiaRestart();
-    return;
-  }
-  deck = buildDeck(currentMode, cat);
-  idx = 0; finished = false;
   render();
 }
 
 function setMode(mode) {
+  clearAiPanel();
   currentMode = mode;
   currentCat = "all";
+  deck = buildDeck(mode, "all");
+  idx = 0; finished = false;
   document.querySelectorAll(".mode-tab").forEach(t => {
     t.classList.toggle("active", t.dataset.mode === mode);
   });
-  if (mode === "historia") {
-    historiaCat = "all";
-    historiaStage = "select";
-    historiaStory = null;
-    historiaAnswers = {};
-    historiaBlankIdx = 0;
-    renderCats();
-    render();
-    return;
-  }
-  deck = buildDeck(mode, "all");
-  idx = 0; finished = false;
   renderCats();
   render();
 }
@@ -1275,404 +1252,138 @@ DATA.adivinha = {
 };
 
 // ─────────────────────────────────────────
-// HISTÓRIA MALUCA — DATA (histórias com lacunas)
+// IA (Google Gemini — chave gratuita, sem cartão)
+// Crie sua chave em https://aistudio.google.com/apikey
 // ─────────────────────────────────────────
-DATA.historia = {
-  cats: [
-    { id:"all",        label:"✨ Todas",         cls:"hall" },
-    { id:"h-aventura", label:"🏕️ Aventura",      cls:"h-aventura" },
-    { id:"h-escola",   label:"📚 Escola",         cls:"h-escola" },
-    { id:"h-herois",   label:"🦸 Super-heróis",   cls:"h-herois" },
-    { id:"h-familia",  label:"🏖️ Família/Praia",  cls:"h-familia" },
-    { id:"h-espaco",   label:"🚀 Espaço",         cls:"h-espaco" },
-    { id:"h-festa",    label:"🎉 Festa",          cls:"h-festa" },
-    { id:"h-animais",  label:"🐾 Animais",        cls:"h-animais" },
-    { id:"h-comida",   label:"🍕 Comida",         cls:"h-comida" },
-  ],
-  catNames: {
-    "h-aventura":"Aventura","h-escola":"Escola","h-herois":"Super-heróis",
-    "h-familia":"Família/Praia","h-espaco":"Espaço","h-festa":"Festa",
-    "h-animais":"Animais","h-comida":"Comida",
-  },
-  stories: [
-    {
-      title:"Aventura na Floresta",
-      cat:"h-aventura",
-      template:"Era uma vez {nome1}, um(a) explorador(a) muito {adjetivo1}, que entrou em uma floresta escura procurando um tesouro. No caminho, encontrou um(a) {animal1} que estava {emocao1}. De repente, ouviu um barulho de {som1} vindo de trás de uma árvore gigante. {nome1} ficou tão assustado(a) que correu tão rápido quanto um(a) {animal2} e gritou \"{exclamacao1}!\". No fim da trilha, encontrou um baú cheio de {comida1} e voltou para casa contando a todos sobre a aventura mais {adjetivo2} da vida.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma pessoa", hint:"ex: Maria"},
-        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: corajoso"},
-        {id:"animal1", label:"Um animal", hint:"ex: coelho"},
-        {id:"emocao1", label:"Uma emoção", hint:"ex: com medo"},
-        {id:"som1", label:"Um som ou barulho", hint:"ex: trovão"},
-        {id:"animal2", label:"Outro animal", hint:"ex: guepardo"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Chocolate!"},
-        {id:"comida1", label:"Uma comida", hint:"ex: pizza"},
-        {id:"adjetivo2", label:"Outro adjetivo", hint:"ex: incrível"},
-      ],
-    },
-    {
-      title:"O Primeiro Dia na Escola Maluca",
-      cat:"h-escola",
-      template:"Hoje é o primeiro dia de aula e {nome1} está muito {emocao1}. A professora, que se chama {nome2}, entrou na sala vestida de {objeto1}. A primeira aula foi de {materia1}, e o dever de casa era desenhar um(a) {animal1}. No recreio, {nome1} comeu {comida1} e brincou de {brincadeira1} com os amigos. No fim do dia, todos gritaram \"{exclamacao1}!\" e foram embora {adjetivo1} para casa.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma criança", hint:"ex: Pedro"},
-        {id:"emocao1", label:"Uma emoção", hint:"ex: animado"},
-        {id:"nome2", label:"Nome de uma professora", hint:"ex: dona Ana"},
-        {id:"objeto1", label:"Uma peça de roupa estranha", hint:"ex: fantasia de abelha"},
-        {id:"materia1", label:"Uma matéria escolar", hint:"ex: matemática"},
-        {id:"animal1", label:"Um animal", hint:"ex: girafa"},
-        {id:"comida1", label:"Uma comida", hint:"ex: sanduíche"},
-        {id:"brincadeira1", label:"Uma brincadeira", hint:"ex: pega-pega"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Uhuu!"},
-        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: felizes"},
-      ],
-    },
-    {
-      title:"O Super-Herói Estranho",
-      cat:"h-herois",
-      template:"O super-herói mais famoso da cidade se chama Capitão(ã) {objeto1} e seu superpoder é {poder1}. Ele(a) usa uma capa de cor {cor1} e voa em cima de um(a) {animal1}. Certo dia, um vilão chamado {nome1} tentou roubar todo(a) {comida1} da cidade. O(a) Capitão(ã) {objeto1} gritou \"{exclamacao1}!\" e derrotou o vilão usando seu poder de {poder1}. No fim, toda a cidade comemorou comendo {comida1} e cantando uma música sobre ser {adjetivo1}.",
-      blanks:[
-        {id:"objeto1", label:"Um objeto do dia a dia", hint:"ex: Torradeira"},
-        {id:"poder1", label:"Um superpoder", hint:"ex: soltar raios"},
-        {id:"cor1", label:"Uma cor", hint:"ex: roxo"},
-        {id:"animal1", label:"Um animal", hint:"ex: águia"},
-        {id:"nome1", label:"Nome de um vilão inventado", hint:"ex: Dr. Caos"},
-        {id:"comida1", label:"Uma comida", hint:"ex: brigadeiro"},
-        {id:"exclamacao1", label:"Uma exclamação de herói", hint:"ex: Ao infinito!"},
-        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: corajoso"},
-      ],
-    },
-    {
-      title:"Dia de Praia Desastroso",
-      cat:"h-familia",
-      template:"A família foi para a praia de {lugar1} e levou {numero1} sanduíches de {comida1}. Assim que chegaram, {nome1} viu um(a) {animal1} andando na areia e saiu correndo {adjetivo1}. O vento soprou tão forte que o guarda-sol voou e caiu bem em cima de {nome2}, que gritou \"{exclamacao1}!\". No fim do dia, todo mundo entrou no mar e nadou como um(a) {animal2}, e a família decidiu voltar no ano que vem.",
-      blanks:[
-        {id:"lugar1", label:"Nome de um lugar/praia", hint:"ex: Canoa Quebrada"},
-        {id:"numero1", label:"Um número", hint:"ex: 20"},
-        {id:"comida1", label:"Uma comida", hint:"ex: queijo"},
-        {id:"nome1", label:"Nome de uma pessoa da família", hint:"ex: vovô"},
-        {id:"animal1", label:"Um animal", hint:"ex: caranguejo"},
-        {id:"adjetivo1", label:"Um advérbio/modo", hint:"ex: gritando"},
-        {id:"nome2", label:"Outra pessoa da família", hint:"ex: tia Clara"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Nossa!"},
-        {id:"animal2", label:"Outro animal", hint:"ex: golfinho"},
-      ],
-    },
-    {
-      title:"Viagem Espacial em Família",
-      cat:"h-espaco",
-      template:"A família {nome1} embarcou em um foguete rumo ao planeta {objeto1}. No caminho, o foguete fez um barulho de {som1} e todos ficaram {emocao1}. Ao pousar, encontraram um alienígena chamado {nome2} que só comia {comida1} e falava a língua {objeto2}. Juntos, dançaram uma dança chamada \"{exclamacao1}\" e voltaram para a Terra levando um(a) {animal1} de estimação de outro planeta.",
-      blanks:[
-        {id:"nome1", label:"Sobrenome de uma família", hint:"ex: Oliveira"},
-        {id:"objeto1", label:"Nome inventado de um planeta", hint:"ex: Zortax"},
-        {id:"som1", label:"Um som", hint:"ex: bip bip"},
-        {id:"emocao1", label:"Uma emoção", hint:"ex: nervosos"},
-        {id:"nome2", label:"Nome de um alienígena", hint:"ex: Blorp"},
-        {id:"comida1", label:"Uma comida", hint:"ex: gelatina"},
-        {id:"objeto2", label:"Um idioma inventado", hint:"ex: Glugluês"},
-        {id:"exclamacao1", label:"Nome de uma dança inventada", hint:"ex: Requebra Cósmico"},
-        {id:"animal1", label:"Um animal", hint:"ex: gato"},
-      ],
-    },
-    {
-      title:"Festa de Aniversário Fora do Comum",
-      cat:"h-festa",
-      template:"A festa de aniversário de {nome1} tinha o tema \"{objeto1}\" e todo mundo veio fantasiado de {animal1}. O bolo tinha sabor de {comida1} e {numero1} velinhas. Na hora dos parabéns, o(a) {nome2} tropeçou e caiu dentro do bolo gritando \"{exclamacao1}!\". Depois, todos dançaram uma música chamada \"{objeto2}\" até ficarem {emocao1}, e a festa foi considerada a mais {adjetivo1} da história da família.",
-      blanks:[
-        {id:"nome1", label:"Nome do(a) aniversariante", hint:"ex: Sofia"},
-        {id:"objeto1", label:"Um tema de festa estranho", hint:"ex: Piratas do espaço"},
-        {id:"animal1", label:"Um animal", hint:"ex: dinossauro"},
-        {id:"comida1", label:"Um sabor de bolo", hint:"ex: pistache com bacon"},
-        {id:"numero1", label:"Um número", hint:"ex: 47"},
-        {id:"nome2", label:"Nome de outra pessoa", hint:"ex: tio Beto"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Ops!"},
-        {id:"objeto2", label:"Nome inventado de uma música", hint:"ex: Bumba na Fofoca"},
-        {id:"emocao1", label:"Uma emoção/estado", hint:"ex: tontos"},
-        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: divertida"},
-      ],
-    },
-    {
-      title:"Um Dia na Fazenda",
-      cat:"h-animais",
-      template:"Na fazenda do(a) seu(sua) {nome1}, todo mundo acordava com o som de {som1}. Um dia, um(a) {animal1} fugiu do curral e começou a correr atrás de {nome2} pelo quintal inteiro. Para ajudar, todos usaram um balde de {comida1} para atrair o bicho de volta. No fim, o(a) {animal1} ficou tão {emocao1} que decidiu virar o(a) novo(a) mascote da fazenda, e todos comemoraram gritando \"{exclamacao1}!\".",
-      blanks:[
-        {id:"nome1", label:"Nome de um parente (seu tio/sua tia)", hint:"ex: seu Zé"},
-        {id:"som1", label:"Um som de animal", hint:"ex: cocoricó"},
-        {id:"animal1", label:"Um animal de fazenda", hint:"ex: porco"},
-        {id:"nome2", label:"Nome de uma pessoa", hint:"ex: Lucas"},
-        {id:"comida1", label:"Uma comida", hint:"ex: milho"},
-        {id:"emocao1", label:"Uma emoção/estado", hint:"ex: manso"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Eba!"},
-      ],
-    },
-    {
-      title:"O Monstro Fofo Debaixo da Cama",
-      cat:"h-herois",
-      template:"Toda noite, {nome1} ouvia um barulho de {som1} vindo de debaixo da cama. Com muita coragem, olhou para baixo e encontrou um monstrinho de cor {cor1} chamado {nome2}, que só queria comer {comida1} e brincar de {brincadeira1}. A partir daquele dia, os dois viraram melhores amigos e toda noite {nome1} dizia \"{exclamacao1}\" antes de dormir, e o monstrinho respondia com um(a) {som2} bem baixinho.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma criança", hint:"ex: Bia"},
-        {id:"som1", label:"Um som estranho", hint:"ex: ronco"},
-        {id:"cor1", label:"Uma cor", hint:"ex: verde"},
-        {id:"nome2", label:"Nome inventado de monstro", hint:"ex: Flufi"},
-        {id:"comida1", label:"Uma comida", hint:"ex: meia suja (brincadeira!)"},
-        {id:"brincadeira1", label:"Uma brincadeira", hint:"ex: esconde-esconde"},
-        {id:"exclamacao1", label:"Uma frase carinhosa", hint:"ex: Boa noite, amigo!"},
-        {id:"som2", label:"Outro som", hint:"ex: ronronar"},
-      ],
-    },
-    {
-      title:"Jogo de Futebol Inesquecível",
-      cat:"h-familia",
-      template:"No campinho perto de casa, o time do(a) {nome1} enfrentou o time comandado por um(a) {animal1} muito {adjetivo1}. No primeiro minuto, a bola bateu em {nome2} e voou parar dentro de {objeto1}. Todo mundo gritou \"{exclamacao1}!\" e o jogo parou por {numero1} minutos de tanto rir. No final, o time de {nome1} venceu comemorando com {comida1} para todos.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma pessoa/time", hint:"ex: Time do Kaká"},
-        {id:"animal1", label:"Um animal", hint:"ex: canguru"},
-        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: competitivo"},
-        {id:"nome2", label:"Nome de um jogador", hint:"ex: Davi"},
-        {id:"objeto1", label:"Um lugar/objeto engraçado", hint:"ex: a churrasqueira do vizinho"},
-        {id:"exclamacao1", label:"Uma exclamação de gol", hint:"ex: Golaço!"},
-        {id:"numero1", label:"Um número", hint:"ex: 10"},
-        {id:"comida1", label:"Uma comida", hint:"ex: pastel"},
-      ],
-    },
-    {
-      title:"Receita de Bolo Catastrófica",
-      cat:"h-comida",
-      template:"{nome1} decidiu fazer um bolo de {comida1} para surpreender a família. A receita pedia {numero1} xícaras de {objeto1}, mas por engano foi usado {objeto2} no lugar. Quando o bolo saiu do forno, ele estava com a cor {cor1} e cheirava a {objeto1}. Mesmo assim, todo mundo provou e gritou \"{exclamacao1}!\" — uns de susto, outros de tanto rir. No fim, a família decidiu pedir pizza e guardar a receita para nunca mais tentar de novo.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma pessoa", hint:"ex: vovó Rosa"},
-        {id:"comida1", label:"Um sabor de bolo", hint:"ex: cenoura com chocolate"},
-        {id:"numero1", label:"Um número", hint:"ex: 3"},
-        {id:"objeto1", label:"Um ingrediente de cozinha", hint:"ex: farinha"},
-        {id:"objeto2", label:"Outro ingrediente (bem diferente)", hint:"ex: sal"},
-        {id:"cor1", label:"Uma cor", hint:"ex: azul"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Meu Deus!"},
-      ],
-    },
-    {
-      title:"O Mistério do Quintal",
-      cat:"h-aventura",
-      template:"Enquanto brincava no quintal, {nome1} encontrou uma pegada de {animal1} que ninguém sabia explicar. Junto com {nome2}, seguiu o rastro até um(a) {objeto1} escondido(a) atrás da árvore. De dentro dele(a), saiu um(a) {animal2} fazendo o som \"{som1}\" e usando um chapéu {cor1}. Os dois amigos riram tanto que gritaram \"{exclamacao1}!\" e decidiram guardar segredo, virando os únicos da rua a conhecer aquele mistério.",
-      blanks:[
-        {id:"nome1", label:"Nome de uma criança", hint:"ex: Théo"},
-        {id:"animal1", label:"Um animal", hint:"ex: raposa"},
-        {id:"nome2", label:"Nome de um amigo", hint:"ex: Manu"},
-        {id:"objeto1", label:"Um objeto grande", hint:"ex: baú"},
-        {id:"animal2", label:"Outro animal", hint:"ex: esquilo"},
-        {id:"som1", label:"Um som engraçado", hint:"ex: miau-au"},
-        {id:"cor1", label:"Uma cor", hint:"ex: amarelo"},
-        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Sério isso?!"},
-      ],
-    },
-  ],
-};
+const GEMINI_MODEL = "gemini-2.0-flash";
+const KEY_STORAGE = "familia_gemini_api_key";
 
-// Estado específico do modo História Maluca
-let historiaSubMode = "classico"; // "classico" | "formulario"
-let historiaCat = "all";
-let historiaStory = null;
-let historiaBlankIdx = 0;
-let historiaAnswers = {};
-let historiaStage = "select"; // "select" | "collect" | "reveal"
-let historiaListening = false;
+function getApiKey() { return localStorage.getItem(KEY_STORAGE) || ""; }
 
-function pickStory(cat) {
-  const list = cat === "all" ? DATA.historia.stories : DATA.historia.stories.filter(s => s.cat === cat);
-  return list[Math.floor(Math.random() * list.length)];
+function openKeyModal() {
+  const existing = getApiKey();
+  const overlay = document.createElement("div");
+  overlay.className = "ai-modal-overlay";
+  overlay.id = "aiKeyOverlay";
+  overlay.innerHTML = `
+    <div class="ai-modal">
+      <h3>🔑 Chave da IA (grátis)</h3>
+      <p>Este joguinho usa a API gratuita do Google Gemini para gerar perguntas.
+      Crie sua chave em <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>
+      (não pede cartão) e cole aqui. Ela fica salva só neste navegador.</p>
+      <input type="text" id="aiKeyInput" placeholder="Cole sua chave aqui" value="${existing}">
+      <div class="ai-modal-actions">
+        <button class="cancel" onclick="closeKeyModal()">Cancelar</button>
+        <button class="save" onclick="saveKey()">Salvar</button>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+function closeKeyModal() {
+  const el = document.getElementById("aiKeyOverlay");
+  if (el) el.remove();
+}
+function saveKey() {
+  const val = document.getElementById("aiKeyInput").value.trim();
+  if (val) localStorage.setItem(KEY_STORAGE, val);
+  closeKeyModal();
+  setAiStatus("Chave salva! Já pode gerar perguntas. ✅");
 }
 
-function speechSupported() {
-  return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+function setAiStatus(msg, isError) {
+  const el = document.getElementById("aiStatus");
+  el.textContent = msg || "";
+  el.classList.toggle("error", !!isError);
+}
+function setAiLoading(loading, msg) {
+  const btns = [document.getElementById("btnAiNew"), document.getElementById("btnAiFollow")];
+  btns.forEach(b => b.disabled = loading);
+  if (loading) setAiStatus(msg);
 }
 
-function listenFor(onResult, statusEl) {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if (!SR) { onResult(null); return; }
-  const rec = new SR();
-  rec.lang = "pt-BR";
-  rec.interimResults = false;
-  rec.maxAlternatives = 1;
-  historiaListening = true;
-  if (statusEl) statusEl();
-  rec.onresult = (e) => {
-    historiaListening = false;
-    const text = e.results[0][0].transcript;
-    onResult(text.charAt(0).toUpperCase() + text.slice(1));
-  };
-  rec.onerror = () => { historiaListening = false; onResult(null); if (statusEl) statusEl(); };
-  rec.onend = () => { historiaListening = false; if (statusEl) statusEl(); };
-  try { rec.start(); } catch(e) { historiaListening = false; onResult(null); }
-}
-
-function startHistoriaFlow() {
-  historiaStory = pickStory(historiaCat);
-  historiaAnswers = {};
-  historiaBlankIdx = 0;
-  historiaStage = "collect";
-  render();
-}
-
-function setHistoriaSubMode(mode) {
-  historiaSubMode = mode;
-  render();
-}
-
-function fillStoryText(story, answers) {
-  let text = story.template;
-  story.blanks.forEach(b => {
-    const val = answers[b.id];
-    const re = new RegExp(`\\{${b.id}\\}`, "g");
-    text = text.replace(re, val ? `<span class="filled">${val}</span>` : `<span class="filled">___</span>`);
+async function callGemini(prompt) {
+  const key = getApiKey();
+  if (!key) { openKeyModal(); throw new Error("Cole sua chave gratuita do Gemini para usar a IA."); }
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${encodeURIComponent(key)}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      contents: [{ parts: [{ text: prompt }] }],
+      generationConfig: { temperature: 0.95, maxOutputTokens: 200 },
+    }),
   });
-  return text;
+  const data = await res.json();
+  if (data.error) throw new Error(data.error.message || "Erro ao falar com a IA.");
+  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+  if (!text) throw new Error("A IA não retornou uma resposta. Tente de novo.");
+  return text.trim().replace(/^["“]|["”]$/g, "");
 }
 
-function micClassicRecord() {
-  const blank = historiaStory.blanks[historiaBlankIdx];
-  listenFor((text) => {
-    if (text) historiaAnswers[blank.id] = text;
-    render();
-  }, () => render());
-  render();
+function currentContextLabel() {
+  const modeNames = {
+    perguntas: "perguntas para conversar em família",
+    quem: "perguntas do tipo 'quem é mais provável de...'",
+    prefere: "perguntas do tipo 'você prefere...'",
+    adivinha: "adivinhas (charadas com resposta)",
+  };
+  const catName = DATA[currentMode].catNames[currentCat] || "";
+  return { modeDesc: modeNames[currentMode], catName };
 }
 
-function classicTypeAnswer(val) {
-  const blank = historiaStory.blanks[historiaBlankIdx];
-  historiaAnswers[blank.id] = val;
-}
-
-function classicNext() {
-  if (historiaBlankIdx < historiaStory.blanks.length - 1) {
-    historiaBlankIdx++;
-  } else {
-    historiaStage = "reveal";
+async function generateAIQuestion() {
+  setAiLoading(true, "Gerando pergunta nova...");
+  document.getElementById("aiResultBox").innerHTML = "";
+  try {
+    const { modeDesc, catName } = currentContextLabel();
+    const catPart = catName ? ` no estilo da categoria "${catName}"` : "";
+    let prompt;
+    if (currentMode === "adivinha") {
+      prompt = `Crie UMA adivinha nova em português do Brasil, no estilo "o que é, o que é", apropriada para crianças e conversas em família. Responda SOMENTE neste formato exato, sem nada antes ou depois:
+PERGUNTA: <a adivinha>
+RESPOSTA: <a resposta curta>`;
+    } else {
+      prompt = `Crie UMA pergunta nova e original em português do Brasil para um joguinho de perguntas em família${catPart}. O joguinho é do tipo "${modeDesc}". A pergunta deve ser calorosa, apropriada para crianças, e estimular uma boa conversa entre pais e filhos. Responda apenas com a pergunta, sem aspas, sem numeração e sem nenhum texto adicional.`;
+    }
+    const result = await callGemini(prompt);
+    let html;
+    if (currentMode === "adivinha") {
+      const match = result.match(/PERGUNTA:\s*([\s\S]*?)\s*RESPOSTA:\s*([\s\S]*)/i);
+      const q = match ? match[1].trim() : result;
+      const a = match ? match[2].trim() : "";
+      html = `<div class="ai-question-box">${q}</div>
+        <div class="answer-block"><div class="answer-blur" onclick="this.classList.add('revealed')">${a}</div>
+        <span class="answer-hint">👆 Toque para revelar a resposta</span></div>`;
+    } else {
+      html = `<div class="ai-question-box">${result}</div>`;
+    }
+    document.getElementById("aiResultBox").innerHTML = html;
+    setAiStatus("Pronto! ✨ (gerado por IA, fora do baralho normal)");
+  } catch (err) {
+    setAiStatus(err.message, true);
+  } finally {
+    setAiLoading(false);
   }
-  render();
 }
 
-function classicPrev() {
-  if (historiaBlankIdx > 0) historiaBlankIdx--;
-  render();
-}
-
-function formMicRecord(blankId) {
-  listenFor((text) => {
-    if (text) historiaAnswers[blankId] = text;
-    render();
-  }, () => render());
-  render();
-}
-
-function formTypeAnswer(blankId, val) {
-  historiaAnswers[blankId] = val;
-}
-
-function historiaRestart() {
-  historiaStage = "select";
-  historiaStory = null;
-  historiaAnswers = {};
-  historiaBlankIdx = 0;
-  render();
-}
-
-function historiaNewStorySameCat() {
-  startHistoriaFlow();
-}
-
-function renderHistoria() {
-  const card = document.getElementById("card");
-  const counter = document.getElementById("counter");
-  const nav = document.getElementById("nav");
-  nav.style.display = "none";
-  counter.textContent = "";
-
-  if (historiaStage === "select") {
-    card.innerHTML = `
-      <span class="mode-badge historia">📖 História Maluca</span>
-      <div class="submode-toggle">
-        <button class="submode-btn ${historiaSubMode==='classico'?'active':''}" onclick="setHistoriaSubMode('classico')">🎙️ Clássico (às cegas)</button>
-        <button class="submode-btn ${historiaSubMode==='formulario'?'active':''}" onclick="setHistoriaSubMode('formulario')">📋 Formulário</button>
-      </div>
-      <div class="historia-intro">
-        <span class="emoji">🤪</span>
-        <h2>Vamos criar uma história maluca!</h2>
-        <p>${historiaSubMode === 'classico'
-          ? 'Cada pessoa fala uma palavra sem saber onde ela vai entrar na história — a graça é a surpresa no final!'
-          : 'Todas as palavras aparecem juntas. É só falar cada uma no microfone e revelar a história completa.'}</p>
-        <p>Escolha um tema (ou deixe em "Todas") e toque para sortear uma história.</p>
-        <button class="roll-btn" onclick="startHistoriaFlow()">🎲 Sortear história</button>
-      </div>
-    `;
+async function generateFollowUp() {
+  const answer = document.getElementById("aiAnswerInput").value.trim();
+  if (!answer) {
+    setAiStatus("Escreva o que a criança respondeu, para eu criar uma boa pergunta de acompanhamento.", true);
     return;
   }
-
-  if (historiaStage === "collect" && historiaSubMode === "classico") {
-    const blank = historiaStory.blanks[historiaBlankIdx];
-    const answered = historiaAnswers[blank.id];
-    const supported = speechSupported();
-    card.innerHTML = `
-      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
-      <p class="blank-progress">Palavra ${historiaBlankIdx + 1} de ${historiaStory.blanks.length}</p>
-      <p class="blank-label">${blank.label}</p>
-      <p class="blank-hint">${blank.hint}</p>
-      ${supported ? `
-        <button class="mic-btn ${historiaListening ? 'listening' : ''}" onclick="micClassicRecord()">🎙️</button>
-        <p class="mic-status">${historiaListening ? 'Ouvindo... fale agora!' : (answered ? '' : 'Toque e fale a palavra')}</p>
-      ` : `
-        <p class="mic-status">Seu navegador não suporta microfone — digite abaixo:</p>
-      `}
-      <input type="text" class="text-fallback" placeholder="ou digite aqui" value="${answered || ''}"
-        oninput="classicTypeAnswer(this.value)" onkeydown="if(event.key==='Enter') classicNext()">
-      ${answered ? `<p class="blank-answer">✅ ${answered}</p>` : ''}
-      <div class="blank-actions">
-        <button class="nav-btn prev" onclick="classicPrev()" ${historiaBlankIdx===0?'disabled':''}>← Anterior</button>
-        <button class="nav-btn next" onclick="classicNext()">${historiaBlankIdx === historiaStory.blanks.length - 1 ? 'Revelar história →' : 'Próxima →'}</button>
-      </div>
-    `;
-    return;
-  }
-
-  if (historiaStage === "collect" && historiaSubMode === "formulario") {
-    const supported = speechSupported();
-    const allFilled = historiaStory.blanks.every(b => historiaAnswers[b.id]);
-    const items = historiaStory.blanks.map(b => {
-      const answered = historiaAnswers[b.id];
-      return `
-        <div class="form-item">
-          <div>
-            <div class="form-item-label">${b.label}</div>
-            <div class="form-item-hint">${b.hint}</div>
-            ${answered ? `<div class="form-item-answer">✅ ${answered}</div>` : ''}
-          </div>
-          ${supported
-            ? `<button class="mic-btn-small ${historiaListening ? 'listening' : ''}" onclick="formMicRecord('${b.id}')">🎙️</button>`
-            : `<input type="text" class="text-fallback" style="max-width:120px;margin-top:0;" placeholder="digite" value="${answered || ''}" oninput="formTypeAnswer('${b.id}', this.value); render()">`
-          }
-        </div>
-      `;
-    }).join("");
-    card.innerHTML = `
-      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
-      <div class="form-list">${items}</div>
-      <div class="blank-actions">
-        <button class="nav-btn" onclick="historiaRestart()">← Trocar história</button>
-        <button class="nav-btn next" onclick="historiaStage='reveal'; render();">Revelar história →</button>
-      </div>
-      ${!allFilled ? '<p class="mic-status" style="margin-top:10px;">Dica: campos em branco viram "___" na história</p>' : ''}
-    `;
-    return;
-  }
-
-  if (historiaStage === "reveal") {
-    card.innerHTML = `
-      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
-      <p class="story-text">${fillStoryText(historiaStory, historiaAnswers)}</p>
-      <div class="blank-actions">
-        <button class="nav-btn" onclick="historiaRestart()">🔀 Trocar tema</button>
-        <button class="nav-btn next" onclick="historiaNewStorySameCat()">🎲 Nova história</button>
-      </div>
-    `;
+  setAiLoading(true, "Pensando em uma boa pergunta de acompanhamento...");
+  document.getElementById("aiResultBox").innerHTML = "";
+  try {
+    const currentQ = (deck[idx] && deck[idx].text) || "";
+    const prompt = `Estamos jogando um jogo de perguntas em família. A pergunta feita foi: "${currentQ}". A criança respondeu: "${answer}". Crie UMA pergunta de acompanhamento curta e calorosa em português do Brasil, que se aprofunde gentilmente nessa resposta e ajude a família a conversar mais. Responda apenas com a pergunta, sem aspas e sem texto adicional.`;
+    const result = await callGemini(prompt);
+    document.getElementById("aiResultBox").innerHTML = `<div class="ai-question-box">${result}</div>`;
+    setAiStatus("Pronto! ✨");
+  } catch (err) {
+    setAiStatus(err.message, true);
+  } finally {
+    setAiLoading(false);
   }
 }
 
