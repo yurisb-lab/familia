@@ -1,0 +1,1683 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perguntas em Família</title>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #fdf6ee;
+  --card: #fffaf5;
+  --amber: #c97d3a;
+  --amber-light: #e8a96a;
+  --amber-pale: #f5dfc0;
+  --green: #4a7a52;
+  --green-light: #d3ead5;
+  --blue: #3d6a99;
+  --blue-light: #cde0f5;
+  --rose: #9e4560;
+  --rose-light: #f0d0da;
+  --purple: #6e4e9a;
+  --purple-light: #e0d0f5;
+  --teal: #2e7a7a;
+  --teal-light: #c8e8e8;
+  --orange: #b85a20;
+  --orange-light: #f5ddc8;
+  --text: #3a2e22;
+  --text-soft: #7a6a58;
+  --border: #edddc8;
+  --shadow: 0 4px 28px rgba(100,70,30,0.11);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 14px 48px;
+  background-image:
+    radial-gradient(ellipse at 8% 8%, #f5dfc050 0%, transparent 48%),
+    radial-gradient(ellipse at 92% 88%, #d3ead548 0%, transparent 48%);
+}
+header { text-align: center; margin-bottom: 22px; }
+header .icon { font-size: 2.2rem; display: block; margin-bottom: 4px; }
+header h1 { font-family: 'Lora', serif; font-size: 1.45rem; color: var(--amber); font-weight: 600; }
+header p { font-size: 0.78rem; color: var(--text-soft); margin-top: 3px; }
+
+.mode-tabs {
+  display: flex; gap: 6px; margin-bottom: 18px;
+  background: #f0e4d2; border-radius: 999px; padding: 5px;
+  max-width: 480px; width: 100%;
+}
+.mode-tab {
+  flex: 1; border: none; border-radius: 999px; padding: 9px 8px;
+  font-family: 'Nunito', sans-serif; font-size: 0.73rem; font-weight: 700;
+  color: var(--text-soft); background: transparent; cursor: pointer;
+  transition: all 0.2s; letter-spacing: 0.01em; white-space: nowrap;
+}
+.mode-tab.active { background: #fff; color: var(--amber); box-shadow: 0 2px 8px rgba(100,70,30,0.12); }
+
+.categories {
+  display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;
+  margin-bottom: 20px; max-width: 560px; width: 100%;
+}
+.cat-btn {
+  border: 2px solid transparent; border-radius: 999px; padding: 6px 14px;
+  font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 700;
+  cursor: pointer; transition: all 0.18s; letter-spacing: 0.02em; outline: none;
+}
+.cat-btn:hover { transform: translateY(-1px); filter: brightness(0.95); }
+.cat-btn.active { border-color: currentColor; transform: translateY(-1px); }
+
+.cat-btn.all        { background: var(--amber); color: #fff; }
+.cat-btn.gerais     { background: var(--green-light); color: var(--green); }
+.cat-btn.engracadas { background: var(--blue-light); color: var(--blue); }
+.cat-btn.coracao    { background: var(--rose-light); color: var(--rose); }
+.cat-btn.preferir   { background: var(--purple-light); color: var(--purple); }
+.cat-btn.surpresa   { background: var(--amber-pale); color: var(--orange); }
+.cat-btn.qall         { background: var(--teal); color: #fff; }
+.cat-btn.q-engracadas { background: var(--blue-light); color: var(--blue); }
+.cat-btn.q-aventura   { background: var(--green-light); color: var(--green); }
+.cat-btn.q-imaginacao { background: var(--purple-light); color: var(--purple); }
+.cat-btn.q-familia    { background: var(--rose-light); color: var(--rose); }
+.cat-btn.q-divertidas { background: var(--orange-light); color: var(--orange); }
+.cat-btn.q-escola     { background: var(--teal-light); color: var(--teal); }
+.cat-btn.pall         { background: var(--purple); color: #fff; }
+.cat-btn.p-aventura   { background: var(--green-light); color: var(--green); }
+.cat-btn.p-poderes    { background: var(--blue-light); color: var(--blue); }
+.cat-btn.p-engracadas { background: var(--orange-light); color: var(--orange); }
+.cat-btn.p-comidas    { background: var(--rose-light); color: var(--rose); }
+.cat-btn.p-familia    { background: var(--amber-pale); color: var(--amber); }
+.cat-btn.p-imaginacao { background: var(--purple-light); color: var(--purple); }
+.cat-btn.p-coracao    { background: var(--teal-light); color: var(--teal); }
+.cat-btn.p-absurdas   { background: var(--green-light); color: var(--green); }
+.cat-btn.p-escola     { background: var(--blue-light); color: var(--blue); }
+
+.card-wrapper { width: 100%; max-width: 480px; margin-bottom: 14px; }
+.card {
+  background: var(--card); border-radius: 24px; box-shadow: var(--shadow);
+  padding: 36px 28px 32px; min-height: 210px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; border: 1.5px solid var(--border);
+  transition: opacity 0.22s, transform 0.22s;
+}
+.card.fade-out { opacity: 0; transform: scale(0.97); }
+
+.cat-label {
+  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.09em;
+  text-transform: uppercase; margin-bottom: 18px; padding: 4px 12px; border-radius: 999px;
+}
+.cat-label.gerais       { background: var(--green-light); color: var(--green); }
+.cat-label.engracadas   { background: var(--blue-light); color: var(--blue); }
+.cat-label.coracao      { background: var(--rose-light); color: var(--rose); }
+.cat-label.preferir     { background: var(--purple-light); color: var(--purple); }
+.cat-label.surpresa     { background: var(--amber-pale); color: var(--orange); }
+.cat-label.q-engracadas { background: var(--blue-light); color: var(--blue); }
+.cat-label.q-aventura   { background: var(--green-light); color: var(--green); }
+.cat-label.q-imaginacao { background: var(--purple-light); color: var(--purple); }
+.cat-label.q-familia    { background: var(--rose-light); color: var(--rose); }
+.cat-label.q-divertidas { background: var(--orange-light); color: var(--orange); }
+.cat-label.q-escola     { background: var(--teal-light); color: var(--teal); }
+.cat-label.p-aventura   { background: var(--green-light); color: var(--green); }
+.cat-label.p-poderes    { background: var(--blue-light); color: var(--blue); }
+.cat-label.p-engracadas { background: var(--orange-light); color: var(--orange); }
+.cat-label.p-comidas    { background: var(--rose-light); color: var(--rose); }
+.cat-label.p-familia    { background: var(--amber-pale); color: var(--amber); }
+.cat-label.p-imaginacao { background: var(--purple-light); color: var(--purple); }
+.cat-label.p-coracao    { background: var(--teal-light); color: var(--teal); }
+.cat-label.p-absurdas   { background: var(--green-light); color: var(--green); }
+.cat-label.p-escola     { background: var(--blue-light); color: var(--blue); }
+
+.mode-badge {
+  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: #fff; padding: 3px 10px;
+  border-radius: 999px; margin-bottom: 8px;
+}
+.mode-badge.perguntas { background: var(--amber); }
+.mode-badge.quem      { background: var(--teal); }
+.mode-badge.prefere   { background: var(--purple); }
+
+.question { font-family: 'Lora', serif; font-size: 1.18rem; line-height: 1.65; color: var(--text); font-style: italic; }
+.card-tip {
+  font-size: 0.72rem; color: var(--text-soft); margin-top: 14px;
+  font-style: normal; font-family: 'Nunito', sans-serif;
+  background: var(--amber-pale); padding: 5px 12px; border-radius: 999px;
+}
+.counter { font-size: 0.75rem; color: var(--text-soft); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 16px; }
+
+.finished { text-align: center; padding: 24px 12px; }
+.finished .emoji { font-size: 2.8rem; display: block; margin-bottom: 10px; }
+.finished h2 { font-family: 'Lora', serif; font-size: 1.2rem; color: var(--amber); margin-bottom: 6px; }
+.finished p { font-size: 0.84rem; color: var(--text-soft); margin-bottom: 18px; line-height: 1.5; }
+.restart-btn {
+  background: var(--amber); color: #fff; border: none; border-radius: 999px;
+  padding: 11px 26px; font-family: 'Nunito', sans-serif; font-size: 0.88rem;
+  font-weight: 700; cursor: pointer; transition: all 0.2s;
+}
+.restart-btn:hover { background: var(--amber-light); transform: translateY(-1px); }
+
+.nav { display: flex; align-items: center; gap: 12px; max-width: 480px; width: 100%; justify-content: center; }
+.nav-btn {
+  background: var(--card); border: 1.5px solid var(--border); border-radius: 999px;
+  padding: 11px 24px; font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+  font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s;
+  box-shadow: 0 2px 8px rgba(100,70,30,0.07);
+}
+.nav-btn:hover:not(:disabled) { background: var(--amber-pale); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(100,70,30,0.12); }
+.nav-btn:disabled { opacity: 0.3; cursor: default; }
+.nav-btn.next { background: var(--amber); color: #fff; border-color: var(--amber); }
+.nav-btn.next:hover:not(:disabled) { background: var(--amber-light); border-color: var(--amber-light); }
+
+/* ── ADIVINHA ANSWER ── */
+.mode-badge.adivinha { background: #e07b20; }
+.cat-btn.aall { background: #e07b20; color: #fff; }
+.cat-label.adivinha { background: #fde8cc; color: #e07b20; }
+
+.answer-block {
+  margin-top: 18px;
+  width: 100%;
+}
+.answer-blur {
+  font-family: 'Lora', serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  font-style: italic;
+  background: var(--amber-pale);
+  border-radius: 12px;
+  padding: 10px 16px;
+  filter: blur(6px);
+  cursor: pointer;
+  transition: filter 0.3s;
+  user-select: none;
+}
+.answer-blur.revealed { filter: blur(0); cursor: default; }
+.answer-hint {
+  font-size: 0.7rem;
+  color: var(--text-soft);
+  font-family: 'Nunito', sans-serif;
+  margin-top: 6px;
+  display: block;
+  letter-spacing: 0.04em;
+}
+.answer-hint.hidden { display: none; }
+
+/* ── HISTÓRIA MALUCA ── */
+.mode-badge.historia { background: var(--rose); }
+.cat-btn.hall { background: var(--rose); color: #fff; }
+.cat-btn.h-aventura   { background: var(--green-light); color: var(--green); }
+.cat-btn.h-escola     { background: var(--teal-light); color: var(--teal); }
+.cat-btn.h-herois     { background: var(--blue-light); color: var(--blue); }
+.cat-btn.h-familia    { background: var(--rose-light); color: var(--rose); }
+.cat-btn.h-espaco     { background: var(--purple-light); color: var(--purple); }
+.cat-btn.h-festa      { background: var(--orange-light); color: var(--orange); }
+.cat-btn.h-animais    { background: var(--amber-pale); color: var(--amber); }
+.cat-btn.h-comida     { background: var(--rose-light); color: var(--rose); }
+.cat-label.historia   { background: var(--rose-light); color: var(--rose); }
+.cat-label.h-aventura { background: var(--green-light); color: var(--green); }
+.cat-label.h-escola   { background: var(--teal-light); color: var(--teal); }
+.cat-label.h-herois   { background: var(--blue-light); color: var(--blue); }
+.cat-label.h-familia  { background: var(--rose-light); color: var(--rose); }
+.cat-label.h-espaco   { background: var(--purple-light); color: var(--purple); }
+.cat-label.h-festa    { background: var(--orange-light); color: var(--orange); }
+.cat-label.h-animais  { background: var(--amber-pale); color: var(--amber); }
+.cat-label.h-comida   { background: var(--rose-light); color: var(--rose); }
+
+.submode-toggle {
+  display: flex; gap: 6px; background: var(--rose-light); border-radius: 999px;
+  padding: 4px; margin-bottom: 18px; width: 100%; max-width: 320px;
+}
+.submode-btn {
+  flex: 1; border: none; border-radius: 999px; padding: 8px 6px;
+  font-family: 'Nunito', sans-serif; font-size: 0.72rem; font-weight: 700;
+  color: var(--rose); background: transparent; cursor: pointer; transition: all 0.2s;
+}
+.submode-btn.active { background: var(--rose); color: #fff; }
+
+.historia-intro { text-align: center; }
+.historia-intro .emoji { font-size: 2.4rem; display: block; margin-bottom: 6px; }
+.historia-intro h2 { font-family: 'Lora', serif; font-size: 1.15rem; color: var(--rose); margin-bottom: 8px; }
+.historia-intro p { font-size: 0.82rem; color: var(--text-soft); margin-bottom: 6px; line-height: 1.5; }
+.roll-btn {
+  background: var(--rose); color: #fff; border: none; border-radius: 999px;
+  padding: 13px 30px; font-family: 'Nunito', sans-serif; font-size: 0.92rem;
+  font-weight: 700; cursor: pointer; transition: all 0.2s; margin-top: 14px;
+}
+.roll-btn:hover { background: #b4577a; transform: translateY(-1px); }
+
+.blank-progress {
+  font-size: 0.72rem; color: var(--rose); font-weight: 700; letter-spacing: 0.06em;
+  text-transform: uppercase; margin-bottom: 10px;
+}
+.blank-label { font-family: 'Lora', serif; font-size: 1.05rem; color: var(--text); font-style: italic; margin-bottom: 4px; }
+.blank-hint { font-size: 0.72rem; color: var(--text-soft); margin-bottom: 18px; }
+
+.mic-btn {
+  width: 76px; height: 76px; border-radius: 50%; border: none;
+  background: var(--rose); color: #fff; font-size: 1.8rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; box-shadow: 0 4px 14px rgba(158,69,96,0.28);
+}
+.mic-btn:hover { background: #b4577a; transform: scale(1.04); }
+.mic-btn.listening { animation: pulse 1.1s infinite; background: #d0455f; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(208,69,95,0.5); }
+  70% { box-shadow: 0 0 0 16px rgba(208,69,95,0); }
+  100% { box-shadow: 0 0 0 0 rgba(208,69,95,0); }
+}
+.mic-status { font-size: 0.75rem; color: var(--text-soft); margin-top: 10px; min-height: 18px; }
+
+.blank-answer {
+  font-family: 'Lora', serif; font-size: 1.1rem; color: var(--rose); font-weight: 600;
+  margin-top: 14px; min-height: 28px;
+}
+.text-fallback {
+  margin-top: 12px; width: 100%; max-width: 260px;
+  border: 1.5px solid var(--border); border-radius: 999px;
+  padding: 8px 16px; font-family: 'Nunito', sans-serif; font-size: 0.85rem;
+  text-align: center; background: #fff; color: var(--text);
+}
+.blank-actions { display: flex; gap: 10px; margin-top: 18px; }
+
+.form-list { width: 100%; text-align: left; }
+.form-item {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 10px 0; border-bottom: 1px solid var(--border);
+}
+.form-item:last-child { border-bottom: none; }
+.form-item-label { font-size: 0.86rem; color: var(--text); font-weight: 600; }
+.form-item-hint { font-size: 0.68rem; color: var(--text-soft); }
+.form-item-answer { font-size: 0.82rem; color: var(--rose); font-weight: 700; margin-top: 2px; }
+.mic-btn-small {
+  width: 42px; height: 42px; border-radius: 50%; border: none; flex-shrink: 0;
+  background: var(--rose); color: #fff; font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.mic-btn-small.listening { animation: pulse 1.1s infinite; background: #d0455f; }
+.mic-btn-small:hover { background: #b4577a; }
+
+.story-title { font-family: 'Lora', serif; font-size: 1.1rem; color: var(--rose); font-weight: 600; margin-bottom: 14px; }
+.story-text { font-family: 'Lora', serif; font-size: 1.02rem; line-height: 1.75; color: var(--text); text-align: left; }
+.story-text .filled { color: var(--rose); font-weight: 700; font-style: normal; }
+</style>
+</head>
+<body>
+
+<header>
+  <span class="icon">💬</span>
+  <h1>Perguntas em Família</h1>
+  <p>Para conversas que ficam na memória</p>
+</header>
+
+<div class="mode-tabs" id="modeTabs">
+  <button class="mode-tab active" data-mode="perguntas" onclick="setMode('perguntas')">💬 Perguntas</button>
+  <button class="mode-tab" data-mode="quem" onclick="setMode('quem')">🤣 Quem é mais?</button>
+  <button class="mode-tab" data-mode="prefere" onclick="setMode('prefere')">🤔 O que prefere?</button>
+  <button class="mode-tab" data-mode="adivinha" onclick="setMode('adivinha')">🔍 Adivinhas</button>
+  <button class="mode-tab" data-mode="historia" onclick="setMode('historia')">📖 História Maluca</button>
+</div>
+
+<div class="categories" id="categories"></div>
+
+<div class="card-wrapper">
+  <div class="card" id="card"></div>
+</div>
+
+<p class="counter" id="counter"></p>
+
+<div class="nav" id="nav">
+  <button class="nav-btn prev" id="btnPrev" onclick="go(-1)">← Anterior</button>
+  <button class="nav-btn next" id="btnNext" onclick="go(1)">Próxima →</button>
+</div>
+
+<script>
+const DATA = {
+
+  // ══════════════════════════════════════════
+  // MODO: PERGUNTAS
+  // ══════════════════════════════════════════
+  perguntas: {
+    cats: [
+      { id:"all",        label:"✨ Todas",           cls:"all" },
+      { id:"gerais",     label:"💬 Gerais",           cls:"gerais" },
+      { id:"engracadas", label:"😂 Engraçadas",       cls:"engracadas" },
+      { id:"coracao",    label:"❤️ Coração",          cls:"coracao" },
+      { id:"preferir",   label:"🤔 Você prefere?",    cls:"preferir" },
+      { id:"surpresa",   label:"✨ Surpreendentes",   cls:"surpresa" },
+    ],
+    catNames: {
+      gerais:"Gerais", engracadas:"Engraçadas", coracao:"Coração",
+      preferir:"Você prefere?", surpresa:"Surpreendentes",
+    },
+    questions: [
+      // ── GERAIS (63) ──
+      {text:"Qual é uma coisa que eu não sei sobre você?", cat:"gerais"},
+      {text:"Se você pudesse usar uma varinha mágica para mudar uma coisa na nossa família, qual seria?", cat:"gerais"},
+      {text:"Qual é a parte mais difícil de ser criança?", cat:"gerais"},
+      {text:"Qual foi o momento mais feliz da sua semana?", cat:"gerais"},
+      {text:"O que faz você se sentir muito amado?", cat:"gerais"},
+      {text:"Qual é a sua lembrança favorita de nós juntos?", cat:"gerais"},
+      {text:"Se você pudesse escolher qualquer lugar para passearmos amanhã, para onde iríamos?", cat:"gerais"},
+      {text:"O que você acha que faz um bom amigo?", cat:"gerais"},
+      {text:"Qual foi a coisa mais corajosa que você já fez?", cat:"gerais"},
+      {text:"Se você pudesse aprender qualquer habilidade instantaneamente, qual seria?", cat:"gerais"},
+      {text:"O que você mais gosta em você mesmo?", cat:"gerais"},
+      {text:"Qual é uma regra da casa que você entende e qual é uma que você não entende?", cat:"gerais"},
+      {text:"Se você pudesse fazer uma pergunta para Deus e receber uma resposta, qual seria?", cat:"gerais"},
+      {text:"O que você acha que os adultos não entendem sobre as crianças?", cat:"gerais"},
+      {text:"Se você pudesse trocar de lugar com alguém por um dia, quem seria?", cat:"gerais"},
+      {text:"Qual foi a coisa mais engraçada que aconteceu com você este ano?", cat:"gerais"},
+      {text:"O que faz você se sentir triste?", cat:"gerais"},
+      {text:"O que faz você se sentir muito feliz?", cat:"gerais"},
+      {text:"Qual é o melhor elogio que alguém já fez para você?", cat:"gerais"},
+      {text:"O que você gostaria de fazer mais vezes em família?", cat:"gerais"},
+      {text:"O que faz você se sentir realmente importante?", cat:"gerais"},
+      {text:"Quando você se sente mais amado?", cat:"gerais"},
+      {text:"O que eu faço que faz você sorrir?", cat:"gerais"},
+      {text:"O que eu faço que às vezes deixa você triste?", cat:"gerais"},
+      {text:"Qual foi a última vez que você sentiu muito orgulho de si mesmo?", cat:"gerais"},
+      {text:"Existe alguma coisa que você gostaria de fazer melhor?", cat:"gerais"},
+      {text:"O que mais preocupa você hoje?", cat:"gerais"},
+      {text:"Qual foi a coisa mais gentil que alguém fez por você?", cat:"gerais"},
+      {text:"Qual foi a coisa mais gentil que você fez por alguém?", cat:"gerais"},
+      {text:"O que faz um dia ser perfeito para você?", cat:"gerais"},
+      {text:"Quem é uma pessoa que você admira e por quê?", cat:"gerais"},
+      {text:"Qual foi a melhor parte do seu dia hoje?", cat:"gerais"},
+      {text:"Qual foi a pior parte do seu dia hoje?", cat:"gerais"},
+      {text:"O que você gostaria que os adultos entendessem melhor sobre você?", cat:"gerais"},
+      {text:"Quando você se sente mais corajoso?", cat:"gerais"},
+      {text:"Quando você sente medo?", cat:"gerais"},
+      {text:"O que você mais gosta na nossa família?", cat:"gerais"},
+      {text:"O que você gostaria que fizéssemos mais juntos?", cat:"gerais"},
+      {text:"Qual é um sonho que você tem para quando crescer?", cat:"gerais"},
+      {text:"O que faz você se sentir seguro?", cat:"gerais"},
+      {text:"Se pudesse agradecer alguém hoje, quem seria?", cat:"gerais"},
+      {text:"O que você acha que faz uma pessoa ser boa?", cat:"gerais"},
+      {text:"Qual foi uma lição importante que você aprendeu este ano?", cat:"gerais"},
+      // +20 gerais
+      {text:"O que você imagina estar fazendo daqui a 5 anos?", cat:"gerais"},
+      {text:"Qual é a coisa mais estranha que já aconteceu com você?", cat:"gerais"},
+      {text:"Se você pudesse ter uma habilidade secreta que ninguém soubesse, qual seria?", cat:"gerais"},
+      {text:"O que você faria se tivesse um dia inteiro só para você?", cat:"gerais"},
+      {text:"Qual é a coisa mais importante que você já aprendeu com um amigo?", cat:"gerais"},
+      {text:"Se você pudesse mudar uma coisa na escola, o que seria?", cat:"gerais"},
+      {text:"Qual é o lugar favorito da sua casa e por quê?", cat:"gerais"},
+      {text:"O que você faria se soubesse que não poderia fracassar?", cat:"gerais"},
+      {text:"Qual é a coisa que mais te deixa animado quando acorda de manhã?", cat:"gerais"},
+      {text:"Se você pudesse escrever uma carta para você mesmo no futuro, o que diria?", cat:"gerais"},
+      {text:"Qual é a coisa que você mais gosta de fazer quando está sozinho?", cat:"gerais"},
+      {text:"O que você acha que é mais difícil: pedir desculpa ou perdoar?", cat:"gerais"},
+      {text:"Qual foi a vez que você mais ajudou alguém?", cat:"gerais"},
+      {text:"Se você pudesse passar um dia inteiro com qualquer pessoa do mundo, quem escolheria?", cat:"gerais"},
+      {text:"O que você acha que faz uma família ser feliz?", cat:"gerais"},
+      {text:"Qual é a coisa que você nunca se cansa de fazer?", cat:"gerais"},
+      {text:"Se você pudesse inventar uma nova matéria na escola, qual seria?", cat:"gerais"},
+      {text:"O que você mais admira em alguém da nossa família?", cat:"gerais"},
+      {text:"Qual foi a decisão mais difícil que você já teve que tomar?", cat:"gerais"},
+      {text:"O que você gostaria de ter mais coragem para fazer?", cat:"gerais"},
+
+      // ── ENGRAÇADAS (50) ──
+      {text:"Você preferiria ter pés de pato ou nariz de elefante?", cat:"engracadas"},
+      {text:"Se os animais pudessem falar, qual seria o mais engraçado?", cat:"engracadas"},
+      {text:"Se você fosse diretor da escola por um dia, o que mudaria?", cat:"engracadas"},
+      {text:"Qual seria o sabor de sorvete mais maluco que você inventaria?", cat:"engracadas"},
+      {text:"Se você pudesse ter qualquer animal de estimação, até mesmo um dinossauro, qual escolheria?", cat:"engracadas"},
+      {text:"O que você faria se encontrasse um milhão de reais na rua?", cat:"engracadas"},
+      {text:"Se você pudesse trocar sua voz pela de qualquer animal, qual escolheria?", cat:"engracadas"},
+      {text:"Se o nosso carro pudesse falar, o que ele diria sobre a nossa família?", cat:"engracadas"},
+      {text:"Se você fosse presidente por um dia, qual seria sua primeira lei?", cat:"engracadas"},
+      {text:"Se os brinquedos ganhassem vida à noite, o que eles fariam?", cat:"engracadas"},
+      {text:"Você preferiria ter orelhas de coelho ou cauda de macaco?", cat:"engracadas"},
+      {text:"Se pudesse criar um feriado, como ele seria?", cat:"engracadas"},
+      {text:"Qual seria o pior sabor de pizza do mundo?", cat:"engracadas"},
+      {text:"Se você pudesse misturar dois animais, quais seriam?", cat:"engracadas"},
+      {text:"Se os vegetais pudessem reclamar, do que reclamariam?", cat:"engracadas"},
+      {text:"Qual superpoder seria o mais inútil?", cat:"engracadas"},
+      {text:"Se a nossa família fosse uma banda, qual seria o nome?", cat:"engracadas"},
+      {text:"Se você fosse um vilão de desenho, qual seria seu plano maluco?", cat:"engracadas"},
+      {text:"Se pudesse transformar uma matéria da escola em brincadeira, qual seria?", cat:"engracadas"},
+      {text:"Se as galinhas dominassem o mundo, o que mudaria?", cat:"engracadas"},
+      {text:"Qual seria a coisa mais estranha para chover do céu?", cat:"engracadas"},
+      {text:"Você preferiria comer apenas sorvete ou apenas pizza pelo resto da vida?", cat:"engracadas"},
+      {text:"Se pudesse morar dentro de um filme, qual escolheria?", cat:"engracadas"},
+      {text:"Se seu bicho de estimação pudesse falar por um minuto, o que ele diria?", cat:"engracadas"},
+      {text:"Se pudesse inventar um sabor de refrigerante, qual seria?", cat:"engracadas"},
+      {text:"Qual seria o nome do seu restaurante maluco?", cat:"engracadas"},
+      // +24 engraçadas
+      {text:"Se você pudesse ter um superpoder ridículo, qual seria?", cat:"engracadas"},
+      {text:"Se a sua barriga falasse, o que ela reclamaria mais?", cat:"engracadas"},
+      {text:"Se você fosse um personagem de videogame, qual seria sua vida extra?", cat:"engracadas"},
+      {text:"Qual seria o pior nome para um cachorro?", cat:"engracadas"},
+      {text:"Se você pudesse renomear os dias da semana, como se chamariam?", cat:"engracadas"},
+      {text:"Se a chuva caísse para cima, o que você faria?", cat:"engracadas"},
+      {text:"Se você acordasse amanhã falando ao contrário, o que seria o mais difícil de dizer?", cat:"engracadas"},
+      {text:"Qual animal faria o pior motorista de ônibus?", cat:"engracadas"},
+      {text:"Se seu nariz fosse um instrumento musical, o que tocaria?", cat:"engracadas"},
+      {text:"Se você pudesse fazer qualquer coisa virar um esporte olímpico, o que escolheria?", cat:"engracadas"},
+      {text:"Se as plantas pudessem gritar, qual gritaria mais alto?", cat:"engracadas"},
+      {text:"Se você inventasse um robô para fazer uma coisa, qual seria a mais inútil possível?", cat:"engracadas"},
+      {text:"Qual seria o pior superpoder para ter numa prova na escola?", cat:"engracadas"},
+      {text:"Se você pudesse substituir todas as cadeiras do mundo por outra coisa, o que seria?", cat:"engracadas"},
+      {text:"Se os polvos fossem os donos de restaurantes, o que serviriam no cardápio?", cat:"engracadas"},
+      {text:"Qual seria o animal mais chato para ter como vizinho?", cat:"engracadas"},
+      {text:"Se você tivesse que escolher um cheiro para ser o seu perfume para sempre, qual seria o mais maluco?", cat:"engracadas"},
+      {text:"Se a lua fosse feita de queijo, quem na nossa família já teria ido comer um pedaço?", cat:"engracadas"},
+      {text:"Se você fosse um emoji, qual seria?", cat:"engracadas"},
+      {text:"Qual seria o pior momento para começar a rir sem parar?", cat:"engracadas"},
+      {text:"Se você pudesse trocar o som do trovão por qualquer outro som, qual escolheria?", cat:"engracadas"},
+      {text:"Se os peixes pudessem sair da água, onde você acha que passariam o fim de semana?", cat:"engracadas"},
+      {text:"Qual seria o nome mais ridículo para um super-herói?", cat:"engracadas"},
+      {text:"Se a sua sombra pudesse fazer coisas diferentes de você, o que ela faria?", cat:"engracadas"},
+
+      // ── CORAÇÃO (35) ──
+      {text:"O que você acha que eu faço bem como pai?", cat:"coracao"},
+      {text:"O que você gostaria que eu fizesse mais?", cat:"coracao"},
+      {text:"Tem alguma coisa que você gostaria de me contar, mas nunca contou?", cat:"coracao"},
+      {text:"Quando você se sente mais perto de Deus?", cat:"coracao"},
+      {text:"O que você acha que Deus mais gosta em uma pessoa?", cat:"coracao"},
+      {text:"Como eu posso ser um pai melhor para você?", cat:"coracao"},
+      {text:"O que você acha que Deus pensa quando olha para você?", cat:"coracao"},
+      {text:"O que você mais gosta de fazer comigo?", cat:"coracao"},
+      {text:"Qual é uma coisa que você gostaria que eu aprendesse sobre você?", cat:"coracao"},
+      {text:"Qual é uma coisa que você gostaria que eu nunca esquecesse sobre você?", cat:"coracao"},
+      {text:"Quando você sente que Deus está cuidando de você?", cat:"coracao"},
+      {text:"O que você acha que faz um pai ser um bom pai?", cat:"coracao"},
+      {text:"O que você acha que eu mais gosto em você?", cat:"coracao"},
+      {text:"O que você acha que sua mãe mais gosta em você?", cat:"coracao"},
+      {text:"Se você pudesse mudar uma coisa em você, o que mudaria?", cat:"coracao"},
+      {text:"Qual foi o momento em que você mais se sentiu feliz conosco?", cat:"coracao"},
+      {text:"Qual foi o momento em que você mais se sentiu triste?", cat:"coracao"},
+      {text:"Se pudesse guardar apenas uma lembrança da nossa família, qual escolheria?", cat:"coracao"},
+      // +17 coração
+      {text:"O que você sente quando alguém te decepciona?", cat:"coracao"},
+      {text:"O que você faz quando está com raiva e quer se acalmar?", cat:"coracao"},
+      {text:"Tem alguma coisa que você gostaria de me pedir, mas ainda não teve coragem?", cat:"coracao"},
+      {text:"O que você acha que Deus sente quando você ora?", cat:"coracao"},
+      {text:"Quando você se sente mais você mesmo?", cat:"coracao"},
+      {text:"Qual é uma coisa que você aprende comigo que carregará para sempre?", cat:"coracao"},
+      {text:"O que você faria se visse alguém sendo maltratado na escola?", cat:"coracao"},
+      {text:"O que significa para você saber que Deus te ama?", cat:"coracao"},
+      {text:"Quando foi a última vez que você sentiu que eu estava muito orgulhoso de você?", cat:"coracao"},
+      {text:"O que você mais gosta na forma como nossa família resolve os problemas?", cat:"coracao"},
+      {text:"Tem algum momento do dia em que você sente mais falta de mim?", cat:"coracao"},
+      {text:"Qual é uma coisa que você gostaria de me ensinar?", cat:"coracao"},
+      {text:"O que você faz quando sente que ninguém te entende?", cat:"coracao"},
+      {text:"Qual é uma promessa que você gostaria que eu fizesse para você?", cat:"coracao"},
+      {text:"O que faz você se sentir realmente aceito?", cat:"coracao"},
+      {text:"Como você sabe quando alguém realmente te ama?", cat:"coracao"},
+      {text:"O que você diria para mim se soubesse que eu ficaria bem com qualquer resposta?", cat:"coracao"},
+
+      // ── VOCÊ PREFERE? curtas (10) ──
+      {text:"Você prefere voar ou ficar invisível?", cat:"preferir"},
+      {text:"Você prefere conversar com animais ou falar todas as línguas do mundo?", cat:"preferir"},
+      {text:"Você prefere nunca mais tomar banho ou nunca mais escovar os dentes?", cat:"preferir"},
+      {text:"Você prefere morar numa casa na árvore ou num castelo?", cat:"preferir"},
+      {text:"Você prefere ter um dragão ou um unicórnio?", cat:"preferir"},
+      {text:"Você prefere voltar no tempo ou viajar para o futuro?", cat:"preferir"},
+      {text:"Você prefere ser muito rápido ou muito forte?", cat:"preferir"},
+      {text:"Você prefere ganhar R$ 100 hoje ou R$ 1.000 daqui a um ano?", cat:"preferir"},
+      {text:"Você prefere explorar o fundo do mar ou o espaço?", cat:"preferir"},
+      {text:"Você prefere ter um botão que faz chover pizza ou sorvete?", cat:"preferir"},
+
+      // ── SURPREENDENTES (15) ──
+      {text:"O que você espera que nossa família seja daqui a 10 anos?", cat:"surpresa"},
+      {text:"Como você descreveria nossa família para alguém que nunca nos conheceu?", cat:"surpresa"},
+      {text:"O que você gostaria que fizéssemos juntos antes de você crescer?", cat:"surpresa"},
+      {text:"Qual é a pergunta que você gostaria que eu fizesse agora?", cat:"surpresa"},
+      {text:"Tem alguma coisa que você sempre quis me perguntar?", cat:"surpresa"},
+      // +10 surpreendentes
+      {text:"Se pudesse deixar uma mensagem para todos os pais do mundo, qual seria?", cat:"surpresa"},
+      {text:"O que você acha que os filhos ensinam aos pais sem perceber?", cat:"surpresa"},
+      {text:"Se nossa família fosse um time, qual seria o nome e qual seria o lema?", cat:"surpresa"},
+      {text:"Qual é a coisa mais bonita que já viu acontecer entre duas pessoas?", cat:"surpresa"},
+      {text:"Se você pudesse mudar uma coisa no mundo para que as crianças fossem mais felizes, o que seria?", cat:"surpresa"},
+      {text:"O que você acha que faz uma lembrança durar para sempre?", cat:"surpresa"},
+      {text:"Se você pudesse escrever uma lei só para as famílias, qual seria?", cat:"surpresa"},
+      {text:"O que você acha que vai sentir falta de ser criança quando crescer?", cat:"surpresa"},
+      {text:"Existe alguém fora da família que mudou a sua vida de alguma forma?", cat:"surpresa"},
+      {text:"Se você pudesse me dar um conselho, qual seria?", cat:"surpresa"},
+    ],
+  },
+
+  // ══════════════════════════════════════════
+  // MODO: QUEM É MAIS PROVÁVEL DE...
+  // ══════════════════════════════════════════
+  quem: {
+    cats: [
+      { id:"all",           label:"✨ Todas",          cls:"qall" },
+      { id:"q-engracadas",  label:"😂 Engraçadas",     cls:"q-engracadas" },
+      { id:"q-aventura",    label:"🏕️ Aventureiras",   cls:"q-aventura" },
+      { id:"q-imaginacao",  label:"🦄 Imaginativas",   cls:"q-imaginacao" },
+      { id:"q-familia",     label:"🏠 Família",        cls:"q-familia" },
+      { id:"q-divertidas",  label:"🎉 Divertidas",     cls:"q-divertidas" },
+      { id:"q-escola",      label:"📚 Escola",         cls:"q-escola" },
+    ],
+    catNames: {
+      "q-engracadas":"Engraçadas","q-aventura":"Aventureiras",
+      "q-imaginacao":"Imaginativas","q-familia":"Família",
+      "q-divertidas":"Muito divertidas","q-escola":"Escola",
+    },
+    questions: [
+      // ── ENGRAÇADAS (25) ──
+      {text:"Comer um sorvete e deixar cair na primeira lambida?", cat:"q-engracadas"},
+      {text:"Rir tão forte que não consegue falar?", cat:"q-engracadas"},
+      {text:"Esquecer onde colocou o próprio chinelo?", cat:"q-engracadas"},
+      {text:"Fazer amizade com um cachorro desconhecido?", cat:"q-engracadas"},
+      {text:"Inventar uma dança maluca?", cat:"q-engracadas"},
+      {text:"Falar dormindo?", cat:"q-engracadas"},
+      {text:"Construir a maior cabana da casa?", cat:"q-engracadas"},
+      {text:"Fazer uma careta em uma foto importante?", cat:"q-engracadas"},
+      {text:"Transformar uma caixa de papelão em um castelo?", cat:"q-engracadas"},
+      {text:"Encontrar um jeito criativo de evitar arrumar o quarto?", cat:"q-engracadas"},
+      {text:"Usar meias diferentes sem perceber?", cat:"q-engracadas"},
+      {text:"Colocar sal no lugar de açúcar?", cat:"q-engracadas"},
+      {text:"Gritar no susto de um filme de terror?", cat:"q-engracadas"},
+      {text:"Dormir no carro em menos de 5 minutos?", cat:"q-engracadas"},
+      {text:"Esquecer o nome de uma pessoa que acabou de conhecer?", cat:"q-engracadas"},
+      {text:"Cantar no chuveiro como se fosse um show?", cat:"q-engracadas"},
+      {text:"Fazer barulho comendo pipoca no cinema?", cat:"q-engracadas"},
+      {text:"Tropeçar no próprio pé?", cat:"q-engracadas"},
+      {text:"Mandar mensagem para a pessoa errada?", cat:"q-engracadas"},
+      {text:"Dar risada na hora mais inapropriada?", cat:"q-engracadas"},
+      {text:"Inventar uma palavra nova e insistir que existe?", cat:"q-engracadas"},
+      {text:"Fingir que entendeu a piada quando não entendeu?", cat:"q-engracadas"},
+      {text:"Colocar o sapato no pé errado e só perceber na rua?", cat:"q-engracadas"},
+      {text:"Falar com o cachorro como se ele entendesse tudo?", cat:"q-engracadas"},
+      {text:"Montar um plano elaborado para evitar lavar a louça?", cat:"q-engracadas"},
+
+      // ── AVENTUREIRAS (25) ──
+      {text:"Sobreviver melhor em uma ilha deserta?", cat:"q-aventura"},
+      {text:"Encontrar um tesouro escondido?", cat:"q-aventura"},
+      {text:"Fazer amizade com um extraterrestre?", cat:"q-aventura"},
+      {text:"Ser escolhido para uma missão secreta?", cat:"q-aventura"},
+      {text:"Escalar uma montanha?", cat:"q-aventura"},
+      {text:"Descobrir uma passagem secreta?", cat:"q-aventura"},
+      {text:"Explorar uma caverna misteriosa?", cat:"q-aventura"},
+      {text:"Domar um dragão?", cat:"q-aventura"},
+      {text:"Navegar até uma ilha desconhecida?", cat:"q-aventura"},
+      {text:"Ser o herói de uma aventura?", cat:"q-aventura"},
+      {text:"Construir uma jangada e tentar navegar?", cat:"q-aventura"},
+      {text:"Acampar sozinho em uma floresta?", cat:"q-aventura"},
+      {text:"Criar um mapa do tesouro para os outros encontrarem?", cat:"q-aventura"},
+      {text:"Pular de paraquedas sem hesitar?", cat:"q-aventura"},
+      {text:"Explorar uma caverna sem lanterna?", cat:"q-aventura"},
+      {text:"Sobreviver três dias sem celular no mato?", cat:"q-aventura"},
+      {text:"Fazer amizade com um animal selvagem?", cat:"q-aventura"},
+      {text:"Atravessar um rio num tronco?", cat:"q-aventura"},
+      {text:"Encontrar uma rota secreta no meio da cidade?", cat:"q-aventura"},
+      {text:"Liderar uma expedição para um lugar desconhecido?", cat:"q-aventura"},
+      {text:"Construir uma cabana do zero numa floresta?", cat:"q-aventura"},
+      {text:"Escalar um morro só para ver a vista?", cat:"q-aventura"},
+      {text:"Criar um plano de fuga de qualquer lugar?", cat:"q-aventura"},
+      {text:"Voltar para casa sozinho de um lugar desconhecido?", cat:"q-aventura"},
+      {text:"Dormir numa barraca durante uma tempestade sem reclamar?", cat:"q-aventura"},
+
+      // ── IMAGINATIVAS (25) ──
+      {text:"Ter um unicórnio de estimação?", cat:"q-imaginacao"},
+      {text:"Conversar com os animais?", cat:"q-imaginacao"},
+      {text:"Inventar uma máquina incrível?", cat:"q-imaginacao"},
+      {text:"Criar um novo sabor de sorvete?", cat:"q-imaginacao"},
+      {text:"Escrever uma história divertida?", cat:"q-imaginacao"},
+      {text:"Virar personagem de desenho animado?", cat:"q-imaginacao"},
+      {text:"Descobrir um planeta novo?", cat:"q-imaginacao"},
+      {text:"Criar um parque de diversões?", cat:"q-imaginacao"},
+      {text:"Construir uma casa na árvore gigante?", cat:"q-imaginacao"},
+      {text:"Inventar um esporte novo?", cat:"q-imaginacao"},
+      {text:"Desenhar um mapa de um mundo imaginário inteiro?", cat:"q-imaginacao"},
+      {text:"Criar uma língua secreta só para a família usar?", cat:"q-imaginacao"},
+      {text:"Imaginar uma história inteira antes de dormir?", cat:"q-imaginacao"},
+      {text:"Inventar regras novas para um jogo clássico?", cat:"q-imaginacao"},
+      {text:"Criar uma fantasia completa com nome, poderes e inimigos?", cat:"q-imaginacao"},
+      {text:"Montar um teatro em casa com fantoches?", cat:"q-imaginacao"},
+      {text:"Inventar uma receita estranha e conseguir comer?", cat:"q-imaginacao"},
+      {text:"Criar um negócio imaginário com produtos e preços?", cat:"q-imaginacao"},
+      {text:"Construir uma cidade inteira com blocos de montar?", cat:"q-imaginacao"},
+      {text:"Escrever um livro com capítulos e tudo?", cat:"q-imaginacao"},
+      {text:"Criar uma coreografia para uma música qualquer?", cat:"q-imaginacao"},
+      {text:"Inventar um festival de brincadeiras?", cat:"q-imaginacao"},
+      {text:"Dar nome a cada objeto da casa?", cat:"q-imaginacao"},
+      {text:"Criar um cardápio maluco para um restaurante imaginário?", cat:"q-imaginacao"},
+      {text:"Inventar um esporte com regras completamente diferentes de tudo?", cat:"q-imaginacao"},
+
+      // ── FAMÍLIA (25) ──
+      {text:"Fazer todo mundo rir no almoço?", cat:"q-familia"},
+      {text:"Dar o abraço mais apertado?", cat:"q-familia"},
+      {text:"Compartilhar o último pedaço de pizza?", cat:"q-familia"},
+      {text:"Ajudar alguém sem ser pedido?", cat:"q-familia"},
+      {text:"Fazer a melhor surpresa?", cat:"q-familia"},
+      {text:"Lembrar de um aniversário?", cat:"q-familia"},
+      {text:"Consolar alguém que está triste?", cat:"q-familia"},
+      {text:"Fazer um presente à mão?", cat:"q-familia"},
+      {text:"Contar a melhor história?", cat:"q-familia"},
+      {text:"Animar uma viagem longa?", cat:"q-familia"},
+      {text:"Guardar o maior segredo da família por mais tempo?", cat:"q-familia"},
+      {text:"Ser o primeiro a se desculpar depois de uma briga?", cat:"q-familia"},
+      {text:"Cozinhar uma refeição surpresa para todo mundo?", cat:"q-familia"},
+      {text:"Lembrar do aniversário de cada membro da família?", cat:"q-familia"},
+      {text:"Criar a tradição mais estranha da família?", cat:"q-familia"},
+      {text:"Ser o animador oficial das viagens longas?", cat:"q-familia"},
+      {text:"Fazer todo mundo sorrir num dia ruim?", cat:"q-familia"},
+      {text:"Organizar uma festa surpresa sem contar para ninguém?", cat:"q-familia"},
+      {text:"Compartilhar o último chocolate sem que ninguém pedisse?", cat:"q-familia"},
+      {text:"Consolar alguém com as palavras certas na hora certa?", cat:"q-familia"},
+      {text:"Montar um álbum de fotos da família?", cat:"q-familia"},
+      {text:"Transformar um almoço comum em uma ocasião especial?", cat:"q-familia"},
+      {text:"Ser o primeiro a ajudar quando alguém precisar?", cat:"q-familia"},
+      {text:"Fazer a paz entre duas pessoas que brigaram?", cat:"q-familia"},
+      {text:"Criar um jogo novo para toda a família jogar junta?", cat:"q-familia"},
+
+      // ── MUITO DIVERTIDAS (25) ──
+      {text:"Virar presidente por um dia?", cat:"q-divertidas"},
+      {text:"Gastar um milhão de reais em brinquedos?", cat:"q-divertidas"},
+      {text:"Adotar um zoológico inteiro?", cat:"q-divertidas"},
+      {text:"Ter 100 gatos em casa?", cat:"q-divertidas"},
+      {text:"Morar em um castelo?", cat:"q-divertidas"},
+      {text:"Dormir em uma barraca no quintal por uma semana?", cat:"q-divertidas"},
+      {text:"Comer pizza no café da manhã, almoço e jantar?", cat:"q-divertidas"},
+      {text:"Viajar no tempo?", cat:"q-divertidas"},
+      {text:"Ter um dinossauro de estimação?", cat:"q-divertidas"},
+      {text:"Trocar de lugar com um super-herói?", cat:"q-divertidas"},
+      {text:"Abrir uma loja de sorvetes com sabores impossíveis?", cat:"q-divertidas"},
+      {text:"Criar um canal de vídeos e ficar famoso de verdade?", cat:"q-divertidas"},
+      {text:"Comprar uma ilha e transformar em parque de diversões?", cat:"q-divertidas"},
+      {text:"Ganhar um concurso de dança sem ter ensaiado?", cat:"q-divertidas"},
+      {text:"Aparecer num programa de TV e não perceber?", cat:"q-divertidas"},
+      {text:"Ser o campeão mundial de esconde-esconde?", cat:"q-divertidas"},
+      {text:"Criar um aplicativo que faz todo mundo rir?", cat:"q-divertidas"},
+      {text:"Treinar um exército de esquilos?", cat:"q-divertidas"},
+      {text:"Vencer uma competição de comer hot dog?", cat:"q-divertidas"},
+      {text:"Abrir um hotel só para animais?", cat:"q-divertidas"},
+      {text:"Ser o primeiro turista a morar em Marte?", cat:"q-divertidas"},
+      {text:"Criar um superpoder acidentalmente?", cat:"q-divertidas"},
+      {text:"Montar uma banda com animais selvagens?", cat:"q-divertidas"},
+      {text:"Ganhar um troféu por fazer a melhor careta?", cat:"q-divertidas"},
+      {text:"Se tornar o rei ou rainha de um país imaginário?", cat:"q-divertidas"},
+
+      // ── ESCOLA (25) ──
+      {text:"Ser o primeiro a terminar a prova?", cat:"q-escola"},
+      {text:"Esquecer o dever de casa em casa?", cat:"q-escola"},
+      {text:"Fazer o professor rir no meio da aula?", cat:"q-escola"},
+      {text:"Dormir na aula sem ninguém perceber?", cat:"q-escola"},
+      {text:"Levar um lanche tão cheiroso que distrai a turma?", cat:"q-escola"},
+      {text:"Tentar uma desculpa criativa por chegar atrasado?", cat:"q-escola"},
+      {text:"Ganhar o prêmio de melhor apresentação?", cat:"q-escola"},
+      {text:"Ser o monitor favorito de toda turma?", cat:"q-escola"},
+      {text:"Inventar um apelido para o professor?", cat:"q-escola"},
+      {text:"Organizar uma bagunça e sair ileso?", cat:"q-escola"},
+      {text:"Estudar de última hora e ir bem na prova?", cat:"q-escola"},
+      {text:"Perguntar a dúvida que todo mundo tinha mas ninguém perguntava?", cat:"q-escola"},
+      {text:"Decorar a sala de aula por conta própria?", cat:"q-escola"},
+      {text:"Criar um clube secreto na escola?", cat:"q-escola"},
+      {text:"Defender um colega na frente de todo mundo?", cat:"q-escola"},
+      {text:"Terminar o recreio antes de todo mundo porque estava brincando demais?", cat:"q-escola"},
+      {text:"Trazer um animal para a escola sem querer?", cat:"q-escola"},
+      {text:"Fazer amizade com todo mundo no primeiro dia?", cat:"q-escola"},
+      {text:"Perder a mochila dentro da própria escola?", cat:"q-escola"},
+      {text:"Resolver um problema da turma que os adultos não conseguiram?", cat:"q-escola"},
+      {text:"Ganhar a gincana escolar quase sozinho?", cat:"q-escola"},
+      {text:"Criar a melhor fantasia da festa junina?", cat:"q-escola"},
+      {text:"Ser eleito o mais animado da turma?", cat:"q-escola"},
+      {text:"Fazer a turma inteira rir com uma resposta na aula?", cat:"q-escola"},
+      {text:"Transformar uma aula chata na mais divertida do ano?", cat:"q-escola"},
+    ],
+  },
+
+  // ══════════════════════════════════════════
+  // MODO: O QUE VOCÊ PREFERE?
+  // ══════════════════════════════════════════
+  prefere: {
+    cats: [
+      { id:"all",          label:"✨ Todas",           cls:"pall" },
+      { id:"p-aventura",   label:"🏕️ Aventuras",      cls:"p-aventura" },
+      { id:"p-poderes",    label:"⚡ Superpoderes",    cls:"p-poderes" },
+      { id:"p-engracadas", label:"😂 Engraçadas",      cls:"p-engracadas" },
+      { id:"p-comidas",    label:"🍕 Comidas",         cls:"p-comidas" },
+      { id:"p-familia",    label:"🏠 Família",         cls:"p-familia" },
+      { id:"p-imaginacao", label:"🦄 Imaginação",      cls:"p-imaginacao" },
+      { id:"p-coracao",    label:"❤️ Coração",         cls:"p-coracao" },
+      { id:"p-absurdas",   label:"🤪 Absurdas",        cls:"p-absurdas" },
+      { id:"p-escola",     label:"📚 Escola",          cls:"p-escola" },
+    ],
+    catNames: {
+      "p-aventura":"Aventuras","p-poderes":"Superpoderes",
+      "p-engracadas":"Engraçadas","p-comidas":"Comidas",
+      "p-familia":"Família","p-imaginacao":"Imaginação",
+      "p-coracao":"Coração","p-absurdas":"Absurdas","p-escola":"Escola",
+    },
+    questions: [
+      // ── AVENTURAS (23) ──
+      {text:"Você prefere voar ou respirar debaixo d'água?", cat:"p-aventura"},
+      {text:"Você prefere explorar o espaço ou o fundo do oceano?", cat:"p-aventura"},
+      {text:"Você prefere encontrar um mapa do tesouro ou uma porta secreta?", cat:"p-aventura"},
+      {text:"Você prefere ter um dragão ou um dinossauro de estimação?", cat:"p-aventura"},
+      {text:"Você prefere ser um pirata ou um astronauta?", cat:"p-aventura"},
+      {text:"Você prefere viajar para o passado ou para o futuro?", cat:"p-aventura"},
+      {text:"Você prefere escalar uma montanha ou atravessar uma floresta?", cat:"p-aventura"},
+      {text:"Você prefere ser um detetive ou um explorador?", cat:"p-aventura"},
+      {text:"Você prefere ter um barco ou um avião particular?", cat:"p-aventura"},
+      {text:"Você prefere viver numa floresta mágica ou num castelo flutuante?", cat:"p-aventura"},
+      {text:"Você prefere explorar ruínas antigas ou florestas inexploradas?", cat:"p-aventura"},
+      {text:"Você prefere ter um jetpack ou uma capa voadora?", cat:"p-aventura"},
+      {text:"Você prefere ser um caçador de fósseis ou um mergulhador de naufrágios?", cat:"p-aventura"},
+      {text:"Você prefere viver uma aventura no Ártico ou no deserto do Saara?", cat:"p-aventura"},
+      {text:"Você prefere viajar de submarino ou de foguete?", cat:"p-aventura"},
+      {text:"Você prefere ter um cavalo alado ou um golfinho que fala?", cat:"p-aventura"},
+      {text:"Você prefere ser um pirata do espaço ou um cavaleiro do futuro?", cat:"p-aventura"},
+      {text:"Você prefere passar uma semana numa floresta ou numa ilha deserta?", cat:"p-aventura"},
+      {text:"Você prefere ter um mapa que mostra tesouros ou uma bússola que aponta a felicidade?", cat:"p-aventura"},
+      {text:"Você prefere voar ou ficar invisível?", cat:"p-aventura"},
+      {text:"Você prefere voltar no tempo ou visitar o futuro?", cat:"p-aventura"},
+      {text:"Você prefere encontrar uma passagem secreta ou um mapa do tesouro?", cat:"p-aventura"},
+      {text:"Você prefere viver em uma cidade no fundo do mar ou em uma cidade nas nuvens?", cat:"p-aventura"},
+
+      // ── SUPERPODERES (20) ──
+      {text:"Você prefere ficar invisível ou ler pensamentos?", cat:"p-poderes"},
+      {text:"Você prefere correr super rápido ou ser super forte?", cat:"p-poderes"},
+      {text:"Você prefere poder falar com animais ou entender todas as línguas?", cat:"p-poderes"},
+      {text:"Você prefere poder voar ou se teletransportar?", cat:"p-poderes"},
+      {text:"Você prefere nunca sentir sono ou nunca sentir fome?", cat:"p-poderes"},
+      {text:"Você prefere controlar água ou fogo?", cat:"p-poderes"},
+      {text:"Você prefere ter força de gigante ou inteligência de computador?", cat:"p-poderes"},
+      {text:"Você prefere ser invisível ou se multiplicar em várias cópias?", cat:"p-poderes"},
+      {text:"Você prefere controlar o tempo ou controlar a gravidade?", cat:"p-poderes"},
+      {text:"Você prefere ter memória perfeita ou aprender qualquer coisa em 10 minutos?", cat:"p-poderes"},
+      {text:"Você prefere falar com plantas ou controlar o clima?", cat:"p-poderes"},
+      {text:"Você prefere criar portais para qualquer lugar ou parar o tempo?", cat:"p-poderes"},
+      {text:"Você prefere ser imune a qualquer doença ou nunca se machucar?", cat:"p-poderes"},
+      {text:"Você prefere ter olhos de raio-x ou ouvidos que escutam quilômetros de distância?", cat:"p-poderes"},
+      {text:"Você prefere respirar fogo ou respirar debaixo d'água?", cat:"p-poderes"},
+      {text:"Você prefere encolher até o tamanho de uma formiga ou crescer até o tamanho de um prédio?", cat:"p-poderes"},
+      {text:"Você prefere ter a força de um urso ou a velocidade de um guepardo?", cat:"p-poderes"},
+      {text:"Você prefere controlar animais ou controlar máquinas?", cat:"p-poderes"},
+      {text:"Você prefere nunca errar um chute ou nunca errar um arremesso?", cat:"p-poderes"},
+      {text:"Você prefere poder gravar tudo que vê como vídeo ou tirar foto com os olhos?", cat:"p-poderes"},
+
+      // ── ENGRAÇADAS (20) ──
+      {text:"Você prefere ter cabelo feito de macarrão ou dedos feitos de cenoura?", cat:"p-engracadas"},
+      {text:"Você prefere falar cantando ou dançar toda vez que andar?", cat:"p-engracadas"},
+      {text:"Você prefere soluçar toda vez que rir ou rir toda vez que espirrar?", cat:"p-engracadas"},
+      {text:"Você prefere usar fantasia de super-herói todos os dias ou pijama todos os dias?", cat:"p-engracadas"},
+      {text:"Você prefere ter um nariz de palhaço permanente ou orelhas de elefante?", cat:"p-engracadas"},
+      {text:"Você prefere comer sorvete com garfo ou pizza com colher?", cat:"p-engracadas"},
+      {text:"Você prefere ter um riso de hiena ou uma voz de pato?", cat:"p-engracadas"},
+      {text:"Você prefere sempre escorregar quando tenta ser sério ou sempre espirrar quando tenta ser discreto?", cat:"p-engracadas"},
+      {text:"Você prefere ter orelhas que giram ou nariz que pisca?", cat:"p-engracadas"},
+      {text:"Você prefere seu cachorro falar em público ou seu estômago roncar em reuniões?", cat:"p-engracadas"},
+      {text:"Você prefere ser perseguido por pombos famintos ou por esquilos curiosos?", cat:"p-engracadas"},
+      {text:"Você prefere que seu cabelo mude de cor toda vez que mentir ou sua voz fique mais aguda?", cat:"p-engracadas"},
+      {text:"Você prefere sempre ter uma minhoca no bolso ou nunca conseguir abrir um pacote de salgadinho?", cat:"p-engracadas"},
+      {text:"Você prefere ter pés que cantam quando anda ou mãos que aplaudem sozinhas?", cat:"p-engracadas"},
+      {text:"Você prefere escorregar toda vez que tenta entrar em uma sala ou bater a cabeça toda vez que tenta sair?", cat:"p-engracadas"},
+      {text:"Você prefere ter um riso contagiante impossível de segurar ou um bocejo que faz todo mundo dormir?", cat:"p-engracadas"},
+      {text:"Você prefere seu cabelo crescer 10 centímetros toda vez que mente ou encolher toda vez que conta uma verdade constrangedora?", cat:"p-engracadas"},
+      {text:"Você prefere sempre deixar cair a comida na roupa ou sempre errar a boca com a colher?", cat:"p-engracadas"},
+      {text:"Você prefere latir toda vez que vir um gato ou miar toda vez que ouvir um barulho alto?", cat:"p-engracadas"},
+      {text:"Você prefere ter pés de pato ou nariz de elefante?", cat:"p-engracadas"},
+
+      // ── COMIDAS (20) ──
+      {text:"Você prefere nunca mais comer chocolate ou nunca mais comer pizza?", cat:"p-comidas"},
+      {text:"Você prefere um caminhão de sorvete ou um caminhão de doces?", cat:"p-comidas"},
+      {text:"Você prefere café da manhã para sempre ou jantar para sempre?", cat:"p-comidas"},
+      {text:"Você prefere comer apenas comidas doces por uma semana ou apenas salgadas?", cat:"p-comidas"},
+      {text:"Você prefere um bolo gigante ou uma barra de chocolate gigante?", cat:"p-comidas"},
+      {text:"Você prefere comer apenas pizza ou apenas hambúrguer por um mês?", cat:"p-comidas"},
+      {text:"Você prefere só poder comer comida laranja ou só poder comer comida redonda?", cat:"p-comidas"},
+      {text:"Você prefere que tudo que comer tenha gosto de baunilha ou tudo tenha gosto de limão?", cat:"p-comidas"},
+      {text:"Você prefere comer macarrão com garfo ou arroz com colher de sorvete?", cat:"p-comidas"},
+      {text:"Você prefere uma pizza infinita que nunca acaba ou um sorvete que nunca derrete?", cat:"p-comidas"},
+      {text:"Você prefere comer um prato que cheira mal mas é delicioso ou um prato que cheira incrível mas tem gosto ruim?", cat:"p-comidas"},
+      {text:"Você prefere que tudo vire doce ou tudo vire salgado?", cat:"p-comidas"},
+      {text:"Você prefere comer só frutas por uma semana ou só legumes por uma semana?", cat:"p-comidas"},
+      {text:"Você prefere ter um buffet de sobremesas ilimitadas ou um churrasco ilimitado?", cat:"p-comidas"},
+      {text:"Você prefere comer com os olhos fechados para sempre ou comer sem poder cheirar para sempre?", cat:"p-comidas"},
+      {text:"Você prefere só poder comer comida fria ou só poder comer comida quente?", cat:"p-comidas"},
+      {text:"Você prefere ter um restaurante favorito que entrega na sua casa todo dia ou aprender a cozinhar qualquer prato que quiser?", cat:"p-comidas"},
+      {text:"Você prefere comer uma fatia de bolo enorme por dia ou um chocolate pequenininho por hora?", cat:"p-comidas"},
+      {text:"Você prefere que tudo que comer seja saudável mesmo parecendo besteira ou tudo seja gostoso mas sem nenhum valor?", cat:"p-comidas"},
+      {text:"Você prefere inventar um sabor de sorvete que vira famoso ou uma receita de bolo que todo mundo pede?", cat:"p-comidas"},
+
+      // ── FAMÍLIA (20) ──
+      {text:"Você prefere passar um dia inteiro com o papai ou com a mamãe?", cat:"p-familia"},
+      {text:"Você prefere uma viagem para a praia ou para a serra?", cat:"p-familia"},
+      {text:"Você prefere uma noite de jogos ou uma noite de filmes?", cat:"p-familia"},
+      {text:"Você prefere acampar no quintal ou fazer um piquenique gigante?", cat:"p-familia"},
+      {text:"Você prefere escolher o restaurante da família por um mês ou os passeios de um mês?", cat:"p-familia"},
+      {text:"Você prefere uma viagem de surpresa sem saber o destino ou uma viagem planejada por você do começo ao fim?", cat:"p-familia"},
+      {text:"Você prefere uma tarde de jogos de tabuleiro ou uma tarde de culinária em família?", cat:"p-familia"},
+      {text:"Você prefere ganhar um dia sem obrigações ou um dia em que todo mundo realiza seu desejo?", cat:"p-familia"},
+      {text:"Você prefere ter um apelido carinhoso em família ou criar um sinal secreto só da nossa família?", cat:"p-familia"},
+      {text:"Você prefere uma noite de acampamento no quintal ou uma noite de cinema em casa com pipoca infinita?", cat:"p-familia"},
+      {text:"Você prefere criar uma tradição nova na família ou reviver a tradição favorita de sempre?", cat:"p-familia"},
+      {text:"Você prefere fazer uma gincana em família ou montar um quebra-cabeça gigante juntos?", cat:"p-familia"},
+      {text:"Você prefere passar o fim de semana na casa de um parente ou receber todos em casa?", cat:"p-familia"},
+      {text:"Você prefere criar um livro de memórias da família ou um álbum de fotos com legendas engraçadas?", cat:"p-familia"},
+      {text:"Você prefere ter um dia em que os filhos mandam ou um dia em que os pais obedecem?", cat:"p-familia"},
+      {text:"Você prefere uma surpresa preparada por mim para você ou uma surpresa preparada por você para mim?", cat:"p-familia"},
+      {text:"Você prefere assistir ao filme favorito de cada um da família ou escolher um filme que ninguém conhece?", cat:"p-familia"},
+      {text:"Você prefere um passeio na natureza ou um dia em um parque temático?", cat:"p-familia"},
+      {text:"Você prefere fazer uma viagem curta toda semana ou uma grande viagem uma vez por ano?", cat:"p-familia"},
+      {text:"Você prefere ter um ritual só nosso de boa noite ou um ritual só nosso de bom dia?", cat:"p-familia"},
+
+      // ── IMAGINAÇÃO (15) ──
+      {text:"Você prefere morar em um castelo ou em uma casa na árvore?", cat:"p-imaginacao"},
+      {text:"Você prefere viver em um desenho animado ou dentro de um videogame?", cat:"p-imaginacao"},
+      {text:"Você prefere ter um quarto do tamanho de um estádio ou uma piscina no quintal?", cat:"p-imaginacao"},
+      {text:"Você prefere ser o personagem principal do seu filme favorito ou do seu livro favorito?", cat:"p-imaginacao"},
+      {text:"Você prefere descobrir um novo planeta ou uma nova espécie de animal?", cat:"p-imaginacao"},
+      {text:"Você prefere morar dentro de um livro de aventuras ou dentro de um jogo de fantasia?", cat:"p-imaginacao"},
+      {text:"Você prefere ter um jardim que cresce qualquer coisa que imaginar ou uma biblioteca com todos os livros do mundo?", cat:"p-imaginacao"},
+      {text:"Você prefere criar um planeta novo ou redesenhar a Terra?", cat:"p-imaginacao"},
+      {text:"Você prefere ter um robô que realiza seus deveres ou um assistente mágico que resolve seus problemas?", cat:"p-imaginacao"},
+      {text:"Você prefere inventar uma máquina do tempo ou um portal para qualquer dimensão?", cat:"p-imaginacao"},
+      {text:"Você prefere construir a casa dos seus sonhos do zero ou ganhar uma casa pronta no lugar mais lindo do mundo?", cat:"p-imaginacao"},
+      {text:"Você prefere ser o escritor da história mais famosa do mundo ou o inventor do brinquedo mais amado do mundo?", cat:"p-imaginacao"},
+      {text:"Você prefere viver em uma floresta encantada ou em um castelo nas estrelas?", cat:"p-imaginacao"},
+      {text:"Você prefere ter um caderno onde tudo que desenha vira real ou um microfone onde tudo que fala vira música?", cat:"p-imaginacao"},
+      {text:"Você prefere explorar uma cidade mágica escondida embaixo da sua cidade ou num mundo paralelo?", cat:"p-imaginacao"},
+
+      // ── CORAÇÃO (15) ──
+      {text:"Você prefere receber um presente incrível ou dar um presente incrível?", cat:"p-coracao"},
+      {text:"Você prefere ser muito engraçado ou muito sábio?", cat:"p-coracao"},
+      {text:"Você prefere ter muitos amigos ou alguns amigos muito próximos?", cat:"p-coracao"},
+      {text:"Você prefere ajudar alguém em segredo ou ser elogiado por ajudar?", cat:"p-coracao"},
+      {text:"Você prefere ser conhecido por sua coragem ou por sua bondade?", cat:"p-coracao"},
+      {text:"Você prefere ser lembrado pela sua alegria ou pela sua bondade?", cat:"p-coracao"},
+      {text:"Você prefere ter uma amizade que dura a vida toda ou fazer novas amizades incríveis por onde for?", cat:"p-coracao"},
+      {text:"Você prefere pedir ajuda quando precisa ou tentar resolver tudo sozinho?", cat:"p-coracao"},
+      {text:"Você prefere ser muito honesto mesmo que doa ou ser gentil mesmo que precise omitir algo?", cat:"p-coracao"},
+      {text:"Você prefere receber um abraço longo ou uma palavra de incentivo na hora certa?", cat:"p-coracao"},
+      {text:"Você prefere ter um amigo que te desafia a crescer ou um amigo que te aceita exatamente como você é?", cat:"p-coracao"},
+      {text:"Você prefere fazer alguém feliz sem que saibam que foi você ou ser reconhecido por algo bom que fez?", cat:"p-coracao"},
+      {text:"Você prefere aprender com os seus erros rapidamente ou nunca cometer o mesmo erro duas vezes?", cat:"p-coracao"},
+      {text:"Você prefere ser a pessoa que consola ou a pessoa que faz rir quando alguém está triste?", cat:"p-coracao"},
+      {text:"Você prefere deixar um legado de coragem ou um legado de amor?", cat:"p-coracao"},
+
+      // ── ABSURDAS (17) ──
+      {text:"Você prefere lutar contra um pato do tamanho de um cavalo ou 100 cavalos do tamanho de patos?", cat:"p-absurdas"},
+      {text:"Você prefere ter um jacaré como professor ou um macaco como médico?", cat:"p-absurdas"},
+      {text:"Você prefere que chovesse sorvete ou pipoca?", cat:"p-absurdas"},
+      {text:"Você prefere morar na lua ou embaixo do mar?", cat:"p-absurdas"},
+      {text:"Você prefere ter um pinguim que fala ou um cachorro que canta?", cat:"p-absurdas"},
+      {text:"Você prefere acordar e descobrir que virou um gigante ou que ficou do tamanho de uma formiga?", cat:"p-absurdas"},
+      {text:"Você prefere ter um elefante que te segue para todo lugar ou um golfinho que mora na sua banheira?", cat:"p-absurdas"},
+      {text:"Você prefere toda vez que piscar teletransportar para um lugar aleatório ou nunca mais poder piscar?", cat:"p-absurdas"},
+      {text:"Você prefere seu reflexo no espelho fazer coisas diferentes de você ou sua sombra sumir em dias de sol?", cat:"p-absurdas"},
+      {text:"Você prefere ser feito de borracha ou de espuma?", cat:"p-absurdas"},
+      {text:"Você prefere ter mãos feitas de macarrão ou pés feitos de gelatina?", cat:"p-absurdas"},
+      {text:"Você prefere que toda vez que gritar apareça confete ou toda vez que sussurrar apague as luzes?", cat:"p-absurdas"},
+      {text:"Você prefere viver num mundo onde todos andam de costas ou num mundo onde todos pulam em vez de caminhar?", cat:"p-absurdas"},
+      {text:"Você prefere ter um bigode que cresce quando mente ou sobrancelhas que dançam quando fica nervoso?", cat:"p-absurdas"},
+      {text:"Você prefere que toda vez que tocar em algo metálico ouvir uma música diferente ou toda vez que sentar num banco escorregar inexplicavelmente?", cat:"p-absurdas"},
+      {text:"Você prefere acordar toda manhã em um país diferente sem escolher ou acordar sempre no mesmo lugar mas no passado?", cat:"p-absurdas"},
+      {text:"Você prefere ter um gêmeo que só aparece nas fotos ou um clone que só existe nas segundas-feiras?", cat:"p-absurdas"},
+
+      // ── ESCOLA (15) ──
+      {text:"Você prefere ter uma memória perfeita para provas ou ser superveloz para fazer as tarefas?", cat:"p-escola"},
+      {text:"Você prefere ter o recreio dobrado ou a aula de educação física todo dia?", cat:"p-escola"},
+      {text:"Você prefere nunca ter dever de casa ou nunca ter prova?", cat:"p-escola"},
+      {text:"Você prefere ser o melhor da turma em matemática ou em redação?", cat:"p-escola"},
+      {text:"Você prefere ter um professor que conta histórias incríveis ou um professor que faz experimentos toda aula?", cat:"p-escola"},
+      {text:"Você prefere aprender tudo por jogos ou aprender tudo por viagens?", cat:"p-escola"},
+      {text:"Você prefere ter uma biblioteca mágica na escola ou um laboratório de invenções?", cat:"p-escola"},
+      {text:"Você prefere escolher as matérias que quer estudar ou escolher os professores que quer ter?", cat:"p-escola"},
+      {text:"Você prefere ter aula em cima de uma árvore ou embaixo d'água?", cat:"p-escola"},
+      {text:"Você prefere fazer uma viagem de estudos para o espaço ou para o fundo do oceano?", cat:"p-escola"},
+      {text:"Você prefere ter um robô que explica tudo que não entende ou um livro que responde qualquer pergunta?", cat:"p-escola"},
+      {text:"Você prefere apresentar um trabalho em forma de teatro ou em forma de vídeo?", cat:"p-escola"},
+      {text:"Você prefere nunca esquecer nada do que leu ou nunca esquecer nada do que ouviu?", cat:"p-escola"},
+      {text:"Você prefere ter um intervalo de 2 horas ou sair 2 horas mais cedo?", cat:"p-escola"},
+      {text:"Você prefere escolher a decoração da sua sala de aula ou criar as regras da sua turma?", cat:"p-escola"},
+    ],
+  },
+};
+
+// ─────────────────────────────────────────
+// STATE & HELPERS
+// ─────────────────────────────────────────
+let currentMode = "perguntas";
+let currentCat  = "all";
+let deck = [], idx = 0, finished = false;
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function buildDeck(mode, cat) {
+  const qs = DATA[mode].questions;
+  return shuffle(cat === "all" ? qs : qs.filter(q => q.cat === cat));
+}
+
+// ─────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────
+function renderCats() {
+  const container = document.getElementById("categories");
+  container.innerHTML = "";
+  DATA[currentMode].cats.forEach(c => {
+    const btn = document.createElement("button");
+    btn.className = `cat-btn ${c.cls}`;
+    btn.dataset.cat = c.id;
+    btn.textContent = c.label;
+    if (c.id === currentCat) btn.classList.add("active");
+    btn.onclick = () => selectCat(c.id);
+    container.appendChild(btn);
+  });
+}
+
+function render() {
+  const card    = document.getElementById("card");
+  const counter = document.getElementById("counter");
+  const nav     = document.getElementById("nav");
+  const btnPrev = document.getElementById("btnPrev");
+
+  if (currentMode === "historia") {
+    renderHistoria();
+    return;
+  }
+
+  if (finished) {
+    const emojis = { perguntas:"🎉", quem:"😄", prefere:"🤔", adivinha:"🔍" };
+    card.innerHTML = `<div class="finished">
+      <span class="emoji">${emojis[currentMode]}</span>
+      <h2>Acabou por aqui!</h2>
+      <p>Vocês passaram por todas as perguntas desta categoria.<br>Que conversa incrível!</p>
+      <button class="restart-btn" onclick="restart()">Embaralhar de novo</button>
+    </div>`;
+    counter.textContent = "";
+    nav.style.display = "none";
+    return;
+  }
+
+  nav.style.display = "flex";
+  const q = deck[idx];
+  const catName = DATA[currentMode].catNames[q.cat] || "";
+  const modeBadgeMap = {
+    perguntas: "💬 Perguntas",
+    quem:      "🤣 Quem é mais provável de...",
+    prefere:   "🤔 O que você prefere?",
+    adivinha:  "🔍 O que é, o que é?",
+  };
+  const prefTip = currentMode === "prefere"
+    ? `<p class="card-tip">💡 Não vale só "esse" — explique o motivo!</p>` : "";
+  const quemPrefix = currentMode === "quem"
+    ? `<p style="font-size:0.78rem;color:var(--text-soft);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Quem é mais provável de...</p>` : "";
+  const adivinhaPrefix = currentMode === "adivinha"
+    ? `<p style="font-size:0.78rem;color:var(--text-soft);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">O que é, o que é?</p>` : "";
+  const adivinhaAnswer = currentMode === "adivinha" && q.answer
+    ? `<div class="answer-block">
+        <div class="answer-blur" id="answerBlur" onclick="revealAnswer()">${q.answer}</div>
+        <span class="answer-hint" id="answerHint">👆 Toque para revelar a resposta</span>
+       </div>` : "";
+
+  card.innerHTML = `
+    <span class="mode-badge ${currentMode}">${modeBadgeMap[currentMode]}</span>
+    <span class="cat-label ${currentMode === 'adivinha' ? 'adivinha' : q.cat}">${currentMode === 'adivinha' ? 'Adivinha' : catName}</span>
+    ${quemPrefix}${adivinhaPrefix}
+    <p class="question">${q.text}</p>
+    ${prefTip}${adivinhaAnswer}
+  `;
+
+  counter.textContent = `${idx + 1} de ${deck.length}`;
+  btnPrev.disabled = idx === 0;
+}
+
+// ─────────────────────────────────────────
+// ACTIONS
+// ─────────────────────────────────────────
+function go(dir) {
+  const card = document.getElementById("card");
+  card.classList.add("fade-out");
+  setTimeout(() => {
+    card.classList.remove("fade-out");
+    if (dir === 1) {
+      if (idx < deck.length - 1) idx++;
+      else finished = true;
+    } else {
+      if (finished) finished = false;
+      else if (idx > 0) idx--;
+    }
+    render();
+  }, 210);
+}
+
+function selectCat(cat) {
+  currentCat = cat;
+  document.querySelectorAll(".cat-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.cat === cat);
+  });
+  if (currentMode === "historia") {
+    historiaCat = cat;
+    historiaRestart();
+    return;
+  }
+  deck = buildDeck(currentMode, cat);
+  idx = 0; finished = false;
+  render();
+}
+
+function setMode(mode) {
+  currentMode = mode;
+  currentCat = "all";
+  document.querySelectorAll(".mode-tab").forEach(t => {
+    t.classList.toggle("active", t.dataset.mode === mode);
+  });
+  if (mode === "historia") {
+    historiaCat = "all";
+    historiaStage = "select";
+    historiaStory = null;
+    historiaAnswers = {};
+    historiaBlankIdx = 0;
+    renderCats();
+    render();
+    return;
+  }
+  deck = buildDeck(mode, "all");
+  idx = 0; finished = false;
+  renderCats();
+  render();
+}
+
+function restart() {
+  deck = buildDeck(currentMode, currentCat);
+  idx = 0; finished = false;
+  document.getElementById("nav").style.display = "flex";
+  render();
+}
+
+function revealAnswer() {
+  const blur = document.getElementById("answerBlur");
+  const hint = document.getElementById("answerHint");
+  if (blur) blur.classList.add("revealed");
+  if (hint) hint.classList.add("hidden");
+}
+
+// ─────────────────────────────────────────
+// ADIVINHA DATA (165 adivinhas)
+// ─────────────────────────────────────────
+DATA.adivinha = {
+  cats: [{ id:"all", label:"🔍 Todas", cls:"aall" }],
+  catNames: {},
+  questions: [
+    {text:"Feito para andar e não anda.", answer:"A rua.", cat:"adivinha"},
+    {text:"Dá muitas voltas e não sai do lugar.", answer:"O relógio.", cat:"adivinha"},
+    {text:"Tem cabeça e tem dente, não é bicho e nem é gente.", answer:"O alho.", cat:"adivinha"},
+    {text:"Não se come, mas é bom para se comer.", answer:"O talher.", cat:"adivinha"},
+    {text:"Uma impressora disse para a outra.", answer:"Essa folha é tua ou é impressão minha?", cat:"adivinha"},
+    {text:"Quanto mais rugas têm mais novo é.", answer:"O pneu.", cat:"adivinha"},
+    {text:"O 4 disse para o 40.", answer:"Passa a bola.", cat:"adivinha"},
+    {text:"Nunca volta, embora nunca tenha ido.", answer:"O passado.", cat:"adivinha"},
+    {text:"Anda com os pés na cabeça.", answer:"O piolho.", cat:"adivinha"},
+    {text:"A esfera disse para o cubo.", answer:"Deixa de ser quadrado.", cat:"adivinha"},
+    {text:"Quanto mais se tira mais se aumenta.", answer:"O buraco.", cat:"adivinha"},
+    {text:"Fica cheio durante o dia e vazio durante a noite.", answer:"O sapato.", cat:"adivinha"},
+    {text:"Quanto mais cresce, mais baixo fica.", answer:"O rabo do cavalo.", cat:"adivinha"},
+    {text:"Vários pontinhos amarelos na parede.", answer:"Fandangos alpinistas.", cat:"adivinha"},
+    {text:"Mesmo atravessando o rio não se molha.", answer:"A ponte.", cat:"adivinha"},
+    {text:"Há no meio do coração.", answer:"A letra 'a'.", cat:"adivinha"},
+    {text:"Se alimenta de léguas.", answer:"O papa-léguas.", cat:"adivinha"},
+    {text:"Tem no meio do ovo.", answer:"A letra 'v'.", cat:"adivinha"},
+    {text:"Está sempre no meio da rua e de pernas para o ar.", answer:"A letra 'u'.", cat:"adivinha"},
+    {text:"O zero disse para o oito.", answer:"Que cinto maneiro!", cat:"adivinha"},
+    {text:"Todo mês tem, menos abril.", answer:"A letra 'o'.", cat:"adivinha"},
+    {text:"Fica no início da rua, no fim do mar e no meio da cara.", answer:"A letra 'r'.", cat:"adivinha"},
+    {text:"O cavalo foi fazer no orelhão.", answer:"Passar um trote.", cat:"adivinha"},
+    {text:"Tem cauda, mas não é cão; não tem asas, mas sabe voar. Se a largam, não sobe, e sai ao vento a brincar.", answer:"A pipa.", cat:"adivinha"},
+    {text:"Pode passar diante do sol sem fazer sombra.", answer:"O vento.", cat:"adivinha"},
+    {text:"O nadador faz para bater o recorde.", answer:"Nada.", cat:"adivinha"},
+    {text:"O tomate foi fazer no banco.", answer:"Tirar extrato.", cat:"adivinha"},
+    {text:"Tem 5 dedos, mas não tem unha.", answer:"A luva.", cat:"adivinha"},
+    {text:"Anda com a barriga para trás.", answer:"A perna da gente.", cat:"adivinha"},
+    {text:"Um tigre que se parece com um velho.", answer:"Quando é um tigre de bengala.", cat:"adivinha"},
+    {text:"Tem mais de dez cabeças e não sabe pensar.", answer:"Uma caixa de fósforos.", cat:"adivinha"},
+    {text:"Enche uma casa, mas não enche uma mão.", answer:"Um botão.", cat:"adivinha"},
+    {text:"Nasce a socos e morre a facadas.", answer:"O pão.", cat:"adivinha"},
+    {text:"O animal que não vale mais nada.", answer:"O javali.", cat:"adivinha"},
+    {text:"Tem pescoço e não tem cabeça, tem braços e não tem mãos, tem corpo e não tem pernas.", answer:"A camisa.", cat:"adivinha"},
+    {text:"Quanto maior menos se vê.", answer:"A escuridão.", cat:"adivinha"},
+    {text:"Faz virar a cabeça de um homem.", answer:"O pescoço.", cat:"adivinha"},
+    {text:"O bicho que anda com as patas.", answer:"O pato.", cat:"adivinha"},
+    {text:"Entra na água e não se molha.", answer:"A sombra.", cat:"adivinha"},
+    {text:"Tem pomar e no seu paletó.", answer:"A manga.", cat:"adivinha"},
+    {text:"Não tem pé e corre, tem leito e não dorme, quando para morre.", answer:"O rio.", cat:"adivinha"},
+    {text:"Mantém sempre o mesmo tamanho, não importa o peso.", answer:"A balança.", cat:"adivinha"},
+    {text:"Nasce no Rio, vive no Rio e morre no Rio, mas não está sempre molhado.", answer:"O carioca.", cat:"adivinha"},
+    {text:"Num instante se quebra quando se diz o nome dele.", answer:"O silêncio.", cat:"adivinha"},
+    {text:"Cai de pé e corre deitado.", answer:"A chuva.", cat:"adivinha"},
+    {text:"Subindo o sol vai se encurtando, descendo o sol vai se alongando.", answer:"A sombra.", cat:"adivinha"},
+    {text:"Põe-se na mesa, parte-se, reparte-se, mas não se come.", answer:"O baralho.", cat:"adivinha"},
+    {text:"Quando a gente fica em pé, ele fica deitado, e quando a gente deita, ele fica em pé.", answer:"O pé.", cat:"adivinha"},
+    {text:"Tem coroa, mas não é rei; tem espinho, mas não é peixe.", answer:"O abacaxi.", cat:"adivinha"},
+    {text:"Uma casinha sem porta e sem janela.", answer:"O ovo.", cat:"adivinha"},
+    {text:"De dia tem quatro pés e de noite tem seis.", answer:"A cama.", cat:"adivinha"},
+    {text:"Anda deitado e dorme em pé.", answer:"O pé.", cat:"adivinha"},
+    {text:"Um fósforo disse a uma vela de aniversário.", answer:"É sempre por você que eu perco a cabeça.", cat:"adivinha"},
+    {text:"O gafanhoto traz na frente e a pulga traz atrás.", answer:"A sílaba 'ga'.", cat:"adivinha"},
+    {text:"Fica cheio de boca para baixo e vazio de boca para cima.", answer:"O chapéu.", cat:"adivinha"},
+    {text:"Quanto mais se perde mais se tem.", answer:"O sono.", cat:"adivinha"},
+    {text:"Nunca passa e sempre está na frente.", answer:"O futuro.", cat:"adivinha"},
+    {text:"Tem dentes e não come.", answer:"O pente.", cat:"adivinha"},
+    {text:"Uma lagarta disse à outra.", answer:"Hoje vou dar uma volta à maçã.", cat:"adivinha"},
+    {text:"É grande antes de ser pequena.", answer:"A vela.", cat:"adivinha"},
+    {text:"A andar deixa um rasto e parado deixa três.", answer:"O carro de mão.", cat:"adivinha"},
+    {text:"Tem oito letras e tirando metade ainda ficam oito.", answer:"BISCoito.", cat:"adivinha"},
+    {text:"Passa a vida na janela e mesmo dentro de casa está fora dela.", answer:"O botão.", cat:"adivinha"},
+    {text:"Tem um palmo de pescoço, tem barriga e não tem osso.", answer:"A garrafa.", cat:"adivinha"},
+    {text:"Quebra quando se fala.", answer:"O segredo.", cat:"adivinha"},
+    {text:"O vinho que não tem álcool.", answer:"O-vinho de codorna.", cat:"adivinha"},
+    {text:"Voa sem ter asas e chora sem ter olhos.", answer:"A nuvem.", cat:"adivinha"},
+    {text:"Quatro pés em cima de quatro pés esperando quatro pés chegarem. Quatro pés não vieram, quatro pés foram embora, quatro pés ficaram.", answer:"O gato em cima da mesa esperando o rato. O rato não veio, o gato foi embora e a mesa ficou.", cat:"adivinha"},
+    {text:"É surdo e mudo, mas conta tudo.", answer:"O livro.", cat:"adivinha"},
+    {text:"Sobe quando a chuva desce.", answer:"O guarda-chuva.", cat:"adivinha"},
+    {text:"A diferença entre o gato e a Coca-Cola?", answer:"O gato mia, a Coca-Cola light.", cat:"adivinha"},
+    {text:"A piada do fotógrafo.", answer:"Ninguém sabe, porque ela ainda não foi revelada.", cat:"adivinha"},
+    {text:"Pode ser de ferro, de gelo, de chocolate ou de água.", answer:"A barra.", cat:"adivinha"},
+    {text:"Um pontinho verde brilhando na cama de um hospital.", answer:"Uma ervilha dando à luz.", cat:"adivinha"},
+    {text:"Corre a casa inteira e depois vai dormir num canto.", answer:"A vassoura.", cat:"adivinha"},
+    {text:"Tem pernas, mas não anda; tem braços, mas não abraça.", answer:"A cadeira.", cat:"adivinha"},
+    {text:"Morre em pé.", answer:"A vela.", cat:"adivinha"},
+    {text:"Está no final do fim, no início do meio e no meio do começo.", answer:"A letra m.", cat:"adivinha"},
+    {text:"Caminha sem pés, voa sem asas e pousa onde quiser.", answer:"O pensamento.", cat:"adivinha"},
+    {text:"Quando se escreve com 'o' costuma matar, quando se escreve com 'a' costuma amarrar.", answer:"Tiro / Tira.", cat:"adivinha"},
+    {text:"Céu que não possui estrelas.", answer:"O céu da boca.", cat:"adivinha"},
+    {text:"Nasce branco, fica verde, depois fica vermelho e acaba preto.", answer:"O café.", cat:"adivinha"},
+    {text:"Tem uma perna longa, uma curta e anda sem parar.", answer:"O relógio.", cat:"adivinha"},
+    {text:"Quanto mais se tira mais se tem.", answer:"Fotografias.", cat:"adivinha"},
+    {text:"Aquilo que a foca mais gosta.", answer:"Fofoca.", cat:"adivinha"},
+    {text:"Tem chapéu, mas não tem cabeça; tem boca, mas não fala; tem asa, mas não voa.", answer:"O bule.", cat:"adivinha"},
+    {text:"Tem debaixo de um tapete no hospício.", answer:"Um doido varrido.", cat:"adivinha"},
+    {text:"O animal mais antigo do mundo.", answer:"A zebra. Ela ainda é a preto e branco.", cat:"adivinha"},
+    {text:"É verde e não é planta, fala e não é gente.", answer:"O papagaio.", cat:"adivinha"},
+    {text:"Corre em volta do pasto inteiro sem se mexer.", answer:"A cerca.", cat:"adivinha"},
+    {text:"O lugar mais certo do Brasil.", answer:"O Sertão.", cat:"adivinha"},
+    {text:"Não tem olhos, mas pisca; não tem boca, mas comanda.", answer:"O semáforo.", cat:"adivinha"},
+    {text:"A banana disse para o tomate.", answer:"Eu que tiro a roupa e você que fica vermelha?", cat:"adivinha"},
+    {text:"A areia disse para o mar.", answer:"Deixa de onda.", cat:"adivinha"},
+    {text:"O chão falou para a mesa.", answer:"Fecha as pernas que eu estou vendo tudo.", cat:"adivinha"},
+    {text:"A zebra disse para a mosca.", answer:"Você está na minha lista negra.", cat:"adivinha"},
+    {text:"É nome de mulher e também de homem. Ia, mas acabou não indo.", answer:"Isaías (Isa-ias).", cat:"adivinha"},
+    {text:"É meu, mas meus amigos usam mais do que eu.", answer:"O meu nome.", cat:"adivinha"},
+    {text:"A fechadura disse para a chave.", answer:"Vamos dar uma voltinha.", cat:"adivinha"},
+    {text:"O rei da horta.", answer:"O rei-polho.", cat:"adivinha"},
+    {text:"O pé mais rápido.", answer:"O pé de vento.", cat:"adivinha"},
+    {text:"À direita sou um homem, facilmente acharás. Às avessas só à noite e nem sempre encontrarás.", answer:"Raul e luar.", cat:"adivinha"},
+    {text:"Trabalha tempo dobrado, sempre de noite e de dia. Se teima em ficar parado, só com uma corda andaria.", answer:"O relógio.", cat:"adivinha"},
+    {text:"De dia fica no céu e à noite fica na água.", answer:"A dentadura.", cat:"adivinha"},
+    {text:"Dá um pulo e se veste de noiva.", answer:"A pipoca.", cat:"adivinha"},
+    {text:"Uma minhoca com sono.", answer:"Uma dorminhoca.", cat:"adivinha"},
+    {text:"Destrói tudo com três letras.", answer:"O fim.", cat:"adivinha"},
+    {text:"Um pontinho verde no canto da sala de aula.", answer:"Uma ervilha de castigo.", cat:"adivinha"},
+    {text:"Nasce grande e morre pequeno.", answer:"O lápis.", cat:"adivinha"},
+    {text:"O pato disse para o outro pato durante o jogo.", answer:"Estamos empatados.", cat:"adivinha"},
+    {text:"Na televisão, cobre um país; no futebol, atrai a bola; em casa, incentiva o lazer.", answer:"A rede.", cat:"adivinha"},
+    {text:"Detestamos na praia, mas adoramos na panela.", answer:"O caldo.", cat:"adivinha"},
+    {text:"Tem asa, tem bico e fica embaixo da cama.", answer:"O bule. Não é o penico! O bule é meu e eu coloco onde quiser.", cat:"adivinha"},
+    {text:"O lugar que todos podem se sentar, menos você.", answer:"O seu colo.", cat:"adivinha"},
+    {text:"Eles são dois vizinhos, mas um não vai à casa do outro e os dois não se veem por causa de um morrinho.", answer:"Os olhos.", cat:"adivinha"},
+    {text:"Pesa mais no mundo.", answer:"A balança.", cat:"adivinha"},
+    {text:"É do tamanho de uma bolota, mas enche a casa até a porta.", answer:"A luz.", cat:"adivinha"},
+    {text:"É irmã da minha tia e não é minha tia.", answer:"A minha mãe.", cat:"adivinha"},
+    {text:"Todas as mães têm. Sem ele não tem pão. Some no inverno e aparece no verão.", answer:"O til (~).", cat:"adivinha"},
+    {text:"Nós matamos quando está nos matando.", answer:"A fome.", cat:"adivinha"},
+    {text:"Tem coroa, mas não é rei; tem raiz, mas não é planta.", answer:"O dente.", cat:"adivinha"},
+    {text:"A maior injustiça do Natal.", answer:"O peru morre e a missa é do galo.", cat:"adivinha"},
+    {text:"Tem cintura fina e perna alongada, toca corneta e leva bofetada.", answer:"O pernilongo.", cat:"adivinha"},
+    {text:"São três irmãos: o mais velho já se foi, o do meio está conosco e o caçula não nasceu.", answer:"Passado, presente e futuro.", cat:"adivinha"},
+    {text:"Nesse lugar o boi consegue passar, mas o mosquito fica preso.", answer:"A teia de aranha.", cat:"adivinha"},
+    {text:"O que o cirurgião e o matemático têm em comum.", answer:"Ambos vivem fazendo operações.", cat:"adivinha"},
+    {text:"A letra que se encontra uma vez por minuto, duas vezes em um momento e nenhuma vez no ano.", answer:"A letra m.", cat:"adivinha"},
+    {text:"O tijolo falou para o outro.", answer:"Há um ciumento entre nós.", cat:"adivinha"},
+    {text:"Pode ser aberto, mas nunca fechado.", answer:"O ovo.", cat:"adivinha"},
+    {text:"A minhoca falou para o minhoco.", answer:"Você minhoquece.", cat:"adivinha"},
+    {text:"O porco-espinho falou para o cato.", answer:"É você, mãe?", cat:"adivinha"},
+    {text:"Desce duro e sobe mole e pingando.", answer:"O macarrão. Quando vai para a panela é duro e do prato para a boca é molinho e pinga molho.", cat:"adivinha"},
+    {text:"O paraquedas disse para o paraquedista.", answer:"Tô contigo e não abro.", cat:"adivinha"},
+    {text:"O problema que o decorador tem quando vai ao médico.", answer:"Problema de coração.", cat:"adivinha"},
+    {text:"Tem uma mãe sem dentes e um pai cantor.", answer:"O ovo.", cat:"adivinha"},
+    {text:"Compram para comer, mas nunca comem.", answer:"O prato.", cat:"adivinha"},
+    {text:"Quanto maior é, menos se vê.", answer:"A sombra.", cat:"adivinha"},
+    {text:"Não tem vida, mas pode morrer.", answer:"A bateria.", cat:"adivinha"},
+    {text:"Quando parte uma partem as duas, quando chega uma chegam as duas.", answer:"As pernas.", cat:"adivinha"},
+    {text:"Todo nariz tem na ponta.", answer:"A letra z.", cat:"adivinha"},
+    {text:"Muitos podem ouvi-lo, mas ninguém o pode ver. Se não falarmos, ele também não falará.", answer:"O eco.", cat:"adivinha"},
+    {text:"Tem barba e não é bode, tem dente e não morde.", answer:"O milho.", cat:"adivinha"},
+    {text:"O médico que está sempre desligado.", answer:"O oftalmologista (OFF-talmologista).", cat:"adivinha"},
+    {text:"Pequeno em Lisboa e grande no Brasil.", answer:"A letra b.", cat:"adivinha"},
+    {text:"A semelhança de uma casa e o samba.", answer:"Para arrumar ambas, mexemos as cadeiras.", cat:"adivinha"},
+    {text:"Quanto mais branco mais sujo fico.", answer:"Quadro de giz.", cat:"adivinha"},
+    {text:"Está em tudo e nada tem.", answer:"A letra d.", cat:"adivinha"},
+    {text:"Quando mais quente está, mais fresco é.", answer:"O pão.", cat:"adivinha"},
+    {text:"O livro de Matemática disse para o livro de História.", answer:"Não me venha com história que eu já estou cheio de problemas.", cat:"adivinha"},
+    {text:"Ele morre queimado, ela morre cantando.", answer:"O cigarro e a cigarra.", cat:"adivinha"},
+    {text:"A diferença entre o padre e o bule.", answer:"O padre é de muita fé e o bule é de pôr café.", cat:"adivinha"},
+    {text:"São 7 irmãos, dos quais 5 têm sobrenome e 2 não.", answer:"Os dias da semana.", cat:"adivinha"},
+    {text:"Cai, mas não se machuca.", answer:"A chuva.", cat:"adivinha"},
+    {text:"Leva a gente para todo lugar, mas não anda.", answer:"A estrada.", cat:"adivinha"},
+    {text:"Altas torres, lindas janelas, que abrem e fecham sem ninguém tocar nelas.", answer:"Os olhos.", cat:"adivinha"},
+    {text:"Bebe pelos pés.", answer:"A árvore.", cat:"adivinha"},
+    {text:"Quanto mais lavo mais suja fico.", answer:"A água.", cat:"adivinha"},
+    {text:"Respira, mas não tem pulmões, tem pés, mas não anda.", answer:"A planta.", cat:"adivinha"},
+    {text:"Sem sair do seu cantinho, é capaz de viajar ao redor do mundo.", answer:"O selo.", cat:"adivinha"},
+    {text:"Está a sua frente, mas não pode ser visto.", answer:"O futuro.", cat:"adivinha"},
+    {text:"Faz duas pessoas a partir de uma só.", answer:"O espelho.", cat:"adivinha"},
+    {text:"Sobe, mas nunca desce.", answer:"A idade.", cat:"adivinha"},
+    {text:"Quanto mais seca mais molhada fica.", answer:"A toalha.", cat:"adivinha"},
+    {text:"Na água nasci, na água me criei, mas, se me jogarem na água, na água morrerei.", answer:"O sal.", cat:"adivinha"},
+    {text:"Quando você precisa, joga fora, quando não precisa mais, pega de volta.", answer:"A âncora.", cat:"adivinha"},
+  ],
+};
+
+// ─────────────────────────────────────────
+// HISTÓRIA MALUCA — DATA (histórias com lacunas)
+// ─────────────────────────────────────────
+DATA.historia = {
+  cats: [
+    { id:"all",        label:"✨ Todas",         cls:"hall" },
+    { id:"h-aventura", label:"🏕️ Aventura",      cls:"h-aventura" },
+    { id:"h-escola",   label:"📚 Escola",         cls:"h-escola" },
+    { id:"h-herois",   label:"🦸 Super-heróis",   cls:"h-herois" },
+    { id:"h-familia",  label:"🏖️ Família/Praia",  cls:"h-familia" },
+    { id:"h-espaco",   label:"🚀 Espaço",         cls:"h-espaco" },
+    { id:"h-festa",    label:"🎉 Festa",          cls:"h-festa" },
+    { id:"h-animais",  label:"🐾 Animais",        cls:"h-animais" },
+    { id:"h-comida",   label:"🍕 Comida",         cls:"h-comida" },
+  ],
+  catNames: {
+    "h-aventura":"Aventura","h-escola":"Escola","h-herois":"Super-heróis",
+    "h-familia":"Família/Praia","h-espaco":"Espaço","h-festa":"Festa",
+    "h-animais":"Animais","h-comida":"Comida",
+  },
+  stories: [
+    {
+      title:"Aventura na Floresta",
+      cat:"h-aventura",
+      template:"Era uma vez {nome1}, um(a) explorador(a) muito {adjetivo1}, que entrou em uma floresta escura procurando um tesouro. No caminho, encontrou um(a) {animal1} que estava {emocao1}. De repente, ouviu um barulho de {som1} vindo de trás de uma árvore gigante. {nome1} ficou tão assustado(a) que correu tão rápido quanto um(a) {animal2} e gritou \"{exclamacao1}!\". No fim da trilha, encontrou um baú cheio de {comida1} e voltou para casa contando a todos sobre a aventura mais {adjetivo2} da vida.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma pessoa", hint:"ex: Maria"},
+        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: corajoso"},
+        {id:"animal1", label:"Um animal", hint:"ex: coelho"},
+        {id:"emocao1", label:"Uma emoção", hint:"ex: com medo"},
+        {id:"som1", label:"Um som ou barulho", hint:"ex: trovão"},
+        {id:"animal2", label:"Outro animal", hint:"ex: guepardo"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Chocolate!"},
+        {id:"comida1", label:"Uma comida", hint:"ex: pizza"},
+        {id:"adjetivo2", label:"Outro adjetivo", hint:"ex: incrível"},
+      ],
+    },
+    {
+      title:"O Primeiro Dia na Escola Maluca",
+      cat:"h-escola",
+      template:"Hoje é o primeiro dia de aula e {nome1} está muito {emocao1}. A professora, que se chama {nome2}, entrou na sala vestida de {objeto1}. A primeira aula foi de {materia1}, e o dever de casa era desenhar um(a) {animal1}. No recreio, {nome1} comeu {comida1} e brincou de {brincadeira1} com os amigos. No fim do dia, todos gritaram \"{exclamacao1}!\" e foram embora {adjetivo1} para casa.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma criança", hint:"ex: Pedro"},
+        {id:"emocao1", label:"Uma emoção", hint:"ex: animado"},
+        {id:"nome2", label:"Nome de uma professora", hint:"ex: dona Ana"},
+        {id:"objeto1", label:"Uma peça de roupa estranha", hint:"ex: fantasia de abelha"},
+        {id:"materia1", label:"Uma matéria escolar", hint:"ex: matemática"},
+        {id:"animal1", label:"Um animal", hint:"ex: girafa"},
+        {id:"comida1", label:"Uma comida", hint:"ex: sanduíche"},
+        {id:"brincadeira1", label:"Uma brincadeira", hint:"ex: pega-pega"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Uhuu!"},
+        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: felizes"},
+      ],
+    },
+    {
+      title:"O Super-Herói Estranho",
+      cat:"h-herois",
+      template:"O super-herói mais famoso da cidade se chama Capitão(ã) {objeto1} e seu superpoder é {poder1}. Ele(a) usa uma capa de cor {cor1} e voa em cima de um(a) {animal1}. Certo dia, um vilão chamado {nome1} tentou roubar todo(a) {comida1} da cidade. O(a) Capitão(ã) {objeto1} gritou \"{exclamacao1}!\" e derrotou o vilão usando seu poder de {poder1}. No fim, toda a cidade comemorou comendo {comida1} e cantando uma música sobre ser {adjetivo1}.",
+      blanks:[
+        {id:"objeto1", label:"Um objeto do dia a dia", hint:"ex: Torradeira"},
+        {id:"poder1", label:"Um superpoder", hint:"ex: soltar raios"},
+        {id:"cor1", label:"Uma cor", hint:"ex: roxo"},
+        {id:"animal1", label:"Um animal", hint:"ex: águia"},
+        {id:"nome1", label:"Nome de um vilão inventado", hint:"ex: Dr. Caos"},
+        {id:"comida1", label:"Uma comida", hint:"ex: brigadeiro"},
+        {id:"exclamacao1", label:"Uma exclamação de herói", hint:"ex: Ao infinito!"},
+        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: corajoso"},
+      ],
+    },
+    {
+      title:"Dia de Praia Desastroso",
+      cat:"h-familia",
+      template:"A família foi para a praia de {lugar1} e levou {numero1} sanduíches de {comida1}. Assim que chegaram, {nome1} viu um(a) {animal1} andando na areia e saiu correndo {adjetivo1}. O vento soprou tão forte que o guarda-sol voou e caiu bem em cima de {nome2}, que gritou \"{exclamacao1}!\". No fim do dia, todo mundo entrou no mar e nadou como um(a) {animal2}, e a família decidiu voltar no ano que vem.",
+      blanks:[
+        {id:"lugar1", label:"Nome de um lugar/praia", hint:"ex: Canoa Quebrada"},
+        {id:"numero1", label:"Um número", hint:"ex: 20"},
+        {id:"comida1", label:"Uma comida", hint:"ex: queijo"},
+        {id:"nome1", label:"Nome de uma pessoa da família", hint:"ex: vovô"},
+        {id:"animal1", label:"Um animal", hint:"ex: caranguejo"},
+        {id:"adjetivo1", label:"Um advérbio/modo", hint:"ex: gritando"},
+        {id:"nome2", label:"Outra pessoa da família", hint:"ex: tia Clara"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Nossa!"},
+        {id:"animal2", label:"Outro animal", hint:"ex: golfinho"},
+      ],
+    },
+    {
+      title:"Viagem Espacial em Família",
+      cat:"h-espaco",
+      template:"A família {nome1} embarcou em um foguete rumo ao planeta {objeto1}. No caminho, o foguete fez um barulho de {som1} e todos ficaram {emocao1}. Ao pousar, encontraram um alienígena chamado {nome2} que só comia {comida1} e falava a língua {objeto2}. Juntos, dançaram uma dança chamada \"{exclamacao1}\" e voltaram para a Terra levando um(a) {animal1} de estimação de outro planeta.",
+      blanks:[
+        {id:"nome1", label:"Sobrenome de uma família", hint:"ex: Oliveira"},
+        {id:"objeto1", label:"Nome inventado de um planeta", hint:"ex: Zortax"},
+        {id:"som1", label:"Um som", hint:"ex: bip bip"},
+        {id:"emocao1", label:"Uma emoção", hint:"ex: nervosos"},
+        {id:"nome2", label:"Nome de um alienígena", hint:"ex: Blorp"},
+        {id:"comida1", label:"Uma comida", hint:"ex: gelatina"},
+        {id:"objeto2", label:"Um idioma inventado", hint:"ex: Glugluês"},
+        {id:"exclamacao1", label:"Nome de uma dança inventada", hint:"ex: Requebra Cósmico"},
+        {id:"animal1", label:"Um animal", hint:"ex: gato"},
+      ],
+    },
+    {
+      title:"Festa de Aniversário Fora do Comum",
+      cat:"h-festa",
+      template:"A festa de aniversário de {nome1} tinha o tema \"{objeto1}\" e todo mundo veio fantasiado de {animal1}. O bolo tinha sabor de {comida1} e {numero1} velinhas. Na hora dos parabéns, o(a) {nome2} tropeçou e caiu dentro do bolo gritando \"{exclamacao1}!\". Depois, todos dançaram uma música chamada \"{objeto2}\" até ficarem {emocao1}, e a festa foi considerada a mais {adjetivo1} da história da família.",
+      blanks:[
+        {id:"nome1", label:"Nome do(a) aniversariante", hint:"ex: Sofia"},
+        {id:"objeto1", label:"Um tema de festa estranho", hint:"ex: Piratas do espaço"},
+        {id:"animal1", label:"Um animal", hint:"ex: dinossauro"},
+        {id:"comida1", label:"Um sabor de bolo", hint:"ex: pistache com bacon"},
+        {id:"numero1", label:"Um número", hint:"ex: 47"},
+        {id:"nome2", label:"Nome de outra pessoa", hint:"ex: tio Beto"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Ops!"},
+        {id:"objeto2", label:"Nome inventado de uma música", hint:"ex: Bumba na Fofoca"},
+        {id:"emocao1", label:"Uma emoção/estado", hint:"ex: tontos"},
+        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: divertida"},
+      ],
+    },
+    {
+      title:"Um Dia na Fazenda",
+      cat:"h-animais",
+      template:"Na fazenda do(a) seu(sua) {nome1}, todo mundo acordava com o som de {som1}. Um dia, um(a) {animal1} fugiu do curral e começou a correr atrás de {nome2} pelo quintal inteiro. Para ajudar, todos usaram um balde de {comida1} para atrair o bicho de volta. No fim, o(a) {animal1} ficou tão {emocao1} que decidiu virar o(a) novo(a) mascote da fazenda, e todos comemoraram gritando \"{exclamacao1}!\".",
+      blanks:[
+        {id:"nome1", label:"Nome de um parente (seu tio/sua tia)", hint:"ex: seu Zé"},
+        {id:"som1", label:"Um som de animal", hint:"ex: cocoricó"},
+        {id:"animal1", label:"Um animal de fazenda", hint:"ex: porco"},
+        {id:"nome2", label:"Nome de uma pessoa", hint:"ex: Lucas"},
+        {id:"comida1", label:"Uma comida", hint:"ex: milho"},
+        {id:"emocao1", label:"Uma emoção/estado", hint:"ex: manso"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Eba!"},
+      ],
+    },
+    {
+      title:"O Monstro Fofo Debaixo da Cama",
+      cat:"h-herois",
+      template:"Toda noite, {nome1} ouvia um barulho de {som1} vindo de debaixo da cama. Com muita coragem, olhou para baixo e encontrou um monstrinho de cor {cor1} chamado {nome2}, que só queria comer {comida1} e brincar de {brincadeira1}. A partir daquele dia, os dois viraram melhores amigos e toda noite {nome1} dizia \"{exclamacao1}\" antes de dormir, e o monstrinho respondia com um(a) {som2} bem baixinho.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma criança", hint:"ex: Bia"},
+        {id:"som1", label:"Um som estranho", hint:"ex: ronco"},
+        {id:"cor1", label:"Uma cor", hint:"ex: verde"},
+        {id:"nome2", label:"Nome inventado de monstro", hint:"ex: Flufi"},
+        {id:"comida1", label:"Uma comida", hint:"ex: meia suja (brincadeira!)"},
+        {id:"brincadeira1", label:"Uma brincadeira", hint:"ex: esconde-esconde"},
+        {id:"exclamacao1", label:"Uma frase carinhosa", hint:"ex: Boa noite, amigo!"},
+        {id:"som2", label:"Outro som", hint:"ex: ronronar"},
+      ],
+    },
+    {
+      title:"Jogo de Futebol Inesquecível",
+      cat:"h-familia",
+      template:"No campinho perto de casa, o time do(a) {nome1} enfrentou o time comandado por um(a) {animal1} muito {adjetivo1}. No primeiro minuto, a bola bateu em {nome2} e voou parar dentro de {objeto1}. Todo mundo gritou \"{exclamacao1}!\" e o jogo parou por {numero1} minutos de tanto rir. No final, o time de {nome1} venceu comemorando com {comida1} para todos.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma pessoa/time", hint:"ex: Time do Kaká"},
+        {id:"animal1", label:"Um animal", hint:"ex: canguru"},
+        {id:"adjetivo1", label:"Um adjetivo", hint:"ex: competitivo"},
+        {id:"nome2", label:"Nome de um jogador", hint:"ex: Davi"},
+        {id:"objeto1", label:"Um lugar/objeto engraçado", hint:"ex: a churrasqueira do vizinho"},
+        {id:"exclamacao1", label:"Uma exclamação de gol", hint:"ex: Golaço!"},
+        {id:"numero1", label:"Um número", hint:"ex: 10"},
+        {id:"comida1", label:"Uma comida", hint:"ex: pastel"},
+      ],
+    },
+    {
+      title:"Receita de Bolo Catastrófica",
+      cat:"h-comida",
+      template:"{nome1} decidiu fazer um bolo de {comida1} para surpreender a família. A receita pedia {numero1} xícaras de {objeto1}, mas por engano foi usado {objeto2} no lugar. Quando o bolo saiu do forno, ele estava com a cor {cor1} e cheirava a {objeto1}. Mesmo assim, todo mundo provou e gritou \"{exclamacao1}!\" — uns de susto, outros de tanto rir. No fim, a família decidiu pedir pizza e guardar a receita para nunca mais tentar de novo.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma pessoa", hint:"ex: vovó Rosa"},
+        {id:"comida1", label:"Um sabor de bolo", hint:"ex: cenoura com chocolate"},
+        {id:"numero1", label:"Um número", hint:"ex: 3"},
+        {id:"objeto1", label:"Um ingrediente de cozinha", hint:"ex: farinha"},
+        {id:"objeto2", label:"Outro ingrediente (bem diferente)", hint:"ex: sal"},
+        {id:"cor1", label:"Uma cor", hint:"ex: azul"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Meu Deus!"},
+      ],
+    },
+    {
+      title:"O Mistério do Quintal",
+      cat:"h-aventura",
+      template:"Enquanto brincava no quintal, {nome1} encontrou uma pegada de {animal1} que ninguém sabia explicar. Junto com {nome2}, seguiu o rastro até um(a) {objeto1} escondido(a) atrás da árvore. De dentro dele(a), saiu um(a) {animal2} fazendo o som \"{som1}\" e usando um chapéu {cor1}. Os dois amigos riram tanto que gritaram \"{exclamacao1}!\" e decidiram guardar segredo, virando os únicos da rua a conhecer aquele mistério.",
+      blanks:[
+        {id:"nome1", label:"Nome de uma criança", hint:"ex: Théo"},
+        {id:"animal1", label:"Um animal", hint:"ex: raposa"},
+        {id:"nome2", label:"Nome de um amigo", hint:"ex: Manu"},
+        {id:"objeto1", label:"Um objeto grande", hint:"ex: baú"},
+        {id:"animal2", label:"Outro animal", hint:"ex: esquilo"},
+        {id:"som1", label:"Um som engraçado", hint:"ex: miau-au"},
+        {id:"cor1", label:"Uma cor", hint:"ex: amarelo"},
+        {id:"exclamacao1", label:"Uma exclamação engraçada", hint:"ex: Sério isso?!"},
+      ],
+    },
+  ],
+};
+
+// Estado específico do modo História Maluca
+let historiaSubMode = "classico"; // "classico" | "formulario"
+let historiaCat = "all";
+let historiaStory = null;
+let historiaBlankIdx = 0;
+let historiaAnswers = {};
+let historiaStage = "select"; // "select" | "collect" | "reveal"
+let historiaListening = false;
+
+function pickStory(cat) {
+  const list = cat === "all" ? DATA.historia.stories : DATA.historia.stories.filter(s => s.cat === cat);
+  return list[Math.floor(Math.random() * list.length)];
+}
+
+function speechSupported() {
+  return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+}
+
+function listenFor(onResult, statusEl) {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { onResult(null); return; }
+  const rec = new SR();
+  rec.lang = "pt-BR";
+  rec.interimResults = false;
+  rec.maxAlternatives = 1;
+  historiaListening = true;
+  if (statusEl) statusEl();
+  rec.onresult = (e) => {
+    historiaListening = false;
+    const text = e.results[0][0].transcript;
+    onResult(text.charAt(0).toUpperCase() + text.slice(1));
+  };
+  rec.onerror = () => { historiaListening = false; onResult(null); if (statusEl) statusEl(); };
+  rec.onend = () => { historiaListening = false; if (statusEl) statusEl(); };
+  try { rec.start(); } catch(e) { historiaListening = false; onResult(null); }
+}
+
+function startHistoriaFlow() {
+  historiaStory = pickStory(historiaCat);
+  historiaAnswers = {};
+  historiaBlankIdx = 0;
+  historiaStage = "collect";
+  render();
+}
+
+function setHistoriaSubMode(mode) {
+  historiaSubMode = mode;
+  render();
+}
+
+function fillStoryText(story, answers) {
+  let text = story.template;
+  story.blanks.forEach(b => {
+    const val = answers[b.id];
+    const re = new RegExp(`\\{${b.id}\\}`, "g");
+    text = text.replace(re, val ? `<span class="filled">${val}</span>` : `<span class="filled">___</span>`);
+  });
+  return text;
+}
+
+function micClassicRecord() {
+  const blank = historiaStory.blanks[historiaBlankIdx];
+  listenFor((text) => {
+    if (text) historiaAnswers[blank.id] = text;
+    render();
+  }, () => render());
+  render();
+}
+
+function classicTypeAnswer(val) {
+  const blank = historiaStory.blanks[historiaBlankIdx];
+  historiaAnswers[blank.id] = val;
+}
+
+function classicNext() {
+  if (historiaBlankIdx < historiaStory.blanks.length - 1) {
+    historiaBlankIdx++;
+  } else {
+    historiaStage = "reveal";
+  }
+  render();
+}
+
+function classicPrev() {
+  if (historiaBlankIdx > 0) historiaBlankIdx--;
+  render();
+}
+
+function formMicRecord(blankId) {
+  listenFor((text) => {
+    if (text) historiaAnswers[blankId] = text;
+    render();
+  }, () => render());
+  render();
+}
+
+function formTypeAnswer(blankId, val) {
+  historiaAnswers[blankId] = val;
+}
+
+function historiaRestart() {
+  historiaStage = "select";
+  historiaStory = null;
+  historiaAnswers = {};
+  historiaBlankIdx = 0;
+  render();
+}
+
+function historiaNewStorySameCat() {
+  startHistoriaFlow();
+}
+
+function renderHistoria() {
+  const card = document.getElementById("card");
+  const counter = document.getElementById("counter");
+  const nav = document.getElementById("nav");
+  nav.style.display = "none";
+  counter.textContent = "";
+
+  if (historiaStage === "select") {
+    card.innerHTML = `
+      <span class="mode-badge historia">📖 História Maluca</span>
+      <div class="submode-toggle">
+        <button class="submode-btn ${historiaSubMode==='classico'?'active':''}" onclick="setHistoriaSubMode('classico')">🎙️ Clássico (às cegas)</button>
+        <button class="submode-btn ${historiaSubMode==='formulario'?'active':''}" onclick="setHistoriaSubMode('formulario')">📋 Formulário</button>
+      </div>
+      <div class="historia-intro">
+        <span class="emoji">🤪</span>
+        <h2>Vamos criar uma história maluca!</h2>
+        <p>${historiaSubMode === 'classico'
+          ? 'Cada pessoa fala uma palavra sem saber onde ela vai entrar na história — a graça é a surpresa no final!'
+          : 'Todas as palavras aparecem juntas. É só falar cada uma no microfone e revelar a história completa.'}</p>
+        <p>Escolha um tema (ou deixe em "Todas") e toque para sortear uma história.</p>
+        <button class="roll-btn" onclick="startHistoriaFlow()">🎲 Sortear história</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (historiaStage === "collect" && historiaSubMode === "classico") {
+    const blank = historiaStory.blanks[historiaBlankIdx];
+    const answered = historiaAnswers[blank.id];
+    const supported = speechSupported();
+    card.innerHTML = `
+      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
+      <p class="blank-progress">Palavra ${historiaBlankIdx + 1} de ${historiaStory.blanks.length}</p>
+      <p class="blank-label">${blank.label}</p>
+      <p class="blank-hint">${blank.hint}</p>
+      ${supported ? `
+        <button class="mic-btn ${historiaListening ? 'listening' : ''}" onclick="micClassicRecord()">🎙️</button>
+        <p class="mic-status">${historiaListening ? 'Ouvindo... fale agora!' : (answered ? '' : 'Toque e fale a palavra')}</p>
+      ` : `
+        <p class="mic-status">Seu navegador não suporta microfone — digite abaixo:</p>
+      `}
+      <input type="text" class="text-fallback" placeholder="ou digite aqui" value="${answered || ''}"
+        oninput="classicTypeAnswer(this.value)" onkeydown="if(event.key==='Enter') classicNext()">
+      ${answered ? `<p class="blank-answer">✅ ${answered}</p>` : ''}
+      <div class="blank-actions">
+        <button class="nav-btn prev" onclick="classicPrev()" ${historiaBlankIdx===0?'disabled':''}>← Anterior</button>
+        <button class="nav-btn next" onclick="classicNext()">${historiaBlankIdx === historiaStory.blanks.length - 1 ? 'Revelar história →' : 'Próxima →'}</button>
+      </div>
+    `;
+    return;
+  }
+
+  if (historiaStage === "collect" && historiaSubMode === "formulario") {
+    const supported = speechSupported();
+    const allFilled = historiaStory.blanks.every(b => historiaAnswers[b.id]);
+    const items = historiaStory.blanks.map(b => {
+      const answered = historiaAnswers[b.id];
+      return `
+        <div class="form-item">
+          <div>
+            <div class="form-item-label">${b.label}</div>
+            <div class="form-item-hint">${b.hint}</div>
+            ${answered ? `<div class="form-item-answer">✅ ${answered}</div>` : ''}
+          </div>
+          ${supported
+            ? `<button class="mic-btn-small ${historiaListening ? 'listening' : ''}" onclick="formMicRecord('${b.id}')">🎙️</button>`
+            : `<input type="text" class="text-fallback" style="max-width:120px;margin-top:0;" placeholder="digite" value="${answered || ''}" oninput="formTypeAnswer('${b.id}', this.value); render()">`
+          }
+        </div>
+      `;
+    }).join("");
+    card.innerHTML = `
+      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
+      <div class="form-list">${items}</div>
+      <div class="blank-actions">
+        <button class="nav-btn" onclick="historiaRestart()">← Trocar história</button>
+        <button class="nav-btn next" onclick="historiaStage='reveal'; render();">Revelar história →</button>
+      </div>
+      ${!allFilled ? '<p class="mic-status" style="margin-top:10px;">Dica: campos em branco viram "___" na história</p>' : ''}
+    `;
+    return;
+  }
+
+  if (historiaStage === "reveal") {
+    card.innerHTML = `
+      <span class="mode-badge historia">📖 ${historiaStory.title}</span>
+      <p class="story-text">${fillStoryText(historiaStory, historiaAnswers)}</p>
+      <div class="blank-actions">
+        <button class="nav-btn" onclick="historiaRestart()">🔀 Trocar tema</button>
+        <button class="nav-btn next" onclick="historiaNewStorySameCat()">🎲 Nova história</button>
+      </div>
+    `;
+  }
+}
+
+// ─── INIT ───
+setMode("perguntas");
+</script>
+</body>
+</html>
