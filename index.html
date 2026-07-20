@@ -3,1392 +3,1062 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perguntas em Família</title>
-<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<title>Ministério Infantil</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg: #fdf6ee;
-  --card: #fffaf5;
-  --amber: #c97d3a;
-  --amber-light: #e8a96a;
-  --amber-pale: #f5dfc0;
-  --green: #4a7a52;
-  --green-light: #d3ead5;
-  --blue: #3d6a99;
-  --blue-light: #cde0f5;
-  --rose: #9e4560;
-  --rose-light: #f0d0da;
-  --purple: #6e4e9a;
-  --purple-light: #e0d0f5;
-  --teal: #2e7a7a;
-  --teal-light: #c8e8e8;
-  --orange: #b85a20;
-  --orange-light: #f5ddc8;
-  --text: #3a2e22;
-  --text-soft: #7a6a58;
-  --border: #edddc8;
-  --shadow: 0 4px 28px rgba(100,70,30,0.11);
-}
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'Nunito', sans-serif;
-  background: var(--bg);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px 14px 48px;
-  background-image:
-    radial-gradient(ellipse at 8% 8%, #f5dfc050 0%, transparent 48%),
-    radial-gradient(ellipse at 92% 88%, #d3ead548 0%, transparent 48%);
-}
-header { text-align: center; margin-bottom: 22px; }
-header .icon { font-size: 2.2rem; display: block; margin-bottom: 4px; }
-header h1 { font-family: 'Lora', serif; font-size: 1.45rem; color: var(--amber); font-weight: 600; }
-header p { font-size: 0.78rem; color: var(--text-soft); margin-top: 3px; }
-
-.mode-tabs {
-  display: flex; gap: 6px; margin-bottom: 18px;
-  background: #f0e4d2; border-radius: 999px; padding: 5px;
-  max-width: 480px; width: 100%;
-}
-.mode-tab {
-  flex: 1; border: none; border-radius: 999px; padding: 9px 8px;
-  font-family: 'Nunito', sans-serif; font-size: 0.73rem; font-weight: 700;
-  color: var(--text-soft); background: transparent; cursor: pointer;
-  transition: all 0.2s; letter-spacing: 0.01em; white-space: nowrap;
-}
-.mode-tab.active { background: #fff; color: var(--amber); box-shadow: 0 2px 8px rgba(100,70,30,0.12); }
-
-.categories {
-  display: flex; flex-wrap: wrap; gap: 7px; justify-content: center;
-  margin-bottom: 20px; max-width: 560px; width: 100%;
-}
-.cat-btn {
-  border: 2px solid transparent; border-radius: 999px; padding: 6px 14px;
-  font-family: 'Nunito', sans-serif; font-size: 0.75rem; font-weight: 700;
-  cursor: pointer; transition: all 0.18s; letter-spacing: 0.02em; outline: none;
-}
-.cat-btn:hover { transform: translateY(-1px); filter: brightness(0.95); }
-.cat-btn.active { border-color: currentColor; transform: translateY(-1px); }
-
-.cat-btn.all        { background: var(--amber); color: #fff; }
-.cat-btn.gerais     { background: var(--green-light); color: var(--green); }
-.cat-btn.engracadas { background: var(--blue-light); color: var(--blue); }
-.cat-btn.coracao    { background: var(--rose-light); color: var(--rose); }
-.cat-btn.preferir   { background: var(--purple-light); color: var(--purple); }
-.cat-btn.surpresa   { background: var(--amber-pale); color: var(--orange); }
-.cat-btn.qall         { background: var(--teal); color: #fff; }
-.cat-btn.q-engracadas { background: var(--blue-light); color: var(--blue); }
-.cat-btn.q-aventura   { background: var(--green-light); color: var(--green); }
-.cat-btn.q-imaginacao { background: var(--purple-light); color: var(--purple); }
-.cat-btn.q-familia    { background: var(--rose-light); color: var(--rose); }
-.cat-btn.q-divertidas { background: var(--orange-light); color: var(--orange); }
-.cat-btn.q-escola     { background: var(--teal-light); color: var(--teal); }
-.cat-btn.pall         { background: var(--purple); color: #fff; }
-.cat-btn.p-aventura   { background: var(--green-light); color: var(--green); }
-.cat-btn.p-poderes    { background: var(--blue-light); color: var(--blue); }
-.cat-btn.p-engracadas { background: var(--orange-light); color: var(--orange); }
-.cat-btn.p-comidas    { background: var(--rose-light); color: var(--rose); }
-.cat-btn.p-familia    { background: var(--amber-pale); color: var(--amber); }
-.cat-btn.p-imaginacao { background: var(--purple-light); color: var(--purple); }
-.cat-btn.p-coracao    { background: var(--teal-light); color: var(--teal); }
-.cat-btn.p-absurdas   { background: var(--green-light); color: var(--green); }
-.cat-btn.p-escola     { background: var(--blue-light); color: var(--blue); }
-
-.card-wrapper { width: 100%; max-width: 480px; margin-bottom: 14px; }
-.card {
-  background: var(--card); border-radius: 24px; box-shadow: var(--shadow);
-  padding: 36px 28px 32px; min-height: 210px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  text-align: center; border: 1.5px solid var(--border);
-  transition: opacity 0.22s, transform 0.22s;
-}
-.card.fade-out { opacity: 0; transform: scale(0.97); }
-
-.cat-label {
-  font-size: 0.67rem; font-weight: 700; letter-spacing: 0.09em;
-  text-transform: uppercase; margin-bottom: 18px; padding: 4px 12px; border-radius: 999px;
-}
-.cat-label.gerais       { background: var(--green-light); color: var(--green); }
-.cat-label.engracadas   { background: var(--blue-light); color: var(--blue); }
-.cat-label.coracao      { background: var(--rose-light); color: var(--rose); }
-.cat-label.preferir     { background: var(--purple-light); color: var(--purple); }
-.cat-label.surpresa     { background: var(--amber-pale); color: var(--orange); }
-.cat-label.q-engracadas { background: var(--blue-light); color: var(--blue); }
-.cat-label.q-aventura   { background: var(--green-light); color: var(--green); }
-.cat-label.q-imaginacao { background: var(--purple-light); color: var(--purple); }
-.cat-label.q-familia    { background: var(--rose-light); color: var(--rose); }
-.cat-label.q-divertidas { background: var(--orange-light); color: var(--orange); }
-.cat-label.q-escola     { background: var(--teal-light); color: var(--teal); }
-.cat-label.p-aventura   { background: var(--green-light); color: var(--green); }
-.cat-label.p-poderes    { background: var(--blue-light); color: var(--blue); }
-.cat-label.p-engracadas { background: var(--orange-light); color: var(--orange); }
-.cat-label.p-comidas    { background: var(--rose-light); color: var(--rose); }
-.cat-label.p-familia    { background: var(--amber-pale); color: var(--amber); }
-.cat-label.p-imaginacao { background: var(--purple-light); color: var(--purple); }
-.cat-label.p-coracao    { background: var(--teal-light); color: var(--teal); }
-.cat-label.p-absurdas   { background: var(--green-light); color: var(--green); }
-.cat-label.p-escola     { background: var(--blue-light); color: var(--blue); }
-
-.mode-badge {
-  font-size: 0.62rem; font-weight: 700; letter-spacing: 0.08em;
-  text-transform: uppercase; color: #fff; padding: 3px 10px;
-  border-radius: 999px; margin-bottom: 8px;
-}
-.mode-badge.perguntas { background: var(--amber); }
-.mode-badge.quem      { background: var(--teal); }
-.mode-badge.prefere   { background: var(--purple); }
-
-.question { font-family: 'Lora', serif; font-size: 1.18rem; line-height: 1.65; color: var(--text); font-style: italic; }
-.card-tip {
-  font-size: 0.72rem; color: var(--text-soft); margin-top: 14px;
-  font-style: normal; font-family: 'Nunito', sans-serif;
-  background: var(--amber-pale); padding: 5px 12px; border-radius: 999px;
-}
-.counter { font-size: 0.75rem; color: var(--text-soft); font-weight: 600; letter-spacing: 0.05em; margin-bottom: 16px; }
-
-.finished { text-align: center; padding: 24px 12px; }
-.finished .emoji { font-size: 2.8rem; display: block; margin-bottom: 10px; }
-.finished h2 { font-family: 'Lora', serif; font-size: 1.2rem; color: var(--amber); margin-bottom: 6px; }
-.finished p { font-size: 0.84rem; color: var(--text-soft); margin-bottom: 18px; line-height: 1.5; }
-.restart-btn {
-  background: var(--amber); color: #fff; border: none; border-radius: 999px;
-  padding: 11px 26px; font-family: 'Nunito', sans-serif; font-size: 0.88rem;
-  font-weight: 700; cursor: pointer; transition: all 0.2s;
-}
-.restart-btn:hover { background: var(--amber-light); transform: translateY(-1px); }
-
-.nav { display: flex; align-items: center; gap: 12px; max-width: 480px; width: 100%; justify-content: center; }
-.nav-btn {
-  background: var(--card); border: 1.5px solid var(--border); border-radius: 999px;
-  padding: 11px 24px; font-family: 'Nunito', sans-serif; font-size: 0.85rem;
-  font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.2s;
-  box-shadow: 0 2px 8px rgba(100,70,30,0.07);
-}
-.nav-btn:hover:not(:disabled) { background: var(--amber-pale); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(100,70,30,0.12); }
-.nav-btn:disabled { opacity: 0.3; cursor: default; }
-.nav-btn.next { background: var(--amber); color: #fff; border-color: var(--amber); }
-.nav-btn.next:hover:not(:disabled) { background: var(--amber-light); border-color: var(--amber-light); }
-
-/* ── ADIVINHA ANSWER ── */
-.mode-badge.adivinha { background: #e07b20; }
-.cat-btn.aall { background: #e07b20; color: #fff; }
-.cat-label.adivinha { background: #fde8cc; color: #e07b20; }
-
-.answer-block {
-  margin-top: 18px;
-  width: 100%;
-}
-.answer-blur {
-  font-family: 'Lora', serif;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--text);
-  font-style: italic;
-  background: var(--amber-pale);
-  border-radius: 12px;
-  padding: 10px 16px;
-  filter: blur(6px);
-  cursor: pointer;
-  transition: filter 0.3s;
-  user-select: none;
-}
-.answer-blur.revealed { filter: blur(0); cursor: default; }
-.answer-hint {
-  font-size: 0.7rem;
-  color: var(--text-soft);
-  font-family: 'Nunito', sans-serif;
-  margin-top: 6px;
-  display: block;
-  letter-spacing: 0.04em;
-}
-.answer-hint.hidden { display: none; }
-
-/* ── IA ── */
-.ai-gear {
-  position: fixed; top: 14px; right: 14px; width: 38px; height: 38px;
-  border-radius: 50%; background: var(--card); border: 1.5px solid var(--border);
-  box-shadow: var(--shadow); display: flex; align-items: center; justify-content: center;
-  font-size: 1.1rem; cursor: pointer; z-index: 50; transition: transform 0.2s;
-}
-.ai-gear:hover { transform: rotate(25deg); }
-
-.ai-panel {
-  width: 100%; max-width: 480px; margin-top: 14px;
-  background: var(--card); border: 1.5px solid var(--border); border-radius: 18px;
-  padding: 14px 16px; box-shadow: var(--shadow);
-}
-.ai-panel-title {
-  font-size: 0.72rem; font-weight: 700; color: var(--teal); letter-spacing: 0.06em;
-  text-transform: uppercase; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;
-}
-.ai-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
-.ai-btn {
-  flex: 1; min-width: 140px; border: none; border-radius: 999px; padding: 10px 14px;
-  font-family: 'Nunito', sans-serif; font-size: 0.78rem; font-weight: 700;
-  cursor: pointer; transition: all 0.2s; background: var(--teal); color: #fff;
-}
-.ai-btn:hover:not(:disabled) { background: #256363; transform: translateY(-1px); }
-.ai-btn:disabled { opacity: 0.5; cursor: default; }
-.ai-btn.secondary { background: var(--purple); }
-.ai-btn.secondary:hover:not(:disabled) { background: #59407e; }
-.ai-answer-input {
-  width: 100%; border: 1.5px solid var(--border); border-radius: 12px; padding: 8px 12px;
-  font-family: 'Nunito', sans-serif; font-size: 0.82rem; color: var(--text);
-  resize: vertical; min-height: 44px; margin-bottom: 8px; background: #fff;
-}
-.ai-answer-input:focus { outline: none; border-color: var(--teal); }
-.ai-status { font-size: 0.72rem; color: var(--text-soft); min-height: 16px; }
-.ai-status.error { color: #b03030; }
-.ai-question-box {
-  font-family: 'Lora', serif; font-style: italic; font-size: 1rem; line-height: 1.55;
-  background: var(--teal-light); color: var(--text); border-radius: 12px;
-  padding: 12px 14px; margin-top: 8px;
-}
-.ai-spinner {
-  display: inline-block; width: 14px; height: 14px; border: 2px solid var(--teal-light);
-  border-top-color: var(--teal); border-radius: 50%; animation: ai-spin 0.7s linear infinite;
-  vertical-align: middle; margin-right: 6px;
-}
-@keyframes ai-spin { to { transform: rotate(360deg); } }
-
-.ai-modal-overlay {
-  position: fixed; inset: 0; background: rgba(58,46,34,0.45); z-index: 100;
-  display: flex; align-items: center; justify-content: center; padding: 20px;
-}
-.ai-modal {
-  background: var(--card); border-radius: 20px; padding: 24px 22px; max-width: 380px; width: 100%;
-  box-shadow: var(--shadow);
-}
-.ai-modal h3 { font-family: 'Lora', serif; color: var(--amber); font-size: 1.05rem; margin-bottom: 8px; }
-.ai-modal p { font-size: 0.78rem; color: var(--text-soft); line-height: 1.5; margin-bottom: 12px; }
-.ai-modal a { color: var(--teal); }
-.ai-modal input {
-  width: 100%; border: 1.5px solid var(--border); border-radius: 10px; padding: 9px 12px;
-  font-family: 'Nunito', sans-serif; font-size: 0.85rem; margin-bottom: 12px;
-}
-.ai-modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
-.ai-modal-actions button {
-  border: none; border-radius: 999px; padding: 9px 18px; font-family: 'Nunito', sans-serif;
-  font-size: 0.8rem; font-weight: 700; cursor: pointer;
-}
-.ai-modal-actions .cancel { background: transparent; color: var(--text-soft); }
-.ai-modal-actions .save { background: var(--teal); color: #fff; }
+  :root{
+    --bg: #FBF9F1;
+    --paper: #FFFFFF;
+    --ink: #1B3A3E;
+    --ink-soft: #5D7679;
+    --teal: #146973;
+    --teal-dark: #0D4A52;
+    --teal-tint: #DEEEEF;
+    --amber: #F5C400;
+    --amber-tint: #FDF2C4;
+    --coral: #F0651E;
+    --coral-tint: #FCE2D3;
+    --green: #7CB342;
+    --green-tint: #E8F1DA;
+    --pink: #E91E8C;
+    --pink-tint: #FBDCEE;
+    --blue: #29ABE2;
+    --border: #E6E0CC;
+    --shadow: 0 2px 10px rgba(27,58,62,0.07);
+    --radius: 16px;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Baloo 2',cursive;
+    font-weight:600;
+    color:var(--teal-dark);
+    margin:0;
+  }
+  #app{
+    max-width:480px;
+    margin:0 auto;
+    min-height:100vh;
+    background:var(--bg);
+    position:relative;
+    padding-bottom:84px;
+  }
+  /* header */
+  .topbar{
+    background:var(--teal);
+    color:#fff;
+    padding:22px 20px 34px;
+    position:relative;
+    overflow:hidden;
+  }
+  .topbar .eyebrow{
+    font-size:12px;
+    letter-spacing:.04em;
+    opacity:.85;
+    margin-bottom:2px;
+  }
+  .topbar h1{
+    color:#fff;
+    font-size:22px;
+  }
+  .scallop{
+    position:absolute;
+    left:0; right:0; bottom:-1px;
+    height:16px;
+    background:
+      radial-gradient(circle at 8px 0, transparent 8px, var(--bg) 8.5px) 0 -8px / 16px 16px repeat-x;
+  }
+  .content{
+    padding:18px 16px 8px;
+  }
+  .section-title{
+    font-size:14px;
+    color:var(--ink-soft);
+    font-weight:500;
+    margin:22px 4px 10px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .section-title:first-child{margin-top:0;}
+  .card{
+    background:var(--paper);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:14px 16px;
+    margin-bottom:10px;
+    box-shadow:var(--shadow);
+  }
+  .card.empty{
+    text-align:center;
+    color:var(--ink-soft);
+    font-size:14px;
+    padding:22px 16px;
+  }
+  .row{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+  .pill{
+    display:inline-block;
+    font-size:12px;
+    font-weight:600;
+    padding:3px 10px;
+    border-radius:999px;
+    background:var(--teal-tint);
+    color:var(--teal-dark);
+  }
+  .pill.amber{background:var(--amber-tint); color:#8A5A0E;}
+  .pill.coral{background:var(--coral-tint); color:#A83B27;}
+  .pill.green{background:var(--green-tint); color:#3F6B1F;}
+  .pill.pink{background:var(--pink-tint); color:#A11364;}
+  .muted{color:var(--ink-soft); font-size:13px;}
+  .card-title{font-weight:600; font-size:15.5px; margin:0 0 2px;}
+  .card-sub{font-size:13px; color:var(--ink-soft); margin:0;}
+  .tag-row{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px;}
+  .tag{
+    background:var(--teal-tint);
+    color:var(--teal-dark);
+    font-size:12.5px;
+    padding:3px 9px;
+    border-radius:999px;
+  }
+  .btn{
+    border:1px solid var(--border);
+    background:#fff;
+    color:var(--ink);
+    font-family:inherit;
+    font-size:14px;
+    font-weight:500;
+    padding:9px 14px;
+    border-radius:12px;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+  }
+  .btn:active{transform:scale(.97);}
+  .btn.primary{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .btn.ghost{border:none; background:transparent; color:var(--teal-dark); padding:8px 4px;}
+  .btn.small{padding:6px 10px; font-size:13px;}
+  .btn.block{width:100%; justify-content:center;}
+  .btn.danger-ghost{color:var(--coral); border:none; background:transparent; padding:6px;}
+  .icon-btn{
+    width:34px; height:34px; border-radius:10px; border:1px solid var(--border);
+    background:#fff; display:flex; align-items:center; justify-content:center; cursor:pointer; flex:none;
+  }
+  .fab{
+    position:fixed;
+    right:calc(50% - 240px + 18px);
+    bottom:92px;
+    width:52px; height:52px;
+    border-radius:50%;
+    background:var(--coral);
+    color:#fff;
+    border:none;
+    font-size:26px;
+    box-shadow:0 4px 14px rgba(232,106,85,.4);
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+  }
+  @media (max-width:520px){
+    .fab{right:18px;}
+  }
+  /* bottom nav */
+  .navbar{
+    position:fixed;
+    left:0; right:0; bottom:0;
+    max-width:480px;
+    margin:0 auto;
+    background:#fff;
+    border-top:1px solid var(--border);
+    display:flex;
+    padding:8px 4px calc(8px + env(safe-area-inset-bottom));
+  }
+  .navbtn{
+    flex:1;
+    background:none; border:none;
+    display:flex; flex-direction:column; align-items:center; gap:3px;
+    padding:6px 2px;
+    color:var(--ink-soft);
+    font-family:inherit;
+    font-size:11px;
+    cursor:pointer;
+  }
+  .navbtn.active{color:var(--teal);}
+  .navbtn svg{width:22px;height:22px;}
+  .view{display:none;}
+  .view.active{display:block;}
+  /* form / modal */
+  .overlay{
+    position:fixed; inset:0; background:rgba(20,32,31,.45);
+    display:none; align-items:flex-end; justify-content:center; z-index:50;
+  }
+  .overlay.open{display:flex;}
+  .sheet{
+    background:var(--bg);
+    width:100%; max-width:480px;
+    border-radius:20px 20px 0 0;
+    padding:18px 18px calc(18px + env(safe-area-inset-bottom));
+    max-height:88vh;
+    overflow-y:auto;
+  }
+  .sheet h2{font-size:18px; margin-bottom:14px;}
+  label{
+    display:block; font-size:13px; font-weight:500; color:var(--ink-soft);
+    margin:12px 0 5px;
+  }
+  input, textarea, select{
+    width:100%;
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:10px 12px;
+    font-family:inherit;
+    font-size:14.5px;
+    background:#fff;
+    color:var(--ink);
+  }
+  textarea{resize:vertical; min-height:70px;}
+  .field-row{display:flex; gap:10px;}
+  .field-row > div{flex:1;}
+  .chip-select{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px;}
+  .chip{
+    border:1px solid var(--border); border-radius:999px; padding:6px 12px;
+    font-size:13.5px; cursor:pointer; background:#fff; color:var(--ink);
+  }
+  .chip.on{background:var(--teal); border-color:var(--teal); color:#fff;}
+  .sheet-actions{display:flex; gap:10px; margin-top:20px;}
+  .sheet-actions .btn{flex:1;}
+  .toast{
+    position:fixed; left:50%; transform:translateX(-50%);
+    bottom:100px; background:var(--teal-dark); color:#fff;
+    padding:10px 18px; border-radius:999px; font-size:13.5px;
+    z-index:80; opacity:0; transition:opacity .25s;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1;}
+  .msg-preview{
+    background:var(--teal-tint); border-radius:12px; padding:12px 14px;
+    font-size:14px; white-space:pre-wrap; color:var(--teal-dark); margin-top:10px;
+    line-height:1.55;
+  }
+  .header-actions{display:flex; gap:6px;}
 </style>
 </head>
 <body>
+<div id="app">
 
-<header>
-  <span class="icon">💬</span>
-  <h1>Perguntas em Família</h1>
-  <p>Para conversas que ficam na memória</p>
-</header>
-
-<div class="mode-tabs" id="modeTabs">
-  <button class="mode-tab active" data-mode="perguntas" onclick="setMode('perguntas')">💬 Perguntas</button>
-  <button class="mode-tab" data-mode="quem" onclick="setMode('quem')">🤣 Quem é mais?</button>
-  <button class="mode-tab" data-mode="prefere" onclick="setMode('prefere')">🤔 O que prefere?</button>
-  <button class="mode-tab" data-mode="adivinha" onclick="setMode('adivinha')">🔍 Adivinhas</button>
-</div>
-
-<div class="categories" id="categories"></div>
-
-<div class="card-wrapper">
-  <div class="card" id="card"></div>
-</div>
-
-<p class="counter" id="counter"></p>
-
-<div class="nav" id="nav">
-  <button class="nav-btn prev" id="btnPrev" onclick="go(-1)">← Anterior</button>
-  <button class="nav-btn next" id="btnNext" onclick="go(1)">Próxima →</button>
-</div>
-
-<div class="ai-panel">
-  <div class="ai-panel-title">🤖 Perguntas com IA</div>
-  <div class="ai-row">
-    <button class="ai-btn" id="btnAiNew" onclick="generateAIQuestion()">✨ Gerar pergunta nova</button>
-    <button class="ai-btn secondary" id="btnAiFollow" onclick="generateFollowUp()">💬 Pergunta de acompanhamento</button>
-  </div>
-  <textarea class="ai-answer-input" id="aiAnswerInput" placeholder="O que a criança respondeu? (opcional, usado na 'pergunta de acompanhamento')"></textarea>
-  <div class="ai-status" id="aiStatus"></div>
-  <div id="aiResultBox"></div>
-</div>
-
-<button class="ai-gear" id="aiGear" onclick="openKeyModal()" title="Configurar chave da IA">⚙️</button>
-
-<script>
-const DATA = {
-
-  // ══════════════════════════════════════════
-  // MODO: PERGUNTAS
-  // ══════════════════════════════════════════
-  perguntas: {
-    cats: [
-      { id:"all",        label:"✨ Todas",           cls:"all" },
-      { id:"gerais",     label:"💬 Gerais",           cls:"gerais" },
-      { id:"engracadas", label:"😂 Engraçadas",       cls:"engracadas" },
-      { id:"coracao",    label:"❤️ Coração",          cls:"coracao" },
-      { id:"preferir",   label:"🤔 Você prefere?",    cls:"preferir" },
-      { id:"surpresa",   label:"✨ Surpreendentes",   cls:"surpresa" },
-    ],
-    catNames: {
-      gerais:"Gerais", engracadas:"Engraçadas", coracao:"Coração",
-      preferir:"Você prefere?", surpresa:"Surpreendentes",
-    },
-    questions: [
-      // ── GERAIS (63) ──
-      {text:"Qual é uma coisa que eu não sei sobre você?", cat:"gerais"},
-      {text:"Se você pudesse usar uma varinha mágica para mudar uma coisa na nossa família, qual seria?", cat:"gerais"},
-      {text:"Qual é a parte mais difícil de ser criança?", cat:"gerais"},
-      {text:"Qual foi o momento mais feliz da sua semana?", cat:"gerais"},
-      {text:"O que faz você se sentir muito amado?", cat:"gerais"},
-      {text:"Qual é a sua lembrança favorita de nós juntos?", cat:"gerais"},
-      {text:"Se você pudesse escolher qualquer lugar para passearmos amanhã, para onde iríamos?", cat:"gerais"},
-      {text:"O que você acha que faz um bom amigo?", cat:"gerais"},
-      {text:"Qual foi a coisa mais corajosa que você já fez?", cat:"gerais"},
-      {text:"Se você pudesse aprender qualquer habilidade instantaneamente, qual seria?", cat:"gerais"},
-      {text:"O que você mais gosta em você mesmo?", cat:"gerais"},
-      {text:"Qual é uma regra da casa que você entende e qual é uma que você não entende?", cat:"gerais"},
-      {text:"Se você pudesse fazer uma pergunta para Deus e receber uma resposta, qual seria?", cat:"gerais"},
-      {text:"O que você acha que os adultos não entendem sobre as crianças?", cat:"gerais"},
-      {text:"Se você pudesse trocar de lugar com alguém por um dia, quem seria?", cat:"gerais"},
-      {text:"Qual foi a coisa mais engraçada que aconteceu com você este ano?", cat:"gerais"},
-      {text:"O que faz você se sentir triste?", cat:"gerais"},
-      {text:"O que faz você se sentir muito feliz?", cat:"gerais"},
-      {text:"Qual é o melhor elogio que alguém já fez para você?", cat:"gerais"},
-      {text:"O que você gostaria de fazer mais vezes em família?", cat:"gerais"},
-      {text:"O que faz você se sentir realmente importante?", cat:"gerais"},
-      {text:"Quando você se sente mais amado?", cat:"gerais"},
-      {text:"O que eu faço que faz você sorrir?", cat:"gerais"},
-      {text:"O que eu faço que às vezes deixa você triste?", cat:"gerais"},
-      {text:"Qual foi a última vez que você sentiu muito orgulho de si mesmo?", cat:"gerais"},
-      {text:"Existe alguma coisa que você gostaria de fazer melhor?", cat:"gerais"},
-      {text:"O que mais preocupa você hoje?", cat:"gerais"},
-      {text:"Qual foi a coisa mais gentil que alguém fez por você?", cat:"gerais"},
-      {text:"Qual foi a coisa mais gentil que você fez por alguém?", cat:"gerais"},
-      {text:"O que faz um dia ser perfeito para você?", cat:"gerais"},
-      {text:"Quem é uma pessoa que você admira e por quê?", cat:"gerais"},
-      {text:"Qual foi a melhor parte do seu dia hoje?", cat:"gerais"},
-      {text:"Qual foi a pior parte do seu dia hoje?", cat:"gerais"},
-      {text:"O que você gostaria que os adultos entendessem melhor sobre você?", cat:"gerais"},
-      {text:"Quando você se sente mais corajoso?", cat:"gerais"},
-      {text:"Quando você sente medo?", cat:"gerais"},
-      {text:"O que você mais gosta na nossa família?", cat:"gerais"},
-      {text:"O que você gostaria que fizéssemos mais juntos?", cat:"gerais"},
-      {text:"Qual é um sonho que você tem para quando crescer?", cat:"gerais"},
-      {text:"O que faz você se sentir seguro?", cat:"gerais"},
-      {text:"Se pudesse agradecer alguém hoje, quem seria?", cat:"gerais"},
-      {text:"O que você acha que faz uma pessoa ser boa?", cat:"gerais"},
-      {text:"Qual foi uma lição importante que você aprendeu este ano?", cat:"gerais"},
-      // +20 gerais
-      {text:"O que você imagina estar fazendo daqui a 5 anos?", cat:"gerais"},
-      {text:"Qual é a coisa mais estranha que já aconteceu com você?", cat:"gerais"},
-      {text:"Se você pudesse ter uma habilidade secreta que ninguém soubesse, qual seria?", cat:"gerais"},
-      {text:"O que você faria se tivesse um dia inteiro só para você?", cat:"gerais"},
-      {text:"Qual é a coisa mais importante que você já aprendeu com um amigo?", cat:"gerais"},
-      {text:"Se você pudesse mudar uma coisa na escola, o que seria?", cat:"gerais"},
-      {text:"Qual é o lugar favorito da sua casa e por quê?", cat:"gerais"},
-      {text:"O que você faria se soubesse que não poderia fracassar?", cat:"gerais"},
-      {text:"Qual é a coisa que mais te deixa animado quando acorda de manhã?", cat:"gerais"},
-      {text:"Se você pudesse escrever uma carta para você mesmo no futuro, o que diria?", cat:"gerais"},
-      {text:"Qual é a coisa que você mais gosta de fazer quando está sozinho?", cat:"gerais"},
-      {text:"O que você acha que é mais difícil: pedir desculpa ou perdoar?", cat:"gerais"},
-      {text:"Qual foi a vez que você mais ajudou alguém?", cat:"gerais"},
-      {text:"Se você pudesse passar um dia inteiro com qualquer pessoa do mundo, quem escolheria?", cat:"gerais"},
-      {text:"O que você acha que faz uma família ser feliz?", cat:"gerais"},
-      {text:"Qual é a coisa que você nunca se cansa de fazer?", cat:"gerais"},
-      {text:"Se você pudesse inventar uma nova matéria na escola, qual seria?", cat:"gerais"},
-      {text:"O que você mais admira em alguém da nossa família?", cat:"gerais"},
-      {text:"Qual foi a decisão mais difícil que você já teve que tomar?", cat:"gerais"},
-      {text:"O que você gostaria de ter mais coragem para fazer?", cat:"gerais"},
-
-      // ── ENGRAÇADAS (50) ──
-      {text:"Você preferiria ter pés de pato ou nariz de elefante?", cat:"engracadas"},
-      {text:"Se os animais pudessem falar, qual seria o mais engraçado?", cat:"engracadas"},
-      {text:"Se você fosse diretor da escola por um dia, o que mudaria?", cat:"engracadas"},
-      {text:"Qual seria o sabor de sorvete mais maluco que você inventaria?", cat:"engracadas"},
-      {text:"Se você pudesse ter qualquer animal de estimação, até mesmo um dinossauro, qual escolheria?", cat:"engracadas"},
-      {text:"O que você faria se encontrasse um milhão de reais na rua?", cat:"engracadas"},
-      {text:"Se você pudesse trocar sua voz pela de qualquer animal, qual escolheria?", cat:"engracadas"},
-      {text:"Se o nosso carro pudesse falar, o que ele diria sobre a nossa família?", cat:"engracadas"},
-      {text:"Se você fosse presidente por um dia, qual seria sua primeira lei?", cat:"engracadas"},
-      {text:"Se os brinquedos ganhassem vida à noite, o que eles fariam?", cat:"engracadas"},
-      {text:"Você preferiria ter orelhas de coelho ou cauda de macaco?", cat:"engracadas"},
-      {text:"Se pudesse criar um feriado, como ele seria?", cat:"engracadas"},
-      {text:"Qual seria o pior sabor de pizza do mundo?", cat:"engracadas"},
-      {text:"Se você pudesse misturar dois animais, quais seriam?", cat:"engracadas"},
-      {text:"Se os vegetais pudessem reclamar, do que reclamariam?", cat:"engracadas"},
-      {text:"Qual superpoder seria o mais inútil?", cat:"engracadas"},
-      {text:"Se a nossa família fosse uma banda, qual seria o nome?", cat:"engracadas"},
-      {text:"Se você fosse um vilão de desenho, qual seria seu plano maluco?", cat:"engracadas"},
-      {text:"Se pudesse transformar uma matéria da escola em brincadeira, qual seria?", cat:"engracadas"},
-      {text:"Se as galinhas dominassem o mundo, o que mudaria?", cat:"engracadas"},
-      {text:"Qual seria a coisa mais estranha para chover do céu?", cat:"engracadas"},
-      {text:"Você preferiria comer apenas sorvete ou apenas pizza pelo resto da vida?", cat:"engracadas"},
-      {text:"Se pudesse morar dentro de um filme, qual escolheria?", cat:"engracadas"},
-      {text:"Se seu bicho de estimação pudesse falar por um minuto, o que ele diria?", cat:"engracadas"},
-      {text:"Se pudesse inventar um sabor de refrigerante, qual seria?", cat:"engracadas"},
-      {text:"Qual seria o nome do seu restaurante maluco?", cat:"engracadas"},
-      // +24 engraçadas
-      {text:"Se você pudesse ter um superpoder ridículo, qual seria?", cat:"engracadas"},
-      {text:"Se a sua barriga falasse, o que ela reclamaria mais?", cat:"engracadas"},
-      {text:"Se você fosse um personagem de videogame, qual seria sua vida extra?", cat:"engracadas"},
-      {text:"Qual seria o pior nome para um cachorro?", cat:"engracadas"},
-      {text:"Se você pudesse renomear os dias da semana, como se chamariam?", cat:"engracadas"},
-      {text:"Se a chuva caísse para cima, o que você faria?", cat:"engracadas"},
-      {text:"Se você acordasse amanhã falando ao contrário, o que seria o mais difícil de dizer?", cat:"engracadas"},
-      {text:"Qual animal faria o pior motorista de ônibus?", cat:"engracadas"},
-      {text:"Se seu nariz fosse um instrumento musical, o que tocaria?", cat:"engracadas"},
-      {text:"Se você pudesse fazer qualquer coisa virar um esporte olímpico, o que escolheria?", cat:"engracadas"},
-      {text:"Se as plantas pudessem gritar, qual gritaria mais alto?", cat:"engracadas"},
-      {text:"Se você inventasse um robô para fazer uma coisa, qual seria a mais inútil possível?", cat:"engracadas"},
-      {text:"Qual seria o pior superpoder para ter numa prova na escola?", cat:"engracadas"},
-      {text:"Se você pudesse substituir todas as cadeiras do mundo por outra coisa, o que seria?", cat:"engracadas"},
-      {text:"Se os polvos fossem os donos de restaurantes, o que serviriam no cardápio?", cat:"engracadas"},
-      {text:"Qual seria o animal mais chato para ter como vizinho?", cat:"engracadas"},
-      {text:"Se você tivesse que escolher um cheiro para ser o seu perfume para sempre, qual seria o mais maluco?", cat:"engracadas"},
-      {text:"Se a lua fosse feita de queijo, quem na nossa família já teria ido comer um pedaço?", cat:"engracadas"},
-      {text:"Se você fosse um emoji, qual seria?", cat:"engracadas"},
-      {text:"Qual seria o pior momento para começar a rir sem parar?", cat:"engracadas"},
-      {text:"Se você pudesse trocar o som do trovão por qualquer outro som, qual escolheria?", cat:"engracadas"},
-      {text:"Se os peixes pudessem sair da água, onde você acha que passariam o fim de semana?", cat:"engracadas"},
-      {text:"Qual seria o nome mais ridículo para um super-herói?", cat:"engracadas"},
-      {text:"Se a sua sombra pudesse fazer coisas diferentes de você, o que ela faria?", cat:"engracadas"},
-
-      // ── CORAÇÃO (35) ──
-      {text:"O que você acha que eu faço bem como pai?", cat:"coracao"},
-      {text:"O que você gostaria que eu fizesse mais?", cat:"coracao"},
-      {text:"Tem alguma coisa que você gostaria de me contar, mas nunca contou?", cat:"coracao"},
-      {text:"Quando você se sente mais perto de Deus?", cat:"coracao"},
-      {text:"O que você acha que Deus mais gosta em uma pessoa?", cat:"coracao"},
-      {text:"Como eu posso ser um pai melhor para você?", cat:"coracao"},
-      {text:"O que você acha que Deus pensa quando olha para você?", cat:"coracao"},
-      {text:"O que você mais gosta de fazer comigo?", cat:"coracao"},
-      {text:"Qual é uma coisa que você gostaria que eu aprendesse sobre você?", cat:"coracao"},
-      {text:"Qual é uma coisa que você gostaria que eu nunca esquecesse sobre você?", cat:"coracao"},
-      {text:"Quando você sente que Deus está cuidando de você?", cat:"coracao"},
-      {text:"O que você acha que faz um pai ser um bom pai?", cat:"coracao"},
-      {text:"O que você acha que eu mais gosto em você?", cat:"coracao"},
-      {text:"O que você acha que sua mãe mais gosta em você?", cat:"coracao"},
-      {text:"Se você pudesse mudar uma coisa em você, o que mudaria?", cat:"coracao"},
-      {text:"Qual foi o momento em que você mais se sentiu feliz conosco?", cat:"coracao"},
-      {text:"Qual foi o momento em que você mais se sentiu triste?", cat:"coracao"},
-      {text:"Se pudesse guardar apenas uma lembrança da nossa família, qual escolheria?", cat:"coracao"},
-      // +17 coração
-      {text:"O que você sente quando alguém te decepciona?", cat:"coracao"},
-      {text:"O que você faz quando está com raiva e quer se acalmar?", cat:"coracao"},
-      {text:"Tem alguma coisa que você gostaria de me pedir, mas ainda não teve coragem?", cat:"coracao"},
-      {text:"O que você acha que Deus sente quando você ora?", cat:"coracao"},
-      {text:"Quando você se sente mais você mesmo?", cat:"coracao"},
-      {text:"Qual é uma coisa que você aprende comigo que carregará para sempre?", cat:"coracao"},
-      {text:"O que você faria se visse alguém sendo maltratado na escola?", cat:"coracao"},
-      {text:"O que significa para você saber que Deus te ama?", cat:"coracao"},
-      {text:"Quando foi a última vez que você sentiu que eu estava muito orgulhoso de você?", cat:"coracao"},
-      {text:"O que você mais gosta na forma como nossa família resolve os problemas?", cat:"coracao"},
-      {text:"Tem algum momento do dia em que você sente mais falta de mim?", cat:"coracao"},
-      {text:"Qual é uma coisa que você gostaria de me ensinar?", cat:"coracao"},
-      {text:"O que você faz quando sente que ninguém te entende?", cat:"coracao"},
-      {text:"Qual é uma promessa que você gostaria que eu fizesse para você?", cat:"coracao"},
-      {text:"O que faz você se sentir realmente aceito?", cat:"coracao"},
-      {text:"Como você sabe quando alguém realmente te ama?", cat:"coracao"},
-      {text:"O que você diria para mim se soubesse que eu ficaria bem com qualquer resposta?", cat:"coracao"},
-
-      // ── VOCÊ PREFERE? curtas (10) ──
-      {text:"Você prefere voar ou ficar invisível?", cat:"preferir"},
-      {text:"Você prefere conversar com animais ou falar todas as línguas do mundo?", cat:"preferir"},
-      {text:"Você prefere nunca mais tomar banho ou nunca mais escovar os dentes?", cat:"preferir"},
-      {text:"Você prefere morar numa casa na árvore ou num castelo?", cat:"preferir"},
-      {text:"Você prefere ter um dragão ou um unicórnio?", cat:"preferir"},
-      {text:"Você prefere voltar no tempo ou viajar para o futuro?", cat:"preferir"},
-      {text:"Você prefere ser muito rápido ou muito forte?", cat:"preferir"},
-      {text:"Você prefere ganhar R$ 100 hoje ou R$ 1.000 daqui a um ano?", cat:"preferir"},
-      {text:"Você prefere explorar o fundo do mar ou o espaço?", cat:"preferir"},
-      {text:"Você prefere ter um botão que faz chover pizza ou sorvete?", cat:"preferir"},
-
-      // ── SURPREENDENTES (15) ──
-      {text:"O que você espera que nossa família seja daqui a 10 anos?", cat:"surpresa"},
-      {text:"Como você descreveria nossa família para alguém que nunca nos conheceu?", cat:"surpresa"},
-      {text:"O que você gostaria que fizéssemos juntos antes de você crescer?", cat:"surpresa"},
-      {text:"Qual é a pergunta que você gostaria que eu fizesse agora?", cat:"surpresa"},
-      {text:"Tem alguma coisa que você sempre quis me perguntar?", cat:"surpresa"},
-      // +10 surpreendentes
-      {text:"Se pudesse deixar uma mensagem para todos os pais do mundo, qual seria?", cat:"surpresa"},
-      {text:"O que você acha que os filhos ensinam aos pais sem perceber?", cat:"surpresa"},
-      {text:"Se nossa família fosse um time, qual seria o nome e qual seria o lema?", cat:"surpresa"},
-      {text:"Qual é a coisa mais bonita que já viu acontecer entre duas pessoas?", cat:"surpresa"},
-      {text:"Se você pudesse mudar uma coisa no mundo para que as crianças fossem mais felizes, o que seria?", cat:"surpresa"},
-      {text:"O que você acha que faz uma lembrança durar para sempre?", cat:"surpresa"},
-      {text:"Se você pudesse escrever uma lei só para as famílias, qual seria?", cat:"surpresa"},
-      {text:"O que você acha que vai sentir falta de ser criança quando crescer?", cat:"surpresa"},
-      {text:"Existe alguém fora da família que mudou a sua vida de alguma forma?", cat:"surpresa"},
-      {text:"Se você pudesse me dar um conselho, qual seria?", cat:"surpresa"},
-    ],
-  },
-
-  // ══════════════════════════════════════════
-  // MODO: QUEM É MAIS PROVÁVEL DE...
-  // ══════════════════════════════════════════
-  quem: {
-    cats: [
-      { id:"all",           label:"✨ Todas",          cls:"qall" },
-      { id:"q-engracadas",  label:"😂 Engraçadas",     cls:"q-engracadas" },
-      { id:"q-aventura",    label:"🏕️ Aventureiras",   cls:"q-aventura" },
-      { id:"q-imaginacao",  label:"🦄 Imaginativas",   cls:"q-imaginacao" },
-      { id:"q-familia",     label:"🏠 Família",        cls:"q-familia" },
-      { id:"q-divertidas",  label:"🎉 Divertidas",     cls:"q-divertidas" },
-      { id:"q-escola",      label:"📚 Escola",         cls:"q-escola" },
-    ],
-    catNames: {
-      "q-engracadas":"Engraçadas","q-aventura":"Aventureiras",
-      "q-imaginacao":"Imaginativas","q-familia":"Família",
-      "q-divertidas":"Muito divertidas","q-escola":"Escola",
-    },
-    questions: [
-      // ── ENGRAÇADAS (25) ──
-      {text:"Comer um sorvete e deixar cair na primeira lambida?", cat:"q-engracadas"},
-      {text:"Rir tão forte que não consegue falar?", cat:"q-engracadas"},
-      {text:"Esquecer onde colocou o próprio chinelo?", cat:"q-engracadas"},
-      {text:"Fazer amizade com um cachorro desconhecido?", cat:"q-engracadas"},
-      {text:"Inventar uma dança maluca?", cat:"q-engracadas"},
-      {text:"Falar dormindo?", cat:"q-engracadas"},
-      {text:"Construir a maior cabana da casa?", cat:"q-engracadas"},
-      {text:"Fazer uma careta em uma foto importante?", cat:"q-engracadas"},
-      {text:"Transformar uma caixa de papelão em um castelo?", cat:"q-engracadas"},
-      {text:"Encontrar um jeito criativo de evitar arrumar o quarto?", cat:"q-engracadas"},
-      {text:"Usar meias diferentes sem perceber?", cat:"q-engracadas"},
-      {text:"Colocar sal no lugar de açúcar?", cat:"q-engracadas"},
-      {text:"Gritar no susto de um filme de terror?", cat:"q-engracadas"},
-      {text:"Dormir no carro em menos de 5 minutos?", cat:"q-engracadas"},
-      {text:"Esquecer o nome de uma pessoa que acabou de conhecer?", cat:"q-engracadas"},
-      {text:"Cantar no chuveiro como se fosse um show?", cat:"q-engracadas"},
-      {text:"Fazer barulho comendo pipoca no cinema?", cat:"q-engracadas"},
-      {text:"Tropeçar no próprio pé?", cat:"q-engracadas"},
-      {text:"Mandar mensagem para a pessoa errada?", cat:"q-engracadas"},
-      {text:"Dar risada na hora mais inapropriada?", cat:"q-engracadas"},
-      {text:"Inventar uma palavra nova e insistir que existe?", cat:"q-engracadas"},
-      {text:"Fingir que entendeu a piada quando não entendeu?", cat:"q-engracadas"},
-      {text:"Colocar o sapato no pé errado e só perceber na rua?", cat:"q-engracadas"},
-      {text:"Falar com o cachorro como se ele entendesse tudo?", cat:"q-engracadas"},
-      {text:"Montar um plano elaborado para evitar lavar a louça?", cat:"q-engracadas"},
-
-      // ── AVENTUREIRAS (25) ──
-      {text:"Sobreviver melhor em uma ilha deserta?", cat:"q-aventura"},
-      {text:"Encontrar um tesouro escondido?", cat:"q-aventura"},
-      {text:"Fazer amizade com um extraterrestre?", cat:"q-aventura"},
-      {text:"Ser escolhido para uma missão secreta?", cat:"q-aventura"},
-      {text:"Escalar uma montanha?", cat:"q-aventura"},
-      {text:"Descobrir uma passagem secreta?", cat:"q-aventura"},
-      {text:"Explorar uma caverna misteriosa?", cat:"q-aventura"},
-      {text:"Domar um dragão?", cat:"q-aventura"},
-      {text:"Navegar até uma ilha desconhecida?", cat:"q-aventura"},
-      {text:"Ser o herói de uma aventura?", cat:"q-aventura"},
-      {text:"Construir uma jangada e tentar navegar?", cat:"q-aventura"},
-      {text:"Acampar sozinho em uma floresta?", cat:"q-aventura"},
-      {text:"Criar um mapa do tesouro para os outros encontrarem?", cat:"q-aventura"},
-      {text:"Pular de paraquedas sem hesitar?", cat:"q-aventura"},
-      {text:"Explorar uma caverna sem lanterna?", cat:"q-aventura"},
-      {text:"Sobreviver três dias sem celular no mato?", cat:"q-aventura"},
-      {text:"Fazer amizade com um animal selvagem?", cat:"q-aventura"},
-      {text:"Atravessar um rio num tronco?", cat:"q-aventura"},
-      {text:"Encontrar uma rota secreta no meio da cidade?", cat:"q-aventura"},
-      {text:"Liderar uma expedição para um lugar desconhecido?", cat:"q-aventura"},
-      {text:"Construir uma cabana do zero numa floresta?", cat:"q-aventura"},
-      {text:"Escalar um morro só para ver a vista?", cat:"q-aventura"},
-      {text:"Criar um plano de fuga de qualquer lugar?", cat:"q-aventura"},
-      {text:"Voltar para casa sozinho de um lugar desconhecido?", cat:"q-aventura"},
-      {text:"Dormir numa barraca durante uma tempestade sem reclamar?", cat:"q-aventura"},
-
-      // ── IMAGINATIVAS (25) ──
-      {text:"Ter um unicórnio de estimação?", cat:"q-imaginacao"},
-      {text:"Conversar com os animais?", cat:"q-imaginacao"},
-      {text:"Inventar uma máquina incrível?", cat:"q-imaginacao"},
-      {text:"Criar um novo sabor de sorvete?", cat:"q-imaginacao"},
-      {text:"Escrever uma história divertida?", cat:"q-imaginacao"},
-      {text:"Virar personagem de desenho animado?", cat:"q-imaginacao"},
-      {text:"Descobrir um planeta novo?", cat:"q-imaginacao"},
-      {text:"Criar um parque de diversões?", cat:"q-imaginacao"},
-      {text:"Construir uma casa na árvore gigante?", cat:"q-imaginacao"},
-      {text:"Inventar um esporte novo?", cat:"q-imaginacao"},
-      {text:"Desenhar um mapa de um mundo imaginário inteiro?", cat:"q-imaginacao"},
-      {text:"Criar uma língua secreta só para a família usar?", cat:"q-imaginacao"},
-      {text:"Imaginar uma história inteira antes de dormir?", cat:"q-imaginacao"},
-      {text:"Inventar regras novas para um jogo clássico?", cat:"q-imaginacao"},
-      {text:"Criar uma fantasia completa com nome, poderes e inimigos?", cat:"q-imaginacao"},
-      {text:"Montar um teatro em casa com fantoches?", cat:"q-imaginacao"},
-      {text:"Inventar uma receita estranha e conseguir comer?", cat:"q-imaginacao"},
-      {text:"Criar um negócio imaginário com produtos e preços?", cat:"q-imaginacao"},
-      {text:"Construir uma cidade inteira com blocos de montar?", cat:"q-imaginacao"},
-      {text:"Escrever um livro com capítulos e tudo?", cat:"q-imaginacao"},
-      {text:"Criar uma coreografia para uma música qualquer?", cat:"q-imaginacao"},
-      {text:"Inventar um festival de brincadeiras?", cat:"q-imaginacao"},
-      {text:"Dar nome a cada objeto da casa?", cat:"q-imaginacao"},
-      {text:"Criar um cardápio maluco para um restaurante imaginário?", cat:"q-imaginacao"},
-      {text:"Inventar um esporte com regras completamente diferentes de tudo?", cat:"q-imaginacao"},
-
-      // ── FAMÍLIA (25) ──
-      {text:"Fazer todo mundo rir no almoço?", cat:"q-familia"},
-      {text:"Dar o abraço mais apertado?", cat:"q-familia"},
-      {text:"Compartilhar o último pedaço de pizza?", cat:"q-familia"},
-      {text:"Ajudar alguém sem ser pedido?", cat:"q-familia"},
-      {text:"Fazer a melhor surpresa?", cat:"q-familia"},
-      {text:"Lembrar de um aniversário?", cat:"q-familia"},
-      {text:"Consolar alguém que está triste?", cat:"q-familia"},
-      {text:"Fazer um presente à mão?", cat:"q-familia"},
-      {text:"Contar a melhor história?", cat:"q-familia"},
-      {text:"Animar uma viagem longa?", cat:"q-familia"},
-      {text:"Guardar o maior segredo da família por mais tempo?", cat:"q-familia"},
-      {text:"Ser o primeiro a se desculpar depois de uma briga?", cat:"q-familia"},
-      {text:"Cozinhar uma refeição surpresa para todo mundo?", cat:"q-familia"},
-      {text:"Lembrar do aniversário de cada membro da família?", cat:"q-familia"},
-      {text:"Criar a tradição mais estranha da família?", cat:"q-familia"},
-      {text:"Ser o animador oficial das viagens longas?", cat:"q-familia"},
-      {text:"Fazer todo mundo sorrir num dia ruim?", cat:"q-familia"},
-      {text:"Organizar uma festa surpresa sem contar para ninguém?", cat:"q-familia"},
-      {text:"Compartilhar o último chocolate sem que ninguém pedisse?", cat:"q-familia"},
-      {text:"Consolar alguém com as palavras certas na hora certa?", cat:"q-familia"},
-      {text:"Montar um álbum de fotos da família?", cat:"q-familia"},
-      {text:"Transformar um almoço comum em uma ocasião especial?", cat:"q-familia"},
-      {text:"Ser o primeiro a ajudar quando alguém precisar?", cat:"q-familia"},
-      {text:"Fazer a paz entre duas pessoas que brigaram?", cat:"q-familia"},
-      {text:"Criar um jogo novo para toda a família jogar junta?", cat:"q-familia"},
-
-      // ── MUITO DIVERTIDAS (25) ──
-      {text:"Virar presidente por um dia?", cat:"q-divertidas"},
-      {text:"Gastar um milhão de reais em brinquedos?", cat:"q-divertidas"},
-      {text:"Adotar um zoológico inteiro?", cat:"q-divertidas"},
-      {text:"Ter 100 gatos em casa?", cat:"q-divertidas"},
-      {text:"Morar em um castelo?", cat:"q-divertidas"},
-      {text:"Dormir em uma barraca no quintal por uma semana?", cat:"q-divertidas"},
-      {text:"Comer pizza no café da manhã, almoço e jantar?", cat:"q-divertidas"},
-      {text:"Viajar no tempo?", cat:"q-divertidas"},
-      {text:"Ter um dinossauro de estimação?", cat:"q-divertidas"},
-      {text:"Trocar de lugar com um super-herói?", cat:"q-divertidas"},
-      {text:"Abrir uma loja de sorvetes com sabores impossíveis?", cat:"q-divertidas"},
-      {text:"Criar um canal de vídeos e ficar famoso de verdade?", cat:"q-divertidas"},
-      {text:"Comprar uma ilha e transformar em parque de diversões?", cat:"q-divertidas"},
-      {text:"Ganhar um concurso de dança sem ter ensaiado?", cat:"q-divertidas"},
-      {text:"Aparecer num programa de TV e não perceber?", cat:"q-divertidas"},
-      {text:"Ser o campeão mundial de esconde-esconde?", cat:"q-divertidas"},
-      {text:"Criar um aplicativo que faz todo mundo rir?", cat:"q-divertidas"},
-      {text:"Treinar um exército de esquilos?", cat:"q-divertidas"},
-      {text:"Vencer uma competição de comer hot dog?", cat:"q-divertidas"},
-      {text:"Abrir um hotel só para animais?", cat:"q-divertidas"},
-      {text:"Ser o primeiro turista a morar em Marte?", cat:"q-divertidas"},
-      {text:"Criar um superpoder acidentalmente?", cat:"q-divertidas"},
-      {text:"Montar uma banda com animais selvagens?", cat:"q-divertidas"},
-      {text:"Ganhar um troféu por fazer a melhor careta?", cat:"q-divertidas"},
-      {text:"Se tornar o rei ou rainha de um país imaginário?", cat:"q-divertidas"},
-
-      // ── ESCOLA (25) ──
-      {text:"Ser o primeiro a terminar a prova?", cat:"q-escola"},
-      {text:"Esquecer o dever de casa em casa?", cat:"q-escola"},
-      {text:"Fazer o professor rir no meio da aula?", cat:"q-escola"},
-      {text:"Dormir na aula sem ninguém perceber?", cat:"q-escola"},
-      {text:"Levar um lanche tão cheiroso que distrai a turma?", cat:"q-escola"},
-      {text:"Tentar uma desculpa criativa por chegar atrasado?", cat:"q-escola"},
-      {text:"Ganhar o prêmio de melhor apresentação?", cat:"q-escola"},
-      {text:"Ser o monitor favorito de toda turma?", cat:"q-escola"},
-      {text:"Inventar um apelido para o professor?", cat:"q-escola"},
-      {text:"Organizar uma bagunça e sair ileso?", cat:"q-escola"},
-      {text:"Estudar de última hora e ir bem na prova?", cat:"q-escola"},
-      {text:"Perguntar a dúvida que todo mundo tinha mas ninguém perguntava?", cat:"q-escola"},
-      {text:"Decorar a sala de aula por conta própria?", cat:"q-escola"},
-      {text:"Criar um clube secreto na escola?", cat:"q-escola"},
-      {text:"Defender um colega na frente de todo mundo?", cat:"q-escola"},
-      {text:"Terminar o recreio antes de todo mundo porque estava brincando demais?", cat:"q-escola"},
-      {text:"Trazer um animal para a escola sem querer?", cat:"q-escola"},
-      {text:"Fazer amizade com todo mundo no primeiro dia?", cat:"q-escola"},
-      {text:"Perder a mochila dentro da própria escola?", cat:"q-escola"},
-      {text:"Resolver um problema da turma que os adultos não conseguiram?", cat:"q-escola"},
-      {text:"Ganhar a gincana escolar quase sozinho?", cat:"q-escola"},
-      {text:"Criar a melhor fantasia da festa junina?", cat:"q-escola"},
-      {text:"Ser eleito o mais animado da turma?", cat:"q-escola"},
-      {text:"Fazer a turma inteira rir com uma resposta na aula?", cat:"q-escola"},
-      {text:"Transformar uma aula chata na mais divertida do ano?", cat:"q-escola"},
-    ],
-  },
-
-  // ══════════════════════════════════════════
-  // MODO: O QUE VOCÊ PREFERE?
-  // ══════════════════════════════════════════
-  prefere: {
-    cats: [
-      { id:"all",          label:"✨ Todas",           cls:"pall" },
-      { id:"p-aventura",   label:"🏕️ Aventuras",      cls:"p-aventura" },
-      { id:"p-poderes",    label:"⚡ Superpoderes",    cls:"p-poderes" },
-      { id:"p-engracadas", label:"😂 Engraçadas",      cls:"p-engracadas" },
-      { id:"p-comidas",    label:"🍕 Comidas",         cls:"p-comidas" },
-      { id:"p-familia",    label:"🏠 Família",         cls:"p-familia" },
-      { id:"p-imaginacao", label:"🦄 Imaginação",      cls:"p-imaginacao" },
-      { id:"p-coracao",    label:"❤️ Coração",         cls:"p-coracao" },
-      { id:"p-absurdas",   label:"🤪 Absurdas",        cls:"p-absurdas" },
-      { id:"p-escola",     label:"📚 Escola",          cls:"p-escola" },
-    ],
-    catNames: {
-      "p-aventura":"Aventuras","p-poderes":"Superpoderes",
-      "p-engracadas":"Engraçadas","p-comidas":"Comidas",
-      "p-familia":"Família","p-imaginacao":"Imaginação",
-      "p-coracao":"Coração","p-absurdas":"Absurdas","p-escola":"Escola",
-    },
-    questions: [
-      // ── AVENTURAS (23) ──
-      {text:"Você prefere voar ou respirar debaixo d'água?", cat:"p-aventura"},
-      {text:"Você prefere explorar o espaço ou o fundo do oceano?", cat:"p-aventura"},
-      {text:"Você prefere encontrar um mapa do tesouro ou uma porta secreta?", cat:"p-aventura"},
-      {text:"Você prefere ter um dragão ou um dinossauro de estimação?", cat:"p-aventura"},
-      {text:"Você prefere ser um pirata ou um astronauta?", cat:"p-aventura"},
-      {text:"Você prefere viajar para o passado ou para o futuro?", cat:"p-aventura"},
-      {text:"Você prefere escalar uma montanha ou atravessar uma floresta?", cat:"p-aventura"},
-      {text:"Você prefere ser um detetive ou um explorador?", cat:"p-aventura"},
-      {text:"Você prefere ter um barco ou um avião particular?", cat:"p-aventura"},
-      {text:"Você prefere viver numa floresta mágica ou num castelo flutuante?", cat:"p-aventura"},
-      {text:"Você prefere explorar ruínas antigas ou florestas inexploradas?", cat:"p-aventura"},
-      {text:"Você prefere ter um jetpack ou uma capa voadora?", cat:"p-aventura"},
-      {text:"Você prefere ser um caçador de fósseis ou um mergulhador de naufrágios?", cat:"p-aventura"},
-      {text:"Você prefere viver uma aventura no Ártico ou no deserto do Saara?", cat:"p-aventura"},
-      {text:"Você prefere viajar de submarino ou de foguete?", cat:"p-aventura"},
-      {text:"Você prefere ter um cavalo alado ou um golfinho que fala?", cat:"p-aventura"},
-      {text:"Você prefere ser um pirata do espaço ou um cavaleiro do futuro?", cat:"p-aventura"},
-      {text:"Você prefere passar uma semana numa floresta ou numa ilha deserta?", cat:"p-aventura"},
-      {text:"Você prefere ter um mapa que mostra tesouros ou uma bússola que aponta a felicidade?", cat:"p-aventura"},
-      {text:"Você prefere voar ou ficar invisível?", cat:"p-aventura"},
-      {text:"Você prefere voltar no tempo ou visitar o futuro?", cat:"p-aventura"},
-      {text:"Você prefere encontrar uma passagem secreta ou um mapa do tesouro?", cat:"p-aventura"},
-      {text:"Você prefere viver em uma cidade no fundo do mar ou em uma cidade nas nuvens?", cat:"p-aventura"},
-
-      // ── SUPERPODERES (20) ──
-      {text:"Você prefere ficar invisível ou ler pensamentos?", cat:"p-poderes"},
-      {text:"Você prefere correr super rápido ou ser super forte?", cat:"p-poderes"},
-      {text:"Você prefere poder falar com animais ou entender todas as línguas?", cat:"p-poderes"},
-      {text:"Você prefere poder voar ou se teletransportar?", cat:"p-poderes"},
-      {text:"Você prefere nunca sentir sono ou nunca sentir fome?", cat:"p-poderes"},
-      {text:"Você prefere controlar água ou fogo?", cat:"p-poderes"},
-      {text:"Você prefere ter força de gigante ou inteligência de computador?", cat:"p-poderes"},
-      {text:"Você prefere ser invisível ou se multiplicar em várias cópias?", cat:"p-poderes"},
-      {text:"Você prefere controlar o tempo ou controlar a gravidade?", cat:"p-poderes"},
-      {text:"Você prefere ter memória perfeita ou aprender qualquer coisa em 10 minutos?", cat:"p-poderes"},
-      {text:"Você prefere falar com plantas ou controlar o clima?", cat:"p-poderes"},
-      {text:"Você prefere criar portais para qualquer lugar ou parar o tempo?", cat:"p-poderes"},
-      {text:"Você prefere ser imune a qualquer doença ou nunca se machucar?", cat:"p-poderes"},
-      {text:"Você prefere ter olhos de raio-x ou ouvidos que escutam quilômetros de distância?", cat:"p-poderes"},
-      {text:"Você prefere respirar fogo ou respirar debaixo d'água?", cat:"p-poderes"},
-      {text:"Você prefere encolher até o tamanho de uma formiga ou crescer até o tamanho de um prédio?", cat:"p-poderes"},
-      {text:"Você prefere ter a força de um urso ou a velocidade de um guepardo?", cat:"p-poderes"},
-      {text:"Você prefere controlar animais ou controlar máquinas?", cat:"p-poderes"},
-      {text:"Você prefere nunca errar um chute ou nunca errar um arremesso?", cat:"p-poderes"},
-      {text:"Você prefere poder gravar tudo que vê como vídeo ou tirar foto com os olhos?", cat:"p-poderes"},
-
-      // ── ENGRAÇADAS (20) ──
-      {text:"Você prefere ter cabelo feito de macarrão ou dedos feitos de cenoura?", cat:"p-engracadas"},
-      {text:"Você prefere falar cantando ou dançar toda vez que andar?", cat:"p-engracadas"},
-      {text:"Você prefere soluçar toda vez que rir ou rir toda vez que espirrar?", cat:"p-engracadas"},
-      {text:"Você prefere usar fantasia de super-herói todos os dias ou pijama todos os dias?", cat:"p-engracadas"},
-      {text:"Você prefere ter um nariz de palhaço permanente ou orelhas de elefante?", cat:"p-engracadas"},
-      {text:"Você prefere comer sorvete com garfo ou pizza com colher?", cat:"p-engracadas"},
-      {text:"Você prefere ter um riso de hiena ou uma voz de pato?", cat:"p-engracadas"},
-      {text:"Você prefere sempre escorregar quando tenta ser sério ou sempre espirrar quando tenta ser discreto?", cat:"p-engracadas"},
-      {text:"Você prefere ter orelhas que giram ou nariz que pisca?", cat:"p-engracadas"},
-      {text:"Você prefere seu cachorro falar em público ou seu estômago roncar em reuniões?", cat:"p-engracadas"},
-      {text:"Você prefere ser perseguido por pombos famintos ou por esquilos curiosos?", cat:"p-engracadas"},
-      {text:"Você prefere que seu cabelo mude de cor toda vez que mentir ou sua voz fique mais aguda?", cat:"p-engracadas"},
-      {text:"Você prefere sempre ter uma minhoca no bolso ou nunca conseguir abrir um pacote de salgadinho?", cat:"p-engracadas"},
-      {text:"Você prefere ter pés que cantam quando anda ou mãos que aplaudem sozinhas?", cat:"p-engracadas"},
-      {text:"Você prefere escorregar toda vez que tenta entrar em uma sala ou bater a cabeça toda vez que tenta sair?", cat:"p-engracadas"},
-      {text:"Você prefere ter um riso contagiante impossível de segurar ou um bocejo que faz todo mundo dormir?", cat:"p-engracadas"},
-      {text:"Você prefere seu cabelo crescer 10 centímetros toda vez que mente ou encolher toda vez que conta uma verdade constrangedora?", cat:"p-engracadas"},
-      {text:"Você prefere sempre deixar cair a comida na roupa ou sempre errar a boca com a colher?", cat:"p-engracadas"},
-      {text:"Você prefere latir toda vez que vir um gato ou miar toda vez que ouvir um barulho alto?", cat:"p-engracadas"},
-      {text:"Você prefere ter pés de pato ou nariz de elefante?", cat:"p-engracadas"},
-
-      // ── COMIDAS (20) ──
-      {text:"Você prefere nunca mais comer chocolate ou nunca mais comer pizza?", cat:"p-comidas"},
-      {text:"Você prefere um caminhão de sorvete ou um caminhão de doces?", cat:"p-comidas"},
-      {text:"Você prefere café da manhã para sempre ou jantar para sempre?", cat:"p-comidas"},
-      {text:"Você prefere comer apenas comidas doces por uma semana ou apenas salgadas?", cat:"p-comidas"},
-      {text:"Você prefere um bolo gigante ou uma barra de chocolate gigante?", cat:"p-comidas"},
-      {text:"Você prefere comer apenas pizza ou apenas hambúrguer por um mês?", cat:"p-comidas"},
-      {text:"Você prefere só poder comer comida laranja ou só poder comer comida redonda?", cat:"p-comidas"},
-      {text:"Você prefere que tudo que comer tenha gosto de baunilha ou tudo tenha gosto de limão?", cat:"p-comidas"},
-      {text:"Você prefere comer macarrão com garfo ou arroz com colher de sorvete?", cat:"p-comidas"},
-      {text:"Você prefere uma pizza infinita que nunca acaba ou um sorvete que nunca derrete?", cat:"p-comidas"},
-      {text:"Você prefere comer um prato que cheira mal mas é delicioso ou um prato que cheira incrível mas tem gosto ruim?", cat:"p-comidas"},
-      {text:"Você prefere que tudo vire doce ou tudo vire salgado?", cat:"p-comidas"},
-      {text:"Você prefere comer só frutas por uma semana ou só legumes por uma semana?", cat:"p-comidas"},
-      {text:"Você prefere ter um buffet de sobremesas ilimitadas ou um churrasco ilimitado?", cat:"p-comidas"},
-      {text:"Você prefere comer com os olhos fechados para sempre ou comer sem poder cheirar para sempre?", cat:"p-comidas"},
-      {text:"Você prefere só poder comer comida fria ou só poder comer comida quente?", cat:"p-comidas"},
-      {text:"Você prefere ter um restaurante favorito que entrega na sua casa todo dia ou aprender a cozinhar qualquer prato que quiser?", cat:"p-comidas"},
-      {text:"Você prefere comer uma fatia de bolo enorme por dia ou um chocolate pequenininho por hora?", cat:"p-comidas"},
-      {text:"Você prefere que tudo que comer seja saudável mesmo parecendo besteira ou tudo seja gostoso mas sem nenhum valor?", cat:"p-comidas"},
-      {text:"Você prefere inventar um sabor de sorvete que vira famoso ou uma receita de bolo que todo mundo pede?", cat:"p-comidas"},
-
-      // ── FAMÍLIA (20) ──
-      {text:"Você prefere passar um dia inteiro com o papai ou com a mamãe?", cat:"p-familia"},
-      {text:"Você prefere uma viagem para a praia ou para a serra?", cat:"p-familia"},
-      {text:"Você prefere uma noite de jogos ou uma noite de filmes?", cat:"p-familia"},
-      {text:"Você prefere acampar no quintal ou fazer um piquenique gigante?", cat:"p-familia"},
-      {text:"Você prefere escolher o restaurante da família por um mês ou os passeios de um mês?", cat:"p-familia"},
-      {text:"Você prefere uma viagem de surpresa sem saber o destino ou uma viagem planejada por você do começo ao fim?", cat:"p-familia"},
-      {text:"Você prefere uma tarde de jogos de tabuleiro ou uma tarde de culinária em família?", cat:"p-familia"},
-      {text:"Você prefere ganhar um dia sem obrigações ou um dia em que todo mundo realiza seu desejo?", cat:"p-familia"},
-      {text:"Você prefere ter um apelido carinhoso em família ou criar um sinal secreto só da nossa família?", cat:"p-familia"},
-      {text:"Você prefere uma noite de acampamento no quintal ou uma noite de cinema em casa com pipoca infinita?", cat:"p-familia"},
-      {text:"Você prefere criar uma tradição nova na família ou reviver a tradição favorita de sempre?", cat:"p-familia"},
-      {text:"Você prefere fazer uma gincana em família ou montar um quebra-cabeça gigante juntos?", cat:"p-familia"},
-      {text:"Você prefere passar o fim de semana na casa de um parente ou receber todos em casa?", cat:"p-familia"},
-      {text:"Você prefere criar um livro de memórias da família ou um álbum de fotos com legendas engraçadas?", cat:"p-familia"},
-      {text:"Você prefere ter um dia em que os filhos mandam ou um dia em que os pais obedecem?", cat:"p-familia"},
-      {text:"Você prefere uma surpresa preparada por mim para você ou uma surpresa preparada por você para mim?", cat:"p-familia"},
-      {text:"Você prefere assistir ao filme favorito de cada um da família ou escolher um filme que ninguém conhece?", cat:"p-familia"},
-      {text:"Você prefere um passeio na natureza ou um dia em um parque temático?", cat:"p-familia"},
-      {text:"Você prefere fazer uma viagem curta toda semana ou uma grande viagem uma vez por ano?", cat:"p-familia"},
-      {text:"Você prefere ter um ritual só nosso de boa noite ou um ritual só nosso de bom dia?", cat:"p-familia"},
-
-      // ── IMAGINAÇÃO (15) ──
-      {text:"Você prefere morar em um castelo ou em uma casa na árvore?", cat:"p-imaginacao"},
-      {text:"Você prefere viver em um desenho animado ou dentro de um videogame?", cat:"p-imaginacao"},
-      {text:"Você prefere ter um quarto do tamanho de um estádio ou uma piscina no quintal?", cat:"p-imaginacao"},
-      {text:"Você prefere ser o personagem principal do seu filme favorito ou do seu livro favorito?", cat:"p-imaginacao"},
-      {text:"Você prefere descobrir um novo planeta ou uma nova espécie de animal?", cat:"p-imaginacao"},
-      {text:"Você prefere morar dentro de um livro de aventuras ou dentro de um jogo de fantasia?", cat:"p-imaginacao"},
-      {text:"Você prefere ter um jardim que cresce qualquer coisa que imaginar ou uma biblioteca com todos os livros do mundo?", cat:"p-imaginacao"},
-      {text:"Você prefere criar um planeta novo ou redesenhar a Terra?", cat:"p-imaginacao"},
-      {text:"Você prefere ter um robô que realiza seus deveres ou um assistente mágico que resolve seus problemas?", cat:"p-imaginacao"},
-      {text:"Você prefere inventar uma máquina do tempo ou um portal para qualquer dimensão?", cat:"p-imaginacao"},
-      {text:"Você prefere construir a casa dos seus sonhos do zero ou ganhar uma casa pronta no lugar mais lindo do mundo?", cat:"p-imaginacao"},
-      {text:"Você prefere ser o escritor da história mais famosa do mundo ou o inventor do brinquedo mais amado do mundo?", cat:"p-imaginacao"},
-      {text:"Você prefere viver em uma floresta encantada ou em um castelo nas estrelas?", cat:"p-imaginacao"},
-      {text:"Você prefere ter um caderno onde tudo que desenha vira real ou um microfone onde tudo que fala vira música?", cat:"p-imaginacao"},
-      {text:"Você prefere explorar uma cidade mágica escondida embaixo da sua cidade ou num mundo paralelo?", cat:"p-imaginacao"},
-
-      // ── CORAÇÃO (15) ──
-      {text:"Você prefere receber um presente incrível ou dar um presente incrível?", cat:"p-coracao"},
-      {text:"Você prefere ser muito engraçado ou muito sábio?", cat:"p-coracao"},
-      {text:"Você prefere ter muitos amigos ou alguns amigos muito próximos?", cat:"p-coracao"},
-      {text:"Você prefere ajudar alguém em segredo ou ser elogiado por ajudar?", cat:"p-coracao"},
-      {text:"Você prefere ser conhecido por sua coragem ou por sua bondade?", cat:"p-coracao"},
-      {text:"Você prefere ser lembrado pela sua alegria ou pela sua bondade?", cat:"p-coracao"},
-      {text:"Você prefere ter uma amizade que dura a vida toda ou fazer novas amizades incríveis por onde for?", cat:"p-coracao"},
-      {text:"Você prefere pedir ajuda quando precisa ou tentar resolver tudo sozinho?", cat:"p-coracao"},
-      {text:"Você prefere ser muito honesto mesmo que doa ou ser gentil mesmo que precise omitir algo?", cat:"p-coracao"},
-      {text:"Você prefere receber um abraço longo ou uma palavra de incentivo na hora certa?", cat:"p-coracao"},
-      {text:"Você prefere ter um amigo que te desafia a crescer ou um amigo que te aceita exatamente como você é?", cat:"p-coracao"},
-      {text:"Você prefere fazer alguém feliz sem que saibam que foi você ou ser reconhecido por algo bom que fez?", cat:"p-coracao"},
-      {text:"Você prefere aprender com os seus erros rapidamente ou nunca cometer o mesmo erro duas vezes?", cat:"p-coracao"},
-      {text:"Você prefere ser a pessoa que consola ou a pessoa que faz rir quando alguém está triste?", cat:"p-coracao"},
-      {text:"Você prefere deixar um legado de coragem ou um legado de amor?", cat:"p-coracao"},
-
-      // ── ABSURDAS (17) ──
-      {text:"Você prefere lutar contra um pato do tamanho de um cavalo ou 100 cavalos do tamanho de patos?", cat:"p-absurdas"},
-      {text:"Você prefere ter um jacaré como professor ou um macaco como médico?", cat:"p-absurdas"},
-      {text:"Você prefere que chovesse sorvete ou pipoca?", cat:"p-absurdas"},
-      {text:"Você prefere morar na lua ou embaixo do mar?", cat:"p-absurdas"},
-      {text:"Você prefere ter um pinguim que fala ou um cachorro que canta?", cat:"p-absurdas"},
-      {text:"Você prefere acordar e descobrir que virou um gigante ou que ficou do tamanho de uma formiga?", cat:"p-absurdas"},
-      {text:"Você prefere ter um elefante que te segue para todo lugar ou um golfinho que mora na sua banheira?", cat:"p-absurdas"},
-      {text:"Você prefere toda vez que piscar teletransportar para um lugar aleatório ou nunca mais poder piscar?", cat:"p-absurdas"},
-      {text:"Você prefere seu reflexo no espelho fazer coisas diferentes de você ou sua sombra sumir em dias de sol?", cat:"p-absurdas"},
-      {text:"Você prefere ser feito de borracha ou de espuma?", cat:"p-absurdas"},
-      {text:"Você prefere ter mãos feitas de macarrão ou pés feitos de gelatina?", cat:"p-absurdas"},
-      {text:"Você prefere que toda vez que gritar apareça confete ou toda vez que sussurrar apague as luzes?", cat:"p-absurdas"},
-      {text:"Você prefere viver num mundo onde todos andam de costas ou num mundo onde todos pulam em vez de caminhar?", cat:"p-absurdas"},
-      {text:"Você prefere ter um bigode que cresce quando mente ou sobrancelhas que dançam quando fica nervoso?", cat:"p-absurdas"},
-      {text:"Você prefere que toda vez que tocar em algo metálico ouvir uma música diferente ou toda vez que sentar num banco escorregar inexplicavelmente?", cat:"p-absurdas"},
-      {text:"Você prefere acordar toda manhã em um país diferente sem escolher ou acordar sempre no mesmo lugar mas no passado?", cat:"p-absurdas"},
-      {text:"Você prefere ter um gêmeo que só aparece nas fotos ou um clone que só existe nas segundas-feiras?", cat:"p-absurdas"},
-
-      // ── ESCOLA (15) ──
-      {text:"Você prefere ter uma memória perfeita para provas ou ser superveloz para fazer as tarefas?", cat:"p-escola"},
-      {text:"Você prefere ter o recreio dobrado ou a aula de educação física todo dia?", cat:"p-escola"},
-      {text:"Você prefere nunca ter dever de casa ou nunca ter prova?", cat:"p-escola"},
-      {text:"Você prefere ser o melhor da turma em matemática ou em redação?", cat:"p-escola"},
-      {text:"Você prefere ter um professor que conta histórias incríveis ou um professor que faz experimentos toda aula?", cat:"p-escola"},
-      {text:"Você prefere aprender tudo por jogos ou aprender tudo por viagens?", cat:"p-escola"},
-      {text:"Você prefere ter uma biblioteca mágica na escola ou um laboratório de invenções?", cat:"p-escola"},
-      {text:"Você prefere escolher as matérias que quer estudar ou escolher os professores que quer ter?", cat:"p-escola"},
-      {text:"Você prefere ter aula em cima de uma árvore ou embaixo d'água?", cat:"p-escola"},
-      {text:"Você prefere fazer uma viagem de estudos para o espaço ou para o fundo do oceano?", cat:"p-escola"},
-      {text:"Você prefere ter um robô que explica tudo que não entende ou um livro que responde qualquer pergunta?", cat:"p-escola"},
-      {text:"Você prefere apresentar um trabalho em forma de teatro ou em forma de vídeo?", cat:"p-escola"},
-      {text:"Você prefere nunca esquecer nada do que leu ou nunca esquecer nada do que ouviu?", cat:"p-escola"},
-      {text:"Você prefere ter um intervalo de 2 horas ou sair 2 horas mais cedo?", cat:"p-escola"},
-      {text:"Você prefere escolher a decoração da sua sala de aula ou criar as regras da sua turma?", cat:"p-escola"},
-    ],
-  },
-};
-
-// ─────────────────────────────────────────
-// STATE & HELPERS
-// ─────────────────────────────────────────
-let currentMode = "perguntas";
-let currentCat  = "all";
-let deck = [], idx = 0, finished = false;
-
-function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-function buildDeck(mode, cat) {
-  const qs = DATA[mode].questions;
-  return shuffle(cat === "all" ? qs : qs.filter(q => q.cat === cat));
-}
-
-// ─────────────────────────────────────────
-// RENDER
-// ─────────────────────────────────────────
-function renderCats() {
-  const container = document.getElementById("categories");
-  container.innerHTML = "";
-  DATA[currentMode].cats.forEach(c => {
-    const btn = document.createElement("button");
-    btn.className = `cat-btn ${c.cls}`;
-    btn.dataset.cat = c.id;
-    btn.textContent = c.label;
-    if (c.id === currentCat) btn.classList.add("active");
-    btn.onclick = () => selectCat(c.id);
-    container.appendChild(btn);
-  });
-}
-
-function render() {
-  const card    = document.getElementById("card");
-  const counter = document.getElementById("counter");
-  const nav     = document.getElementById("nav");
-  const btnPrev = document.getElementById("btnPrev");
-
-  if (finished) {
-    const emojis = { perguntas:"🎉", quem:"😄", prefere:"🤔", adivinha:"🔍" };
-    card.innerHTML = `<div class="finished">
-      <span class="emoji">${emojis[currentMode]}</span>
-      <h2>Acabou por aqui!</h2>
-      <p>Vocês passaram por todas as perguntas desta categoria.<br>Que conversa incrível!</p>
-      <button class="restart-btn" onclick="restart()">Embaralhar de novo</button>
-    </div>`;
-    counter.textContent = "";
-    nav.style.display = "none";
-    return;
-  }
-
-  nav.style.display = "flex";
-  const q = deck[idx];
-  const catName = DATA[currentMode].catNames[q.cat] || "";
-  const modeBadgeMap = {
-    perguntas: "💬 Perguntas",
-    quem:      "🤣 Quem é mais provável de...",
-    prefere:   "🤔 O que você prefere?",
-    adivinha:  "🔍 O que é, o que é?",
-  };
-  const prefTip = currentMode === "prefere"
-    ? `<p class="card-tip">💡 Não vale só "esse" — explique o motivo!</p>` : "";
-  const quemPrefix = currentMode === "quem"
-    ? `<p style="font-size:0.78rem;color:var(--text-soft);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">Quem é mais provável de...</p>` : "";
-  const adivinhaPrefix = currentMode === "adivinha"
-    ? `<p style="font-size:0.78rem;color:var(--text-soft);font-weight:700;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:12px;">O que é, o que é?</p>` : "";
-  const adivinhaAnswer = currentMode === "adivinha" && q.answer
-    ? `<div class="answer-block">
-        <div class="answer-blur" id="answerBlur" onclick="revealAnswer()">${q.answer}</div>
-        <span class="answer-hint" id="answerHint">👆 Toque para revelar a resposta</span>
-       </div>` : "";
-
-  card.innerHTML = `
-    <span class="mode-badge ${currentMode}">${modeBadgeMap[currentMode]}</span>
-    <span class="cat-label ${currentMode === 'adivinha' ? 'adivinha' : q.cat}">${currentMode === 'adivinha' ? 'Adivinha' : catName}</span>
-    ${quemPrefix}${adivinhaPrefix}
-    <p class="question">${q.text}</p>
-    ${prefTip}${adivinhaAnswer}
-  `;
-
-  counter.textContent = `${idx + 1} de ${deck.length}`;
-  btnPrev.disabled = idx === 0;
-}
-
-// ─────────────────────────────────────────
-// ACTIONS
-// ─────────────────────────────────────────
-function clearAiPanel() {
-  const box = document.getElementById("aiResultBox");
-  const input = document.getElementById("aiAnswerInput");
-  const status = document.getElementById("aiStatus");
-  if (box) box.innerHTML = "";
-  if (input) input.value = "";
-  if (status) { status.textContent = ""; status.classList.remove("error"); }
-}
-
-function go(dir) {
-  clearAiPanel();
-  const card = document.getElementById("card");
-  card.classList.add("fade-out");
-  setTimeout(() => {
-    card.classList.remove("fade-out");
-    if (dir === 1) {
-      if (idx < deck.length - 1) idx++;
-      else finished = true;
-    } else {
-      if (finished) finished = false;
-      else if (idx > 0) idx--;
-    }
-    render();
-  }, 210);
-}
-
-function selectCat(cat) {
-  clearAiPanel();
-  currentCat = cat;
-  deck = buildDeck(currentMode, cat);
-  idx = 0; finished = false;
-  document.querySelectorAll(".cat-btn").forEach(btn => {
-    btn.classList.toggle("active", btn.dataset.cat === cat);
-  });
-  render();
-}
-
-function setMode(mode) {
-  clearAiPanel();
-  currentMode = mode;
-  currentCat = "all";
-  deck = buildDeck(mode, "all");
-  idx = 0; finished = false;
-  document.querySelectorAll(".mode-tab").forEach(t => {
-    t.classList.toggle("active", t.dataset.mode === mode);
-  });
-  renderCats();
-  render();
-}
-
-function restart() {
-  deck = buildDeck(currentMode, currentCat);
-  idx = 0; finished = false;
-  document.getElementById("nav").style.display = "flex";
-  render();
-}
-
-function revealAnswer() {
-  const blur = document.getElementById("answerBlur");
-  const hint = document.getElementById("answerHint");
-  if (blur) blur.classList.add("revealed");
-  if (hint) hint.classList.add("hidden");
-}
-
-// ─────────────────────────────────────────
-// ADIVINHA DATA (165 adivinhas)
-// ─────────────────────────────────────────
-DATA.adivinha = {
-  cats: [{ id:"all", label:"🔍 Todas", cls:"aall" }],
-  catNames: {},
-  questions: [
-    {text:"Feito para andar e não anda.", answer:"A rua.", cat:"adivinha"},
-    {text:"Dá muitas voltas e não sai do lugar.", answer:"O relógio.", cat:"adivinha"},
-    {text:"Tem cabeça e tem dente, não é bicho e nem é gente.", answer:"O alho.", cat:"adivinha"},
-    {text:"Não se come, mas é bom para se comer.", answer:"O talher.", cat:"adivinha"},
-    {text:"Uma impressora disse para a outra.", answer:"Essa folha é tua ou é impressão minha?", cat:"adivinha"},
-    {text:"Quanto mais rugas têm mais novo é.", answer:"O pneu.", cat:"adivinha"},
-    {text:"O 4 disse para o 40.", answer:"Passa a bola.", cat:"adivinha"},
-    {text:"Nunca volta, embora nunca tenha ido.", answer:"O passado.", cat:"adivinha"},
-    {text:"Anda com os pés na cabeça.", answer:"O piolho.", cat:"adivinha"},
-    {text:"A esfera disse para o cubo.", answer:"Deixa de ser quadrado.", cat:"adivinha"},
-    {text:"Quanto mais se tira mais se aumenta.", answer:"O buraco.", cat:"adivinha"},
-    {text:"Fica cheio durante o dia e vazio durante a noite.", answer:"O sapato.", cat:"adivinha"},
-    {text:"Quanto mais cresce, mais baixo fica.", answer:"O rabo do cavalo.", cat:"adivinha"},
-    {text:"Vários pontinhos amarelos na parede.", answer:"Fandangos alpinistas.", cat:"adivinha"},
-    {text:"Mesmo atravessando o rio não se molha.", answer:"A ponte.", cat:"adivinha"},
-    {text:"Há no meio do coração.", answer:"A letra 'a'.", cat:"adivinha"},
-    {text:"Se alimenta de léguas.", answer:"O papa-léguas.", cat:"adivinha"},
-    {text:"Tem no meio do ovo.", answer:"A letra 'v'.", cat:"adivinha"},
-    {text:"Está sempre no meio da rua e de pernas para o ar.", answer:"A letra 'u'.", cat:"adivinha"},
-    {text:"O zero disse para o oito.", answer:"Que cinto maneiro!", cat:"adivinha"},
-    {text:"Todo mês tem, menos abril.", answer:"A letra 'o'.", cat:"adivinha"},
-    {text:"Fica no início da rua, no fim do mar e no meio da cara.", answer:"A letra 'r'.", cat:"adivinha"},
-    {text:"O cavalo foi fazer no orelhão.", answer:"Passar um trote.", cat:"adivinha"},
-    {text:"Tem cauda, mas não é cão; não tem asas, mas sabe voar. Se a largam, não sobe, e sai ao vento a brincar.", answer:"A pipa.", cat:"adivinha"},
-    {text:"Pode passar diante do sol sem fazer sombra.", answer:"O vento.", cat:"adivinha"},
-    {text:"O nadador faz para bater o recorde.", answer:"Nada.", cat:"adivinha"},
-    {text:"O tomate foi fazer no banco.", answer:"Tirar extrato.", cat:"adivinha"},
-    {text:"Tem 5 dedos, mas não tem unha.", answer:"A luva.", cat:"adivinha"},
-    {text:"Anda com a barriga para trás.", answer:"A perna da gente.", cat:"adivinha"},
-    {text:"Um tigre que se parece com um velho.", answer:"Quando é um tigre de bengala.", cat:"adivinha"},
-    {text:"Tem mais de dez cabeças e não sabe pensar.", answer:"Uma caixa de fósforos.", cat:"adivinha"},
-    {text:"Enche uma casa, mas não enche uma mão.", answer:"Um botão.", cat:"adivinha"},
-    {text:"Nasce a socos e morre a facadas.", answer:"O pão.", cat:"adivinha"},
-    {text:"O animal que não vale mais nada.", answer:"O javali.", cat:"adivinha"},
-    {text:"Tem pescoço e não tem cabeça, tem braços e não tem mãos, tem corpo e não tem pernas.", answer:"A camisa.", cat:"adivinha"},
-    {text:"Quanto maior menos se vê.", answer:"A escuridão.", cat:"adivinha"},
-    {text:"Faz virar a cabeça de um homem.", answer:"O pescoço.", cat:"adivinha"},
-    {text:"O bicho que anda com as patas.", answer:"O pato.", cat:"adivinha"},
-    {text:"Entra na água e não se molha.", answer:"A sombra.", cat:"adivinha"},
-    {text:"Tem pomar e no seu paletó.", answer:"A manga.", cat:"adivinha"},
-    {text:"Não tem pé e corre, tem leito e não dorme, quando para morre.", answer:"O rio.", cat:"adivinha"},
-    {text:"Mantém sempre o mesmo tamanho, não importa o peso.", answer:"A balança.", cat:"adivinha"},
-    {text:"Nasce no Rio, vive no Rio e morre no Rio, mas não está sempre molhado.", answer:"O carioca.", cat:"adivinha"},
-    {text:"Num instante se quebra quando se diz o nome dele.", answer:"O silêncio.", cat:"adivinha"},
-    {text:"Cai de pé e corre deitado.", answer:"A chuva.", cat:"adivinha"},
-    {text:"Subindo o sol vai se encurtando, descendo o sol vai se alongando.", answer:"A sombra.", cat:"adivinha"},
-    {text:"Põe-se na mesa, parte-se, reparte-se, mas não se come.", answer:"O baralho.", cat:"adivinha"},
-    {text:"Quando a gente fica em pé, ele fica deitado, e quando a gente deita, ele fica em pé.", answer:"O pé.", cat:"adivinha"},
-    {text:"Tem coroa, mas não é rei; tem espinho, mas não é peixe.", answer:"O abacaxi.", cat:"adivinha"},
-    {text:"Uma casinha sem porta e sem janela.", answer:"O ovo.", cat:"adivinha"},
-    {text:"De dia tem quatro pés e de noite tem seis.", answer:"A cama.", cat:"adivinha"},
-    {text:"Anda deitado e dorme em pé.", answer:"O pé.", cat:"adivinha"},
-    {text:"Um fósforo disse a uma vela de aniversário.", answer:"É sempre por você que eu perco a cabeça.", cat:"adivinha"},
-    {text:"O gafanhoto traz na frente e a pulga traz atrás.", answer:"A sílaba 'ga'.", cat:"adivinha"},
-    {text:"Fica cheio de boca para baixo e vazio de boca para cima.", answer:"O chapéu.", cat:"adivinha"},
-    {text:"Quanto mais se perde mais se tem.", answer:"O sono.", cat:"adivinha"},
-    {text:"Nunca passa e sempre está na frente.", answer:"O futuro.", cat:"adivinha"},
-    {text:"Tem dentes e não come.", answer:"O pente.", cat:"adivinha"},
-    {text:"Uma lagarta disse à outra.", answer:"Hoje vou dar uma volta à maçã.", cat:"adivinha"},
-    {text:"É grande antes de ser pequena.", answer:"A vela.", cat:"adivinha"},
-    {text:"A andar deixa um rasto e parado deixa três.", answer:"O carro de mão.", cat:"adivinha"},
-    {text:"Tem oito letras e tirando metade ainda ficam oito.", answer:"BISCoito.", cat:"adivinha"},
-    {text:"Passa a vida na janela e mesmo dentro de casa está fora dela.", answer:"O botão.", cat:"adivinha"},
-    {text:"Tem um palmo de pescoço, tem barriga e não tem osso.", answer:"A garrafa.", cat:"adivinha"},
-    {text:"Quebra quando se fala.", answer:"O segredo.", cat:"adivinha"},
-    {text:"O vinho que não tem álcool.", answer:"O-vinho de codorna.", cat:"adivinha"},
-    {text:"Voa sem ter asas e chora sem ter olhos.", answer:"A nuvem.", cat:"adivinha"},
-    {text:"Quatro pés em cima de quatro pés esperando quatro pés chegarem. Quatro pés não vieram, quatro pés foram embora, quatro pés ficaram.", answer:"O gato em cima da mesa esperando o rato. O rato não veio, o gato foi embora e a mesa ficou.", cat:"adivinha"},
-    {text:"É surdo e mudo, mas conta tudo.", answer:"O livro.", cat:"adivinha"},
-    {text:"Sobe quando a chuva desce.", answer:"O guarda-chuva.", cat:"adivinha"},
-    {text:"A diferença entre o gato e a Coca-Cola?", answer:"O gato mia, a Coca-Cola light.", cat:"adivinha"},
-    {text:"A piada do fotógrafo.", answer:"Ninguém sabe, porque ela ainda não foi revelada.", cat:"adivinha"},
-    {text:"Pode ser de ferro, de gelo, de chocolate ou de água.", answer:"A barra.", cat:"adivinha"},
-    {text:"Um pontinho verde brilhando na cama de um hospital.", answer:"Uma ervilha dando à luz.", cat:"adivinha"},
-    {text:"Corre a casa inteira e depois vai dormir num canto.", answer:"A vassoura.", cat:"adivinha"},
-    {text:"Tem pernas, mas não anda; tem braços, mas não abraça.", answer:"A cadeira.", cat:"adivinha"},
-    {text:"Morre em pé.", answer:"A vela.", cat:"adivinha"},
-    {text:"Está no final do fim, no início do meio e no meio do começo.", answer:"A letra m.", cat:"adivinha"},
-    {text:"Caminha sem pés, voa sem asas e pousa onde quiser.", answer:"O pensamento.", cat:"adivinha"},
-    {text:"Quando se escreve com 'o' costuma matar, quando se escreve com 'a' costuma amarrar.", answer:"Tiro / Tira.", cat:"adivinha"},
-    {text:"Céu que não possui estrelas.", answer:"O céu da boca.", cat:"adivinha"},
-    {text:"Nasce branco, fica verde, depois fica vermelho e acaba preto.", answer:"O café.", cat:"adivinha"},
-    {text:"Tem uma perna longa, uma curta e anda sem parar.", answer:"O relógio.", cat:"adivinha"},
-    {text:"Quanto mais se tira mais se tem.", answer:"Fotografias.", cat:"adivinha"},
-    {text:"Aquilo que a foca mais gosta.", answer:"Fofoca.", cat:"adivinha"},
-    {text:"Tem chapéu, mas não tem cabeça; tem boca, mas não fala; tem asa, mas não voa.", answer:"O bule.", cat:"adivinha"},
-    {text:"Tem debaixo de um tapete no hospício.", answer:"Um doido varrido.", cat:"adivinha"},
-    {text:"O animal mais antigo do mundo.", answer:"A zebra. Ela ainda é a preto e branco.", cat:"adivinha"},
-    {text:"É verde e não é planta, fala e não é gente.", answer:"O papagaio.", cat:"adivinha"},
-    {text:"Corre em volta do pasto inteiro sem se mexer.", answer:"A cerca.", cat:"adivinha"},
-    {text:"O lugar mais certo do Brasil.", answer:"O Sertão.", cat:"adivinha"},
-    {text:"Não tem olhos, mas pisca; não tem boca, mas comanda.", answer:"O semáforo.", cat:"adivinha"},
-    {text:"A banana disse para o tomate.", answer:"Eu que tiro a roupa e você que fica vermelha?", cat:"adivinha"},
-    {text:"A areia disse para o mar.", answer:"Deixa de onda.", cat:"adivinha"},
-    {text:"O chão falou para a mesa.", answer:"Fecha as pernas que eu estou vendo tudo.", cat:"adivinha"},
-    {text:"A zebra disse para a mosca.", answer:"Você está na minha lista negra.", cat:"adivinha"},
-    {text:"É nome de mulher e também de homem. Ia, mas acabou não indo.", answer:"Isaías (Isa-ias).", cat:"adivinha"},
-    {text:"É meu, mas meus amigos usam mais do que eu.", answer:"O meu nome.", cat:"adivinha"},
-    {text:"A fechadura disse para a chave.", answer:"Vamos dar uma voltinha.", cat:"adivinha"},
-    {text:"O rei da horta.", answer:"O rei-polho.", cat:"adivinha"},
-    {text:"O pé mais rápido.", answer:"O pé de vento.", cat:"adivinha"},
-    {text:"À direita sou um homem, facilmente acharás. Às avessas só à noite e nem sempre encontrarás.", answer:"Raul e luar.", cat:"adivinha"},
-    {text:"Trabalha tempo dobrado, sempre de noite e de dia. Se teima em ficar parado, só com uma corda andaria.", answer:"O relógio.", cat:"adivinha"},
-    {text:"De dia fica no céu e à noite fica na água.", answer:"A dentadura.", cat:"adivinha"},
-    {text:"Dá um pulo e se veste de noiva.", answer:"A pipoca.", cat:"adivinha"},
-    {text:"Uma minhoca com sono.", answer:"Uma dorminhoca.", cat:"adivinha"},
-    {text:"Destrói tudo com três letras.", answer:"O fim.", cat:"adivinha"},
-    {text:"Um pontinho verde no canto da sala de aula.", answer:"Uma ervilha de castigo.", cat:"adivinha"},
-    {text:"Nasce grande e morre pequeno.", answer:"O lápis.", cat:"adivinha"},
-    {text:"O pato disse para o outro pato durante o jogo.", answer:"Estamos empatados.", cat:"adivinha"},
-    {text:"Na televisão, cobre um país; no futebol, atrai a bola; em casa, incentiva o lazer.", answer:"A rede.", cat:"adivinha"},
-    {text:"Detestamos na praia, mas adoramos na panela.", answer:"O caldo.", cat:"adivinha"},
-    {text:"Tem asa, tem bico e fica embaixo da cama.", answer:"O bule. Não é o penico! O bule é meu e eu coloco onde quiser.", cat:"adivinha"},
-    {text:"O lugar que todos podem se sentar, menos você.", answer:"O seu colo.", cat:"adivinha"},
-    {text:"Eles são dois vizinhos, mas um não vai à casa do outro e os dois não se veem por causa de um morrinho.", answer:"Os olhos.", cat:"adivinha"},
-    {text:"Pesa mais no mundo.", answer:"A balança.", cat:"adivinha"},
-    {text:"É do tamanho de uma bolota, mas enche a casa até a porta.", answer:"A luz.", cat:"adivinha"},
-    {text:"É irmã da minha tia e não é minha tia.", answer:"A minha mãe.", cat:"adivinha"},
-    {text:"Todas as mães têm. Sem ele não tem pão. Some no inverno e aparece no verão.", answer:"O til (~).", cat:"adivinha"},
-    {text:"Nós matamos quando está nos matando.", answer:"A fome.", cat:"adivinha"},
-    {text:"Tem coroa, mas não é rei; tem raiz, mas não é planta.", answer:"O dente.", cat:"adivinha"},
-    {text:"A maior injustiça do Natal.", answer:"O peru morre e a missa é do galo.", cat:"adivinha"},
-    {text:"Tem cintura fina e perna alongada, toca corneta e leva bofetada.", answer:"O pernilongo.", cat:"adivinha"},
-    {text:"São três irmãos: o mais velho já se foi, o do meio está conosco e o caçula não nasceu.", answer:"Passado, presente e futuro.", cat:"adivinha"},
-    {text:"Nesse lugar o boi consegue passar, mas o mosquito fica preso.", answer:"A teia de aranha.", cat:"adivinha"},
-    {text:"O que o cirurgião e o matemático têm em comum.", answer:"Ambos vivem fazendo operações.", cat:"adivinha"},
-    {text:"A letra que se encontra uma vez por minuto, duas vezes em um momento e nenhuma vez no ano.", answer:"A letra m.", cat:"adivinha"},
-    {text:"O tijolo falou para o outro.", answer:"Há um ciumento entre nós.", cat:"adivinha"},
-    {text:"Pode ser aberto, mas nunca fechado.", answer:"O ovo.", cat:"adivinha"},
-    {text:"A minhoca falou para o minhoco.", answer:"Você minhoquece.", cat:"adivinha"},
-    {text:"O porco-espinho falou para o cato.", answer:"É você, mãe?", cat:"adivinha"},
-    {text:"Desce duro e sobe mole e pingando.", answer:"O macarrão. Quando vai para a panela é duro e do prato para a boca é molinho e pinga molho.", cat:"adivinha"},
-    {text:"O paraquedas disse para o paraquedista.", answer:"Tô contigo e não abro.", cat:"adivinha"},
-    {text:"O problema que o decorador tem quando vai ao médico.", answer:"Problema de coração.", cat:"adivinha"},
-    {text:"Tem uma mãe sem dentes e um pai cantor.", answer:"O ovo.", cat:"adivinha"},
-    {text:"Compram para comer, mas nunca comem.", answer:"O prato.", cat:"adivinha"},
-    {text:"Quanto maior é, menos se vê.", answer:"A sombra.", cat:"adivinha"},
-    {text:"Não tem vida, mas pode morrer.", answer:"A bateria.", cat:"adivinha"},
-    {text:"Quando parte uma partem as duas, quando chega uma chegam as duas.", answer:"As pernas.", cat:"adivinha"},
-    {text:"Todo nariz tem na ponta.", answer:"A letra z.", cat:"adivinha"},
-    {text:"Muitos podem ouvi-lo, mas ninguém o pode ver. Se não falarmos, ele também não falará.", answer:"O eco.", cat:"adivinha"},
-    {text:"Tem barba e não é bode, tem dente e não morde.", answer:"O milho.", cat:"adivinha"},
-    {text:"O médico que está sempre desligado.", answer:"O oftalmologista (OFF-talmologista).", cat:"adivinha"},
-    {text:"Pequeno em Lisboa e grande no Brasil.", answer:"A letra b.", cat:"adivinha"},
-    {text:"A semelhança de uma casa e o samba.", answer:"Para arrumar ambas, mexemos as cadeiras.", cat:"adivinha"},
-    {text:"Quanto mais branco mais sujo fico.", answer:"Quadro de giz.", cat:"adivinha"},
-    {text:"Está em tudo e nada tem.", answer:"A letra d.", cat:"adivinha"},
-    {text:"Quando mais quente está, mais fresco é.", answer:"O pão.", cat:"adivinha"},
-    {text:"O livro de Matemática disse para o livro de História.", answer:"Não me venha com história que eu já estou cheio de problemas.", cat:"adivinha"},
-    {text:"Ele morre queimado, ela morre cantando.", answer:"O cigarro e a cigarra.", cat:"adivinha"},
-    {text:"A diferença entre o padre e o bule.", answer:"O padre é de muita fé e o bule é de pôr café.", cat:"adivinha"},
-    {text:"São 7 irmãos, dos quais 5 têm sobrenome e 2 não.", answer:"Os dias da semana.", cat:"adivinha"},
-    {text:"Cai, mas não se machuca.", answer:"A chuva.", cat:"adivinha"},
-    {text:"Leva a gente para todo lugar, mas não anda.", answer:"A estrada.", cat:"adivinha"},
-    {text:"Altas torres, lindas janelas, que abrem e fecham sem ninguém tocar nelas.", answer:"Os olhos.", cat:"adivinha"},
-    {text:"Bebe pelos pés.", answer:"A árvore.", cat:"adivinha"},
-    {text:"Quanto mais lavo mais suja fico.", answer:"A água.", cat:"adivinha"},
-    {text:"Respira, mas não tem pulmões, tem pés, mas não anda.", answer:"A planta.", cat:"adivinha"},
-    {text:"Sem sair do seu cantinho, é capaz de viajar ao redor do mundo.", answer:"O selo.", cat:"adivinha"},
-    {text:"Está a sua frente, mas não pode ser visto.", answer:"O futuro.", cat:"adivinha"},
-    {text:"Faz duas pessoas a partir de uma só.", answer:"O espelho.", cat:"adivinha"},
-    {text:"Sobe, mas nunca desce.", answer:"A idade.", cat:"adivinha"},
-    {text:"Quanto mais seca mais molhada fica.", answer:"A toalha.", cat:"adivinha"},
-    {text:"Na água nasci, na água me criei, mas, se me jogarem na água, na água morrerei.", answer:"O sal.", cat:"adivinha"},
-    {text:"Quando você precisa, joga fora, quando não precisa mais, pega de volta.", answer:"A âncora.", cat:"adivinha"},
-  ],
-};
-
-// ─────────────────────────────────────────
-// IA (Google Gemini — chave gratuita, sem cartão)
-// Crie sua chave em https://aistudio.google.com/apikey
-// ─────────────────────────────────────────
-const GEMINI_MODEL = "gemini-2.0-flash";
-const KEY_STORAGE = "familia_gemini_api_key";
-
-function getApiKey() { return localStorage.getItem(KEY_STORAGE) || ""; }
-
-function openKeyModal() {
-  const existing = getApiKey();
-  const overlay = document.createElement("div");
-  overlay.className = "ai-modal-overlay";
-  overlay.id = "aiKeyOverlay";
-  overlay.innerHTML = `
-    <div class="ai-modal">
-      <h3>🔑 Chave da IA (grátis)</h3>
-      <p>Este joguinho usa a API gratuita do Google Gemini para gerar perguntas.
-      Crie sua chave em <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a>
-      (não pede cartão) e cole aqui. Ela fica salva só neste navegador.</p>
-      <input type="text" id="aiKeyInput" placeholder="Cole sua chave aqui" value="${existing}">
-      <div class="ai-modal-actions">
-        <button class="cancel" onclick="closeKeyModal()">Cancelar</button>
-        <button class="save" onclick="saveKey()">Salvar</button>
+  <div class="topbar">
+    <div class="row" style="align-items:flex-start">
+      <div>
+        <div class="eyebrow">Igreja Bíblica Batista de Pacatuba</div>
+        <h1>Ministério Infantil</h1>
       </div>
-    </div>`;
-  document.body.appendChild(overlay);
-}
-function closeKeyModal() {
-  const el = document.getElementById("aiKeyOverlay");
-  if (el) el.remove();
-}
-function saveKey() {
-  const val = document.getElementById("aiKeyInput").value.trim();
-  if (val) localStorage.setItem(KEY_STORAGE, val);
-  closeKeyModal();
-  setAiStatus("Chave salva! Já pode gerar perguntas. ✅");
-}
+      <button id="btn-reports" aria-label="Relatórios" style="background:rgba(255,255,255,.16);border:none;width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8"><path d="M3 3v16a2 2 0 0 0 2 2h16"/><path d="M7 15l4-5 3 3 5-7"/></svg>
+      </button>
+    </div>
+    <div class="scallop"></div>
+  </div>
 
-function setAiStatus(msg, isError) {
-  const el = document.getElementById("aiStatus");
-  el.textContent = msg || "";
-  el.classList.toggle("error", !!isError);
-}
-function setAiLoading(loading, msg) {
-  const btns = [document.getElementById("btnAiNew"), document.getElementById("btnAiFollow")];
-  btns.forEach(b => b.disabled = loading);
-  if (loading) setAiStatus(msg);
-}
+  <div class="content">
 
-async function callGemini(prompt) {
-  const key = getApiKey();
-  if (!key) { openKeyModal(); throw new Error("Cole sua chave gratuita do Gemini para usar a IA."); }
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${encodeURIComponent(key)}`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [{ text: prompt }] }],
-      generationConfig: { temperature: 0.95, maxOutputTokens: 200 },
-    }),
+    <!-- INÍCIO -->
+    <div class="view active" id="view-inicio">
+      <div class="section-title">Próximo compromisso</div>
+      <div id="next-schedule-box"></div>
+
+      <div class="section-title">Lembretes pendentes</div>
+      <div id="pending-reminders-box"></div>
+
+      <div class="section-title">Esta semana</div>
+      <div id="week-summary-box"></div>
+    </div>
+
+    <!-- ESCALAS -->
+    <div class="view" id="view-escalas">
+      <div class="section-title">Datas rápidas <span class="muted">toque para criar</span></div>
+      <div id="quick-dates" style="display:flex;gap:8px;overflow-x:auto;padding-bottom:6px;margin-bottom:4px"></div>
+      <div class="section-title">Escalas <span class="muted" id="escalas-count"></span></div>
+      <div id="escalas-list"></div>
+    </div>
+
+    <!-- AULAS -->
+    <div class="view" id="view-aulas">
+      <div class="section-title">Conteúdo das aulas <span class="muted" id="aulas-count"></span></div>
+      <div id="aulas-list"></div>
+    </div>
+
+    <!-- LEMBRETES -->
+    <div class="view" id="view-lembretes">
+      <div class="section-title">Lembretes <span class="muted" id="lembretes-count"></span></div>
+      <div id="lembretes-list"></div>
+    </div>
+
+    <!-- VOLUNTÁRIOS -->
+    <div class="view" id="view-voluntarios">
+      <div class="section-title">Voluntários <span class="muted" id="voluntarios-count"></span></div>
+      <div id="voluntarios-list"></div>
+    </div>
+
+  </div>
+
+  <button class="fab" id="fab-add" aria-label="Adicionar">+</button>
+
+  <div class="navbar">
+    <button class="navbtn active" data-view="inicio">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      Início
+    </button>
+    <button class="navbtn" data-view="escalas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="17" rx="2"/><path d="M3 9h18"/><path d="M8 3v3"/><path d="M16 3v3"/></svg>
+      Escalas
+    </button>
+    <button class="navbtn" data-view="aulas">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Aulas
+    </button>
+    <button class="navbtn" data-view="lembretes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+      Lembretes
+    </button>
+    <button class="navbtn" data-view="voluntarios">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c0-3.5 2.9-6 6.5-6s6.5 2.5 6.5 6"/><path d="M16.5 4.5a3.2 3.2 0 0 1 0 6.3"/><path d="M17.5 14.3c2.6.5 4 2.6 4 5.7"/></svg>
+      Equipe
+    </button>
+  </div>
+
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="sheet" id="sheet"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-app-compat.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/firebase/9.23.0/firebase-firestore-compat.min.js"></script>
+<script>
+// ATENÇÃO: cole aqui o firebaseConfig que você copiou do Console do Firebase.
+var firebaseConfig = {
+  apiKey: "AIzaSyAFLdjtVQ1zx012XiNSnvLL2M6QZkEHS9A",
+  authDomain: "infantilibbp.firebaseapp.com",
+  projectId: "infantilibbp",
+  storageBucket: "infantilibbp.firebasestorage.app",
+  messagingSenderId: "772390212642",
+  appId: "1:772390212642:web:1f208f17c15057abef667b"
+};
+</script>
+<script>
+(function(){
+
+  var DATA = { volunteers: [], classes: [], schedule: [], lessons: [], reminders: [] };
+  var loaded = false;
+  var db = null;
+  var configOk = firebaseConfig.apiKey && firebaseConfig.apiKey !== 'COLOQUE_AQUI';
+
+  if(configOk){
+    try{
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+    }catch(e){
+      console.error('Erro ao iniciar o Firebase', e);
+      configOk = false;
+    }
+  }
+
+  function uid(){ return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+  function todayISO(){
+    var d = new Date();
+    return d.toISOString().slice(0,10);
+  }
+
+  function fmtDate(iso){
+    if(!iso) return '';
+    var parts = iso.split('-');
+    var d = new Date(parts[0], parts[1]-1, parts[2]);
+    var dias = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+    var diaSemana = dias[d.getDay()];
+    return diaSemana.charAt(0).toUpperCase()+diaSemana.slice(1) + ', ' + parts[2] + '/' + parts[1];
+  }
+
+  function fmtDateShort(iso){
+    if(!iso) return '';
+    var p = iso.split('-');
+    return p[2]+'/'+p[1];
+  }
+
+  async function save(){
+    if(!configOk){ showToast('Firebase não configurado ainda'); return; }
+    try{
+      await db.collection('ministerio').doc('dados').set({ json: JSON.stringify(DATA), atualizadoEm: new Date().toISOString() });
+    }catch(e){
+      console.error('Erro ao salvar no Firestore', e);
+      showToast('Erro ao salvar. Verifique sua conexão.');
+    }
+  }
+
+  async function load(){
+    if(!configOk){
+      showConfigBanner();
+      loaded = true;
+      renderAll();
+      return;
+    }
+    try{
+      var docRef = await db.collection('ministerio').doc('dados').get();
+      if(docRef.exists){
+        var parsed = JSON.parse(docRef.data().json);
+        DATA = Object.assign({volunteers:[],classes:[],schedule:[],lessons:[],reminders:[]}, parsed);
+      }
+      db.collection('ministerio').doc('dados').onSnapshot(function(doc){
+        if(doc.exists && loaded){
+          var fresh = JSON.parse(doc.data().json);
+          DATA = Object.assign({volunteers:[],classes:[],schedule:[],lessons:[],reminders:[]}, fresh);
+          renderAll();
+        }
+      });
+    }catch(e){
+      console.error('Erro ao carregar do Firestore', e);
+      showToast('Não foi possível carregar os dados.');
+    }
+    loaded = true;
+    renderAll();
+  }
+
+  function showConfigBanner(){
+    var box = document.getElementById('next-schedule-box');
+    if(box){
+      box.innerHTML = '<div class="card" style="border-color:var(--coral)">'+
+        '<p class="card-title" style="color:var(--coral)">Firebase não configurado</p>'+
+        '<p class="card-sub">Abra o arquivo index.html e cole seu firebaseConfig no topo do código, dentro da tag &lt;script&gt; logo acima do app.</p>'+
+      '</div>';
+    }
+  }
+
+  function showToast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function(){ t.classList.remove('show'); }, 1800);
+  }
+
+  // ---------- NAV ----------
+  var currentView = 'inicio';
+  document.querySelectorAll('.navbtn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      setView(btn.getAttribute('data-view'));
+    });
   });
-  const data = await res.json();
-  if (data.error) throw new Error(data.error.message || "Erro ao falar com a IA.");
-  const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error("A IA não retornou uma resposta. Tente de novo.");
-  return text.trim().replace(/^["“]|["”]$/g, "");
-}
 
-function currentContextLabel() {
-  const modeNames = {
-    perguntas: "perguntas para conversar em família",
-    quem: "perguntas do tipo 'quem é mais provável de...'",
-    prefere: "perguntas do tipo 'você prefere...'",
-    adivinha: "adivinhas (charadas com resposta)",
+  function setView(v){
+    currentView = v;
+    document.querySelectorAll('.view').forEach(function(el){ el.classList.remove('active'); });
+    document.getElementById('view-'+v).classList.add('active');
+    document.querySelectorAll('.navbtn').forEach(function(el){
+      el.classList.toggle('active', el.getAttribute('data-view')===v);
+    });
+  }
+
+  document.getElementById('fab-add').addEventListener('click', function(){
+    if(currentView==='escalas') openScheduleForm();
+    else if(currentView==='aulas') openLessonForm();
+    else if(currentView==='lembretes') openReminderForm();
+    else if(currentView==='voluntarios') openVolunteerForm();
+    else openScheduleForm();
+  });
+
+  // ---------- OVERLAY / SHEET ----------
+  var overlay = document.getElementById('overlay');
+  var sheet = document.getElementById('sheet');
+  overlay.addEventListener('click', function(e){ if(e.target===overlay) closeSheet(); });
+
+  function openSheet(html){
+    sheet.innerHTML = html;
+    overlay.classList.add('open');
+  }
+  function closeSheet(){
+    overlay.classList.remove('open');
+    sheet.innerHTML = '';
+  }
+
+  // ---------- VOLUNTÁRIOS ----------
+  function openVolunteerForm(id){
+    var v = id ? DATA.volunteers.find(function(x){return x.id===id;}) : {name:'',phone:'',note:''};
+    openSheet(
+      '<h2>'+(id?'Editar voluntário':'Novo voluntário')+'</h2>'+
+      '<label>Nome</label><input id="f-name" value="'+escapeAttr(v.name)+'" placeholder="Nome do voluntário">'+
+      '<label>Telefone (opcional)</label><input id="f-phone" value="'+escapeAttr(v.phone||'')+'" placeholder="(85) 90000-0000">'+
+      '<label>Observação (opcional)</label><input id="f-note" value="'+escapeAttr(v.note||'')+'" placeholder="Ex: prefere berçário">'+
+      '<div class="sheet-actions">'+
+        (id?'<button class="btn danger-ghost" id="f-del">Excluir</button>':'')+
+        '<button class="btn ghost" id="f-cancel">Cancelar</button>'+
+        '<button class="btn primary" id="f-save">Salvar</button>'+
+      '</div>'
+    );
+    document.getElementById('f-cancel').onclick = closeSheet;
+    document.getElementById('f-save').onclick = function(){
+      var name = document.getElementById('f-name').value.trim();
+      if(!name){ showToast('Digite um nome'); return; }
+      var obj = {
+        id: id || uid(),
+        name: name,
+        phone: document.getElementById('f-phone').value.trim(),
+        note: document.getElementById('f-note').value.trim()
+      };
+      if(id){
+        var idx = DATA.volunteers.findIndex(function(x){return x.id===id;});
+        DATA.volunteers[idx] = obj;
+      } else {
+        DATA.volunteers.push(obj);
+      }
+      save(); renderAll(); closeSheet();
+      showToast('Voluntário salvo');
+    };
+    if(id){
+      document.getElementById('f-del').onclick = function(){
+        DATA.volunteers = DATA.volunteers.filter(function(x){return x.id!==id;});
+        save(); renderAll(); closeSheet();
+        showToast('Removido');
+      };
+    }
+  }
+
+  function renderVolunteers(){
+    var list = document.getElementById('voluntarios-list');
+    document.getElementById('voluntarios-count').textContent = DATA.volunteers.length ? '('+DATA.volunteers.length+')' : '';
+    if(!DATA.volunteers.length){
+      list.innerHTML = '<div class="card empty">Nenhum voluntário cadastrado ainda.<br>Toque em + para adicionar.</div>';
+      return;
+    }
+    var sorted = DATA.volunteers.slice().sort(function(a,b){return a.name.localeCompare(b.name);});
+    list.innerHTML = sorted.map(function(v){
+      return '<div class="card row" onclick="window.__openVol(\''+v.id+'\')" style="cursor:pointer">'+
+        '<div><p class="card-title">'+escapeHtml(v.name)+'</p>'+
+        (v.phone?'<p class="card-sub">'+escapeHtml(v.phone)+'</p>':'')+
+        (v.note?'<p class="card-sub">'+escapeHtml(v.note)+'</p>':'')+
+        '</div></div>';
+    }).join('');
+  }
+  window.__openVol = openVolunteerForm;
+
+  function volunteerChipPicker(selectedIds){
+    if(!DATA.volunteers.length) return '<p class="muted">Cadastre voluntários na aba Equipe primeiro.</p>';
+    return '<div class="chip-select" id="vol-chips">' + DATA.volunteers.map(function(v){
+      var on = selectedIds.indexOf(v.id)>=0;
+      return '<div class="chip'+(on?' on':'')+'" data-id="'+v.id+'">'+escapeHtml(v.name)+'</div>';
+    }).join('') + '</div>';
+  }
+
+  // ---------- ESCALAS ----------
+  function openScheduleForm(id){
+    var s = id ? DATA.schedule.find(function(x){return x.id===id;}) : {date: todayISO(), tipo:'Domingo', className:'', volunteerIds:[], time:'', notes:''};
+    openSheet(
+      '<h2>'+(id?'Editar escala':'Nova escala')+'</h2>'+
+      '<div class="field-row"><div><label>Data</label><input type="date" id="f-date" value="'+s.date+'"></div>'+
+      '<div><label>Horário</label><input id="f-time" value="'+escapeAttr(s.time||'')+'" placeholder="08:30"></div></div>'+
+      '<label>Culto</label><div class="chip-select" id="tipo-chips">'+
+        '<div class="chip'+(s.tipo!=='Sábado'?' on':'')+'" data-tipo="Domingo">Domingo</div>'+
+        '<div class="chip'+(s.tipo==='Sábado'?' on':'')+'" data-tipo="Sábado">Sábado</div>'+
+      '</div>'+
+      '<label>Turma / sala</label><input id="f-class" value="'+escapeAttr(s.className)+'" placeholder="Ex: Berçário, Jardim, Juniores">'+
+      '<label>Voluntários escalados</label>'+
+      volunteerChipPicker(s.volunteerIds||[])+
+      '<label>Observações (opcional)</label><textarea id="f-notes" placeholder="Ex: chegar 30 min antes">'+escapeHtml(s.notes||'')+'</textarea>'+
+      '<div class="sheet-actions">'+
+        (id?'<button class="btn danger-ghost" id="f-del">Excluir</button>':'')+
+        '<button class="btn ghost" id="f-cancel">Cancelar</button>'+
+        '<button class="btn primary" id="f-save">Salvar</button>'+
+      '</div>'
+    );
+    var tipoSelected = s.tipo === 'Sábado' ? 'Sábado' : 'Domingo';
+    var tipoChips = document.getElementById('tipo-chips');
+    tipoChips.querySelectorAll('.chip').forEach(function(c){
+      c.addEventListener('click', function(){
+        tipoSelected = c.getAttribute('data-tipo');
+        tipoChips.querySelectorAll('.chip').forEach(function(x){x.classList.remove('on');});
+        c.classList.add('on');
+      });
+    });
+    var chipsEl = document.getElementById('vol-chips');
+    var selected = (s.volunteerIds||[]).slice();
+    if(chipsEl){
+      chipsEl.querySelectorAll('.chip').forEach(function(c){
+        c.addEventListener('click', function(){
+          var vid = c.getAttribute('data-id');
+          var i = selected.indexOf(vid);
+          if(i>=0){ selected.splice(i,1); c.classList.remove('on'); }
+          else{ selected.push(vid); c.classList.add('on'); }
+        });
+      });
+    }
+    document.getElementById('f-cancel').onclick = closeSheet;
+    document.getElementById('f-save').onclick = function(){
+      var className = document.getElementById('f-class').value.trim();
+      var date = document.getElementById('f-date').value;
+      if(!className || !date){ showToast('Preencha data e turma'); return; }
+      var obj = {
+        id: id || uid(),
+        date: date,
+        tipo: tipoSelected,
+        time: document.getElementById('f-time').value.trim(),
+        className: className,
+        volunteerIds: selected,
+        notes: document.getElementById('f-notes').value.trim()
+      };
+      if(id){
+        var idx = DATA.schedule.findIndex(function(x){return x.id===id;});
+        DATA.schedule[idx] = obj;
+      } else {
+        DATA.schedule.push(obj);
+      }
+      save(); renderAll(); closeSheet();
+      showToast('Escala salva');
+    };
+    if(id){
+      document.getElementById('f-del').onclick = function(){
+        DATA.schedule = DATA.schedule.filter(function(x){return x.id!==id;});
+        save(); renderAll(); closeSheet();
+        showToast('Removida');
+      };
+    }
+  }
+
+  function volunteerNames(ids){
+    return (ids||[]).map(function(id){
+      var v = DATA.volunteers.find(function(x){return x.id===id;});
+      return v ? v.name : null;
+    }).filter(Boolean);
+  }
+
+  function renderQuickDates(){
+    var box = document.getElementById('quick-dates');
+    var out = [];
+    var d = new Date();
+    for(var i=0; i<56; i++){
+      var day = d.getDay();
+      if(day===0 || day===6){
+        var iso = d.toISOString().slice(0,10);
+        var already = DATA.schedule.some(function(s){return s.date===iso;});
+        if(!already){
+          out.push({date: iso, tipo: day===0?'Domingo':'Sábado'});
+        }
+      }
+      d.setDate(d.getDate()+1);
+      if(out.length>=14) break;
+    }
+    box.innerHTML = out.map(function(o){
+      return '<div class="chip" style="flex:none;white-space:nowrap" onclick="window.__quickAdd(\''+o.date+'\',\''+o.tipo+'\')">'+
+        (o.tipo==='Domingo'?'Dom':'Sáb')+' '+fmtDateShort(o.date)+'</div>';
+    }).join('');
+  }
+  window.__quickAdd = function(date, tipo){
+    openScheduleForm();
+    document.getElementById('f-date').value = date;
+    var target = document.querySelector('#tipo-chips .chip[data-tipo="'+tipo+'"]');
+    if(target) target.click();
   };
-  const catName = DATA[currentMode].catNames[currentCat] || "";
-  return { modeDesc: modeNames[currentMode], catName };
-}
 
-async function generateAIQuestion() {
-  setAiLoading(true, "Gerando pergunta nova...");
-  document.getElementById("aiResultBox").innerHTML = "";
-  try {
-    const { modeDesc, catName } = currentContextLabel();
-    const catPart = catName ? ` no estilo da categoria "${catName}"` : "";
-    let prompt;
-    if (currentMode === "adivinha") {
-      prompt = `Crie UMA adivinha nova em português do Brasil, no estilo "o que é, o que é", apropriada para crianças e conversas em família. Responda SOMENTE neste formato exato, sem nada antes ou depois:
-PERGUNTA: <a adivinha>
-RESPOSTA: <a resposta curta>`;
-    } else {
-      prompt = `Crie UMA pergunta nova e original em português do Brasil para um joguinho de perguntas em família${catPart}. O joguinho é do tipo "${modeDesc}". A pergunta deve ser calorosa, apropriada para crianças, e estimular uma boa conversa entre pais e filhos. Responda apenas com a pergunta, sem aspas, sem numeração e sem nenhum texto adicional.`;
+  function renderSchedule(){
+    var list = document.getElementById('escalas-list');
+    var sorted = DATA.schedule.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+    document.getElementById('escalas-count').textContent = sorted.length ? '('+sorted.length+')' : '';
+    if(!sorted.length){
+      list.innerHTML = '<div class="card empty">Nenhuma escala cadastrada ainda.<br>Toque em + para criar a primeira.</div>';
+      return;
     }
-    const result = await callGemini(prompt);
-    let html;
-    if (currentMode === "adivinha") {
-      const match = result.match(/PERGUNTA:\s*([\s\S]*?)\s*RESPOSTA:\s*([\s\S]*)/i);
-      const q = match ? match[1].trim() : result;
-      const a = match ? match[2].trim() : "";
-      html = `<div class="ai-question-box">${q}</div>
-        <div class="answer-block"><div class="answer-blur" onclick="this.classList.add('revealed')">${a}</div>
-        <span class="answer-hint">👆 Toque para revelar a resposta</span></div>`;
-    } else {
-      html = `<div class="ai-question-box">${result}</div>`;
+    var today = todayISO();
+    list.innerHTML = sorted.map(function(s){
+      var names = volunteerNames(s.volunteerIds);
+      var isPast = s.date < today;
+      return '<div class="card" onclick="window.__openSched(\''+s.id+'\')" style="cursor:pointer;'+(isPast?'opacity:.55':'')+'">'+
+        '<div class="row"><p class="card-title">'+escapeHtml(s.className)+'</p>'+
+        '<span style="display:flex;gap:5px"><span class="pill '+(s.tipo==='Sábado'?'green':'')+'">'+(s.tipo||'Domingo')+'</span><span class="pill">'+fmtDateShort(s.date)+'</span></span></div>'+
+        '<p class="card-sub">'+fmtDate(s.date)+(s.time?' às '+escapeHtml(s.time):'')+'</p>'+
+        (names.length?'<div class="tag-row">'+names.map(function(n){return '<span class="tag">'+escapeHtml(n)+'</span>';}).join('')+'</div>':'<p class="card-sub" style="margin-top:6px">Sem voluntários definidos</p>')+
+        (s.notes?'<p class="card-sub" style="margin-top:6px">'+escapeHtml(s.notes)+'</p>':'')+
+        '</div>';
+    }).join('');
+  }
+  window.__openSched = openScheduleForm;
+
+  // ---------- AULAS ----------
+  function openLessonForm(id){
+    var l = id ? DATA.lessons.find(function(x){return x.id===id;}) : {date: todayISO(), title:'', verse:'', materials:'', activities:'', notes:''};
+    openSheet(
+      '<h2>'+(id?'Editar aula':'Nova aula')+'</h2>'+
+      '<label>Data</label><input type="date" id="f-date" value="'+l.date+'">'+
+      '<label>Tema da aula</label><input id="f-title" value="'+escapeAttr(l.title)+'" placeholder="Ex: A criação do mundo">'+
+      '<label>Versículo</label><input id="f-verse" value="'+escapeAttr(l.verse||'')+'" placeholder="Ex: Gênesis 1:1">'+
+      '<label>Materiais necessários</label><textarea id="f-materials" placeholder="Ex: cartolina, EVA, cola">'+escapeHtml(l.materials||'')+'</textarea>'+
+      '<label>Atividades</label><textarea id="f-activities" placeholder="Ex: dinâmica, desenho, versículo para decorar">'+escapeHtml(l.activities||'')+'</textarea>'+
+      '<label>Observações (opcional)</label><textarea id="f-notes">'+escapeHtml(l.notes||'')+'</textarea>'+
+      '<div class="sheet-actions">'+
+        (id?'<button class="btn danger-ghost" id="f-del">Excluir</button>':'')+
+        '<button class="btn ghost" id="f-cancel">Cancelar</button>'+
+        '<button class="btn primary" id="f-save">Salvar</button>'+
+      '</div>'
+    );
+    document.getElementById('f-cancel').onclick = closeSheet;
+    document.getElementById('f-save').onclick = function(){
+      var title = document.getElementById('f-title').value.trim();
+      var date = document.getElementById('f-date').value;
+      if(!title || !date){ showToast('Preencha data e tema'); return; }
+      var obj = {
+        id: id || uid(),
+        date: date,
+        title: title,
+        verse: document.getElementById('f-verse').value.trim(),
+        materials: document.getElementById('f-materials').value.trim(),
+        activities: document.getElementById('f-activities').value.trim(),
+        notes: document.getElementById('f-notes').value.trim()
+      };
+      if(id){
+        var idx = DATA.lessons.findIndex(function(x){return x.id===id;});
+        DATA.lessons[idx] = obj;
+      } else {
+        DATA.lessons.push(obj);
+      }
+      save(); renderAll(); closeSheet();
+      showToast('Aula salva');
+    };
+    if(id){
+      document.getElementById('f-del').onclick = function(){
+        DATA.lessons = DATA.lessons.filter(function(x){return x.id!==id;});
+        save(); renderAll(); closeSheet();
+        showToast('Removida');
+      };
     }
-    document.getElementById("aiResultBox").innerHTML = html;
-    setAiStatus("Pronto! ✨ (gerado por IA, fora do baralho normal)");
-  } catch (err) {
-    setAiStatus(err.message, true);
-  } finally {
-    setAiLoading(false);
   }
-}
 
-async function generateFollowUp() {
-  const answer = document.getElementById("aiAnswerInput").value.trim();
-  if (!answer) {
-    setAiStatus("Escreva o que a criança respondeu, para eu criar uma boa pergunta de acompanhamento.", true);
-    return;
+  function renderLessons(){
+    var list = document.getElementById('aulas-list');
+    var sorted = DATA.lessons.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+    document.getElementById('aulas-count').textContent = sorted.length ? '('+sorted.length+')' : '';
+    if(!sorted.length){
+      list.innerHTML = '<div class="card empty">Nenhuma aula cadastrada ainda.<br>Toque em + para adicionar o conteúdo.</div>';
+      return;
+    }
+    var today = todayISO();
+    list.innerHTML = sorted.map(function(l){
+      var isPast = l.date < today;
+      return '<div class="card" onclick="window.__openLesson(\''+l.id+'\')" style="cursor:pointer;'+(isPast?'opacity:.55':'')+'">'+
+        '<div class="row"><p class="card-title">'+escapeHtml(l.title)+'</p><span class="pill amber">'+fmtDateShort(l.date)+'</span></div>'+
+        (l.verse?'<p class="card-sub">📖 '+escapeHtml(l.verse)+'</p>':'')+
+        (l.materials?'<p class="card-sub" style="margin-top:4px">Materiais: '+escapeHtml(l.materials)+'</p>':'')+
+        '</div>';
+    }).join('');
   }
-  setAiLoading(true, "Pensando em uma boa pergunta de acompanhamento...");
-  document.getElementById("aiResultBox").innerHTML = "";
-  try {
-    const currentQ = (deck[idx] && deck[idx].text) || "";
-    const prompt = `Estamos jogando um jogo de perguntas em família. A pergunta feita foi: "${currentQ}". A criança respondeu: "${answer}". Crie UMA pergunta de acompanhamento curta e calorosa em português do Brasil, que se aprofunde gentilmente nessa resposta e ajude a família a conversar mais. Responda apenas com a pergunta, sem aspas e sem texto adicional.`;
-    const result = await callGemini(prompt);
-    document.getElementById("aiResultBox").innerHTML = `<div class="ai-question-box">${result}</div>`;
-    setAiStatus("Pronto! ✨");
-  } catch (err) {
-    setAiStatus(err.message, true);
-  } finally {
-    setAiLoading(false);
-  }
-}
+  window.__openLesson = openLessonForm;
 
-// ─── INIT ───
-setMode("perguntas");
+  // ---------- LEMBRETES ----------
+  function buildMessageFromSchedule(s){
+    var lesson = DATA.lessons.find(function(l){return l.date===s.date;});
+    var names = volunteerNames(s.volunteerIds);
+    var lines = [];
+    lines.push('📌 Ministério Infantil — ' + fmtDate(s.date));
+    lines.push('Turma: ' + s.className + (s.time?' · '+s.time:''));
+    if(names.length) lines.push('Escalados: ' + names.join(', '));
+    if(lesson){
+      lines.push('');
+      lines.push('Aula: ' + lesson.title);
+      if(lesson.verse) lines.push('Versículo: ' + lesson.verse);
+      if(lesson.materials) lines.push('Materiais: ' + lesson.materials);
+    }
+    if(s.notes) { lines.push(''); lines.push(s.notes); }
+    return lines.join('\n');
+  }
+
+  function openReminderForm(id, prefillMessage, prefillTitle){
+    var r = id ? DATA.reminders.find(function(x){return x.id===id;}) : {title: prefillTitle||'', date: todayISO(), message: prefillMessage||''};
+    openSheet(
+      '<h2>'+(id?'Editar lembrete':'Novo lembrete')+'</h2>'+
+      '<label>Título</label><input id="f-title" value="'+escapeAttr(r.title)+'" placeholder="Ex: Lembrete de domingo">'+
+      '<label>Data</label><input type="date" id="f-date" value="'+r.date+'">'+
+      '<label>Mensagem para o grupo</label><textarea id="f-message" rows="6" placeholder="Escreva a mensagem...">'+escapeHtml(r.message||'')+'</textarea>'+
+      '<p class="muted" style="margin-top:4px">Dica: você pode usar uma escala como base — vá em Escalas e toque em "Gerar lembrete" dentro de uma escala.</p>'+
+      '<div class="sheet-actions">'+
+        (id?'<button class="btn danger-ghost" id="f-del">Excluir</button>':'')+
+        '<button class="btn ghost" id="f-cancel">Cancelar</button>'+
+        '<button class="btn primary" id="f-save">Salvar</button>'+
+      '</div>'
+    );
+    document.getElementById('f-cancel').onclick = closeSheet;
+    document.getElementById('f-save').onclick = function(){
+      var title = document.getElementById('f-title').value.trim();
+      if(!title){ showToast('Digite um título'); return; }
+      var obj = {
+        id: id || uid(),
+        title: title,
+        date: document.getElementById('f-date').value,
+        message: document.getElementById('f-message').value
+      };
+      if(id){
+        var idx = DATA.reminders.findIndex(function(x){return x.id===id;});
+        DATA.reminders[idx] = obj;
+      } else {
+        DATA.reminders.push(obj);
+      }
+      save(); renderAll(); closeSheet();
+      showToast('Lembrete salvo');
+    };
+    if(id){
+      document.getElementById('f-del').onclick = function(){
+        DATA.reminders = DATA.reminders.filter(function(x){return x.id!==id;});
+        save(); renderAll(); closeSheet();
+        showToast('Removido');
+      };
+    }
+  }
+
+  function openReminderView(id){
+    var r = DATA.reminders.find(function(x){return x.id===id;});
+    if(!r) return;
+    openSheet(
+      '<h2>'+escapeHtml(r.title)+'</h2>'+
+      '<p class="muted">'+fmtDate(r.date)+'</p>'+
+      '<div class="msg-preview" id="msg-text">'+escapeHtml(r.message)+'</div>'+
+      '<div class="sheet-actions">'+
+        '<button class="btn" id="f-copy">Copiar texto</button>'+
+        '<button class="btn primary" id="f-wa">Abrir no WhatsApp</button>'+
+      '</div>'+
+      '<div class="sheet-actions" style="margin-top:8px">'+
+        '<button class="btn ghost" id="f-edit">Editar</button>'+
+        '<button class="btn danger-ghost" id="f-del">Excluir</button>'+
+        '<button class="btn ghost" id="f-close">Fechar</button>'+
+      '</div>'
+    );
+    document.getElementById('f-close').onclick = closeSheet;
+    document.getElementById('f-edit').onclick = function(){ openReminderForm(id); };
+    document.getElementById('f-del').onclick = function(){
+      DATA.reminders = DATA.reminders.filter(function(x){return x.id!==id;});
+      save(); renderAll(); closeSheet();
+      showToast('Removido');
+    };
+    document.getElementById('f-copy').onclick = function(){ copyText(r.message); };
+    document.getElementById('f-wa').onclick = function(){
+      window.open('https://wa.me/?text='+encodeURIComponent(r.message), '_blank');
+    };
+  }
+
+  function copyText(text){
+    try{
+      navigator.clipboard.writeText(text).then(function(){
+        showToast('Texto copiado');
+      }).catch(function(){ fallbackCopy(text); });
+    }catch(e){ fallbackCopy(text); }
+  }
+  function fallbackCopy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); showToast('Texto copiado'); }
+    catch(e){ showToast('Não foi possível copiar'); }
+    document.body.removeChild(ta);
+  }
+
+  function renderReminders(){
+    var list = document.getElementById('lembretes-list');
+    var sorted = DATA.reminders.slice().sort(function(a,b){return a.date.localeCompare(b.date);});
+    document.getElementById('lembretes-count').textContent = sorted.length ? '('+sorted.length+')' : '';
+    if(!sorted.length){
+      list.innerHTML = '<div class="card empty">Nenhum lembrete criado ainda.<br>Toque em + para escrever um.</div>';
+      return;
+    }
+    var today = todayISO();
+    list.innerHTML = sorted.map(function(r){
+      var isPast = r.date < today;
+      return '<div class="card" onclick="window.__viewRem(\''+r.id+'\')" style="cursor:pointer;'+(isPast?'opacity:.55':'')+'">'+
+        '<div class="row"><p class="card-title">'+escapeHtml(r.title)+'</p><span class="pill coral">'+fmtDateShort(r.date)+'</span></div>'+
+        '<p class="card-sub" style="margin-top:4px">'+escapeHtml((r.message||'').slice(0,70))+((r.message||'').length>70?'…':'')+'</p>'+
+        '</div>';
+    }).join('');
+  }
+  window.__viewRem = openReminderView;
+
+  // schedule -> generate reminder shortcut
+  function generateReminderFromSchedule(id){
+    var s = DATA.schedule.find(function(x){return x.id===id;});
+    if(!s) return;
+    var msg = buildMessageFromSchedule(s);
+    closeSheet();
+    setTimeout(function(){
+      openReminderForm(null, msg, 'Lembrete — ' + s.className + ' ' + fmtDateShort(s.date));
+    }, 150);
+  }
+  window.__genRem = generateReminderFromSchedule;
+
+  // add "Gerar lembrete" button inside schedule edit sheet
+  var origOpenScheduleForm = openScheduleForm;
+
+  // ---------- INÍCIO (dashboard) ----------
+  function renderDashboard(){
+    var today = todayISO();
+    var upcoming = DATA.schedule.filter(function(s){return s.date>=today;}).sort(function(a,b){return a.date.localeCompare(b.date);});
+    var nextBox = document.getElementById('next-schedule-box');
+    if(!upcoming.length){
+      nextBox.innerHTML = '<div class="card empty">Nenhuma escala futura cadastrada.</div>';
+    } else {
+      var s = upcoming[0];
+      var names = volunteerNames(s.volunteerIds);
+      var lesson = DATA.lessons.find(function(l){return l.date===s.date;});
+      nextBox.innerHTML = '<div class="card">'+
+        '<div class="row"><p class="card-title">'+escapeHtml(s.className)+'</p><span class="pill">'+fmtDateShort(s.date)+'</span></div>'+
+        '<p class="card-sub">'+fmtDate(s.date)+(s.time?' às '+escapeHtml(s.time):'')+'</p>'+
+        (names.length?'<div class="tag-row">'+names.map(function(n){return '<span class="tag">'+escapeHtml(n)+'</span>';}).join('')+'</div>':'')+
+        (lesson?'<p class="card-sub" style="margin-top:8px">📖 '+escapeHtml(lesson.title)+'</p>':'')+
+        '<div class="sheet-actions" style="margin-top:12px">'+
+          '<button class="btn small" onclick="window.__openSched(\''+s.id+'\')">Ver escala</button>'+
+          '<button class="btn small primary" onclick="window.__genRem(\''+s.id+'\')">Gerar lembrete</button>'+
+        '</div>'+
+      '</div>';
+    }
+
+    var pendBox = document.getElementById('pending-reminders-box');
+    var pending = DATA.reminders.filter(function(r){return r.date>=today;}).sort(function(a,b){return a.date.localeCompare(b.date);});
+    if(!pending.length){
+      pendBox.innerHTML = '<div class="card empty">Sem lembretes pendentes.</div>';
+    } else {
+      pendBox.innerHTML = pending.slice(0,3).map(function(r){
+        return '<div class="card row" onclick="window.__viewRem(\''+r.id+'\')" style="cursor:pointer">'+
+          '<div><p class="card-title">'+escapeHtml(r.title)+'</p><p class="card-sub">'+fmtDate(r.date)+'</p></div>'+
+          '<span class="pill coral">enviar</span></div>';
+      }).join('');
+    }
+
+    var weekBox = document.getElementById('week-summary-box');
+    var in7 = new Date(); in7.setDate(in7.getDate()+7);
+    var in7iso = in7.toISOString().slice(0,10);
+    var weekSchedules = upcoming.filter(function(s){return s.date<=in7iso;});
+    var weekLessons = DATA.lessons.filter(function(l){return l.date>=today && l.date<=in7iso;});
+    weekBox.innerHTML = '<div class="card">'+
+      '<div class="row"><span class="muted">Escalas nos próximos 7 dias</span><strong>'+weekSchedules.length+'</strong></div>'+
+      '<div class="row" style="margin-top:8px"><span class="muted">Aulas planejadas</span><strong>'+weekLessons.length+'</strong></div>'+
+      '<div class="row" style="margin-top:8px"><span class="muted">Voluntários cadastrados</span><strong>'+DATA.volunteers.length+'</strong></div>'+
+    '</div>';
+  }
+
+  // ---------- helpers ----------
+  function escapeHtml(str){
+    if(str==null) return '';
+    return String(str).replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
+  }
+  function escapeAttr(str){
+    if(str==null) return '';
+    return String(str).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; });
+  }
+
+  function renderAll(){
+    if(!loaded) return;
+    renderDashboard();
+    renderQuickDates();
+    renderSchedule();
+    renderLessons();
+    renderReminders();
+    renderVolunteers();
+  }
+
+  // patch schedule sheet to add "gerar lembrete" button when editing existing
+  var _openScheduleForm = openScheduleForm;
+  openScheduleForm = function(id){
+    _openScheduleForm(id);
+    if(id){
+      var actions = sheet.querySelector('.sheet-actions');
+      if(actions){
+        var genBtn = document.createElement('button');
+        genBtn.className = 'btn block';
+        genBtn.textContent = 'Gerar mensagem de lembrete';
+        genBtn.style.marginTop = '10px';
+        genBtn.onclick = function(){ generateReminderFromSchedule(id); };
+        sheet.appendChild(genBtn);
+      }
+    }
+  };
+  window.__openSched = openScheduleForm;
+
+  // ---------- RELATÓRIOS ----------
+  function availableYears(){
+    var years = {};
+    DATA.schedule.forEach(function(s){ years[s.date.slice(0,4)] = true; });
+    DATA.lessons.forEach(function(l){ years[l.date.slice(0,4)] = true; });
+    var arr = Object.keys(years);
+    var thisYear = String(new Date().getFullYear());
+    if(arr.indexOf(thisYear)===-1) arr.push(thisYear);
+    return arr.sort().reverse();
+  }
+
+  function renderReport(year){
+    var scheds = DATA.schedule.filter(function(s){return s.date.slice(0,4)===year;});
+    var lessons = DATA.lessons.filter(function(l){return l.date.slice(0,4)===year;});
+    var domingos = scheds.filter(function(s){return s.tipo!=='Sábado';}).length;
+    var sabados = scheds.filter(function(s){return s.tipo==='Sábado';}).length;
+
+    var counts = {};
+    scheds.forEach(function(s){
+      (s.volunteerIds||[]).forEach(function(id){
+        counts[id] = (counts[id]||0)+1;
+      });
+    });
+    var ranking = Object.keys(counts).map(function(id){
+      var v = DATA.volunteers.find(function(x){return x.id===id;});
+      return {name: v?v.name:'(removido)', count: counts[id]};
+    }).sort(function(a,b){return b.count-a.count;});
+
+    var classCounts = {};
+    scheds.forEach(function(s){ classCounts[s.className] = (classCounts[s.className]||0)+1; });
+    var classList = Object.keys(classCounts).map(function(c){return {name:c, count:classCounts[c]};}).sort(function(a,b){return b.count-a.count;});
+
+    var years = availableYears();
+
+    return '<h2>Relatório · '+year+'</h2>'+
+      '<div class="chip-select" id="year-chips">'+years.map(function(y){
+        return '<div class="chip'+(y===year?' on':'')+'" data-year="'+y+'">'+y+'</div>';
+      }).join('')+'</div>'+
+      '<div class="card" style="margin-top:14px">'+
+        '<div class="row"><span class="muted">Total de escalas</span><strong>'+scheds.length+'</strong></div>'+
+        '<div class="row" style="margin-top:8px"><span class="muted">Cultos de domingo</span><strong>'+domingos+'</strong></div>'+
+        '<div class="row" style="margin-top:8px"><span class="muted">Cultos de sábado</span><strong>'+sabados+'</strong></div>'+
+        '<div class="row" style="margin-top:8px"><span class="muted">Aulas registradas</span><strong>'+lessons.length+'</strong></div>'+
+      '</div>'+
+      '<p class="section-title" style="margin-top:18px">Participação por voluntário</p>'+
+      (ranking.length ? '<div class="card">'+ranking.map(function(r,i){
+        return '<div class="row" style="'+(i>0?'margin-top:8px':'')+'"><span>'+escapeHtml(r.name)+'</span><span class="pill">'+r.count+'x</span></div>';
+      }).join('')+'</div>' : '<div class="card empty">Sem escalas neste ano.</div>')+
+      '<p class="section-title" style="margin-top:18px">Por turma</p>'+
+      (classList.length ? '<div class="card">'+classList.map(function(c,i){
+        return '<div class="row" style="'+(i>0?'margin-top:8px':'')+'"><span>'+escapeHtml(c.name)+'</span><span class="pill green">'+c.count+'x</span></div>';
+      }).join('')+'</div>' : '<div class="card empty">Sem escalas neste ano.</div>')+
+      '<div class="sheet-actions" style="margin-top:18px"><button class="btn ghost block" id="f-close">Fechar</button></div>';
+  }
+
+  function openReports(){
+    var year = String(new Date().getFullYear());
+    openSheet(renderReport(year));
+    wireReportSheet(year);
+  }
+  function wireReportSheet(year){
+    document.getElementById('f-close').onclick = closeSheet;
+    document.querySelectorAll('#year-chips .chip').forEach(function(c){
+      c.addEventListener('click', function(){
+        var y = c.getAttribute('data-year');
+        sheet.innerHTML = renderReport(y);
+        wireReportSheet(y);
+      });
+    });
+  }
+  document.getElementById('btn-reports').addEventListener('click', openReports);
+
+  load();
+})();
 </script>
 </body>
 </html>
